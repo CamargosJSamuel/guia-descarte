@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Descarte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabeçalho com busca em destaque, filtros por lixeira, grade de itens, quiz e contato. Identidade verde do SIPAT-MA. */
+:root{--bg:#FFF8EF;--card:#FFFFFF;--ink:#24301E;--mut:#5C6B52;--green:#2F6E43;--olive:#7A992E;--line:#E3EBC9;--plate:#FFF8EF;--shadow:0 1px 2px rgba(36,48,30,.06),0 8px 24px rgba(36,48,30,.06);
+--fd:"Barlow Condensed","Liberation Sans Narrow",Arial Narrow,sans-serif;--fb:"Barlow",system-ui,-apple-system,Segoe UI,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121C16;--card:#1B2921;--ink:#EAF1DF;--mut:#A8B89A;--green:#7FC08F;--olive:#A5C456;--line:#2B3B30;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25)}}
+:root[data-theme="dark"]{--bg:#121C16;--card:#1B2921;--ink:#EAF1DF;--mut:#A8B89A;--green:#7FC08F;--olive:#A5C456;--line:#2B3B30;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25)}
+:root[data-theme="dark"],:root:not([data-theme="light"]){color-scheme:light dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:.2px}
+header{padding:22px 0 8px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.plate{background:#FFF8EF;border-radius:14px;padding:6px 10px;display:flex;align-items:center}
+.plate img{display:block;height:64px;width:auto}
+.top .kdp img{height:22px}
+.hero{padding:26px 0 8px}
+.eyebrow{font-family:var(--fd);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);font-size:14px}
+h1{font-size:clamp(40px,8vw,68px);color:var(--green);margin:6px 0 8px}
+.lead{max-width:52ch;color:var(--mut);font-size:18px;margin:0 0 18px}
+.search{position:relative;max-width:640px}
+.search input{width:100%;font:500 18px var(--fb);color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px 18px 16px 52px;box-shadow:var(--shadow);outline:none}
+.search input:focus-visible{border-color:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 22%,transparent)}
+.search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:22px;height:22px;stroke:var(--mut)}
+.chips{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;margin:22px -18px 4px;padding:2px 18px 8px;scrollbar-width:thin}
+.chip{flex:none;scroll-snap-align:start;white-space:nowrap}
+.chip{font:600 15px var(--fb);border:2px solid var(--c,var(--line));background:transparent;color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--c,var(--olive))}
+.chip b{font-weight:600;color:var(--mut);font-size:13px}
+.chip[aria-pressed="true"]{background:var(--c,var(--green));color:var(--t,#fff)}.chip[aria-pressed="true"] i{background:var(--t,#fff)}.chip[aria-pressed="true"] b{color:inherit;opacity:.8}
+.chip i{border:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}.ph0{aspect-ratio:auto!important;height:34px;padding:0!important;opacity:.95}
+.grid{align-items:stretch;grid-auto-rows:1fr}
+.chip:focus-visible,.btn:focus-visible,.opt:focus-visible,summary:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
+.count{color:var(--mut);font-size:14px;margin:14px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+@media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.ph{aspect-ratio:1;padding:6px}.item h3{font-size:19px}.body{padding:10px 12px 12px}.item p{font-size:13.5px}.pill{font-size:11.5px;padding:3px 10px}}
+.item{background:var(--card);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;border-top:5px solid var(--c)}
+.ph{background:#FFF8EF;aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:10px}
+.ph img{max-width:100%;max-height:100%;object-fit:contain}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.item h3{font-size:24px}
+.item .body p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pill{align-self:flex-start;background:var(--c);color:var(--t,#fff);border:1.5px solid color-mix(in srgb,var(--ink) 22%,var(--c));border-radius:999px;padding:4px 12px;font:600 13px var(--fb);letter-spacing:.02em}
+.item p{margin:0;color:var(--mut);font-size:15px}
+.empty{padding:36px 18px;text-align:center;color:var(--mut);background:var(--card);border-radius:18px;box-shadow:var(--shadow)}
+section{padding:42px 0 6px}
+.tabs{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tabin{display:flex;gap:6px;padding-top:8px;padding-bottom:8px}
+.tab{flex:1;font:600 16px var(--fb);color:var(--mut);background:transparent;border:0;border-radius:12px;padding:12px 10px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--green);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#10261a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#10261a}}
+.tab:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
+[hidden]{display:none!important}
+section h2{font-size:clamp(30px,5vw,42px);color:var(--green);margin-bottom:6px}
+.sub{color:var(--mut);margin:0 0 18px;max-width:60ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.fact{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:flex;gap:12px}
+.fact span{font-family:var(--fd);font-weight:700;font-size:30px;color:var(--olive);line-height:1}
+.fact p{margin:0}
+.quiz{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px;max-width:720px}
+.qtop{display:flex;justify-content:space-between;color:var(--mut);font-size:14px;margin-bottom:12px}
+.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:16px}.bar i{display:block;height:100%;background:var(--olive);width:0;transition:width .3s}
+.qrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.qrow .ph{width:150px;border-radius:14px;aspect-ratio:1}
+.qrow h3{font-size:28px;flex:1;min-width:160px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.opt{font:600 15px var(--fb);color:var(--t,#fff);background:var(--c);border:2px solid color-mix(in srgb,var(--ink) 22%,var(--c));border-radius:12px;padding:12px;cursor:pointer;text-align:left}
+.opt:disabled{cursor:default;opacity:.35}.opt.ok{opacity:1;outline:3px solid var(--green);outline-offset:2px}.opt.no{opacity:1;outline:3px solid #B3261E;outline-offset:2px}
+.fb{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--olive) 14%,transparent);font-weight:500}
+.btn{font:600 16px var(--fb);border:0;border-radius:14px;padding:13px 20px;cursor:pointer;background:var(--green);color:#fff;text-decoration:none;display:inline-flex;gap:10px;align-items:center}
+.btn.alt{background:transparent;color:var(--green);border:2px solid var(--green)}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn:not(.alt){color:#10261a}}
+:root[data-theme="dark"] .btn:not(.alt){color:#10261a}
+.cta{background:var(--green);border-radius:26px;padding:28px;color:#fff;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta h2{color:#fff;margin:0 0 4px}.cta p{margin:0;opacity:.92;max-width:44ch}
+.cta .btn{background:#fff;color:#1d5a34}
+.cta .row{display:flex;gap:10px;flex-wrap:wrap}
+.cta .btn.alt{background:transparent;color:#fff;border-color:#ffffffaa}
+details{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:14px 18px;max-width:720px}
+summary{cursor:pointer;font-weight:600}
+details ol{margin:10px 0 0;padding-left:20px;color:var(--mut)}
+footer{margin-top:46px;padding:26px 0 40px;border-top:1px solid var(--line)}
+footer .in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer .kdp img{height:26px}
+footer p{margin:0;color:var(--mut);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:420px){.plate img{height:54px}.top .kdp img{height:17px}}
+
+.pop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 0;max-width:640px}
+.pop small{color:var(--mut);font-weight:600;font-size:13px;margin-right:2px}
+.pb{font:500 14px var(--fb);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.pb:hover{border-color:var(--olive)}
+.help{margin-top:14px;font:600 15px var(--fb);color:var(--green);background:transparent;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.helpbox{margin-top:8px;max-width:640px;background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px}
+.helpbox p{margin:0 0 12px;color:var(--mut)}
+.helpbox .row{display:flex;gap:10px;flex-wrap:wrap}
+.item{cursor:pointer;transition:transform .15s}.item:hover{transform:translateY(-2px)}
+.item:focus-visible{outline:3px solid var(--olive);outline-offset:3px}
+.ov{position:fixed;inset:0;background:rgba(10,20,14,.6);z-index:20;display:flex;align-items:flex-end;justify-content:center;padding:0}
+.sheet{background:var(--c);color:var(--t,#fff);width:100%;max-width:520px;border-radius:28px 28px 0 0;padding:22px 22px 28px;max-height:92%;overflow:auto;box-shadow:0 -10px 40px rgba(0,0,0,.3)}
+@media (min-width:640px){.ov{align-items:center}.sheet{border-radius:28px}}
+.sheet .sm{font:600 14px var(--fb);letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.sheet h2{color:var(--t,#fff);font-size:clamp(38px,9vw,56px);margin:4px 0 14px}
+.sheet .ph{border-radius:18px;aspect-ratio:4/3;max-height:230px;margin-bottom:14px}
+.sheet h3{font-size:26px;margin-bottom:6px}
+.sheet p{margin:0 0 18px;font-size:17px;opacity:.96}
+.sheet .more{margin:-6px 0 16px}.sheet .more a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.fact.hl{outline:3px solid var(--olive);outline-offset:3px}
+.sheet .btn{background:#fff;color:#222}
+.tabs .tabin{align-items:center}
+.rev{font:500 13px var(--fb);color:var(--mut);text-align:right}
+@media (min-width:760px){.tab{flex:0 0 auto;min-width:170px}.zb{margin-left:auto}.chips{flex-wrap:wrap;overflow:visible;margin:22px 0 4px;padding:2px 0 8px}}
+.zb{flex:0 0 auto;font:700 16px var(--fb);color:var(--green);background:transparent;border:2px solid var(--line);border-radius:12px;padding:9px 12px;cursor:pointer}
+.zb:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
+.prog{color:var(--mut);font-size:14px;margin:0 0 14px}
+.badge{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:6px 0 14px}
+.badge svg{width:96px;height:96px;flex:none}
+.badge h3{font-size:46px;color:var(--green)}
+.badge p{margin:2px 0 0}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+ <div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div>
+ <div class="rev">Última revisão<br>novembro de 2026</div>
+</div></header>
+<nav class="tabs" aria-label="Seções"><div class="wrap tabin" role="tablist">
+ <button class="tab" role="tab" id="t-guia" aria-selected="true" data-v="guia">Guia</button>
+ <button class="tab" role="tab" id="t-teste" aria-selected="false" data-v="teste">Teste rápido</button>
+ <button class="zb" id="zb" aria-label="Aumentar o tamanho do texto" title="Tamanho do texto">Aa</button></div></nav>
+<main class="wrap">
+ <div id="v-guia" role="tabpanel" aria-labelledby="t-guia">
+ <div class="hero">
+  <div class="eyebrow">Meio Ambiente</div>
+  <h1>Guia de descarte</h1>
+  <p class="lead">Digite o nome do item e veja em qual lixeira ele vai, com o motivo.</p>
+  <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar item"></label>
+  <div class="pop" id="pop"><small>Mais buscados:</small></div>
+  <button class="help" id="helpb" aria-expanded="false" aria-controls="helpbox">Não sei o nome do item</button>
+  <div class="helpbox" id="helpbox" hidden><p>Descreva o item ou mande uma foto no WhatsApp. A gente responde onde ele vai.</p>
+   <div class="row"><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a><button class="btn alt" id="cpy">Copiar mensagem pronta</button></div>
+   <p id="cpyok" style="margin:10px 0 0" aria-live="polite"></p></div>
+  <div class="chips" id="chips" role="group" aria-label="Filtrar por lixeira"></div>
+ </div>
+ <div class="count" id="count" aria-live="polite"></div>
+ <div class="grid" id="grid"></div>
+
+ <section id="sabia"><h2>Você sabia?</h2>
+  <div class="facts">
+   <div class="fact"><span>01</span><p>Nós trabalhamos com aterro zero: cada resíduo precisa de um destino adequado.</p></div>
+   <div class="fact"><span>02</span><p>Papel, papelão, plástico ou metal sujos de comida, gordura ou molhados ficam mais difíceis de reciclar. Limpar e secar antes de descartar ajuda.</p></div>
+   <div class="fact"><span>03</span><p>Embalagens de várias camadas, como a aluminizada de café, juntam materiais difíceis de separar. Por isso têm lixeira própria.</p></div>
+   <div class="fact"><span>04</span><p>Embalagem de produto químico, mesmo vazia, guarda resíduo e vai para o perigoso.</p></div>
+   <div class="fact"><span>05</span><p>Um resíduo perigoso jogado no lixo comum pode contaminar tudo o que estava junto no saco.</p></div>
+   <div class="fact"><span>06</span><p>Separar na hora do descarte é o que mais facilita a reciclagem e o tratamento depois.</p></div>
+   <div class="fact" id="fplast"><span>07</span><p>Nem todo plástico é igual. O número no triângulo (1 a 7) diz de qual resina ele é feito, não se é reciclável. O polipropileno (PP, nº 5), de potes e tampas, é bem aceito se estiver limpo. O poliestireno (PS, nº 6), de copos, talheres e isopor, é leve e quebradiço, pode atrapalhar a reciclagem e hoje é pouco aproveitado. Peças misturadas, de várias resinas, também são mais difíceis de reciclar. <small style="display:block;margin-top:6px;color:var(--mut)">Fontes: eCycle, Gazeta de S.Paulo, Fast Company Brasil.</small></p></div>
+  </div></section>
+
+
+ </div>
+ <div id="v-teste" role="tabpanel" aria-labelledby="t-teste" hidden>
+  <section style="padding-top:28px"><h2>Teste o que você aprendeu</h2>
+  <p class="sub">Cinco itens sorteados. Escolha a lixeira certa e veja o motivo.</p>
+  <div class="quiz" id="qz"></div></section>
+ </div>
+ <section id="duvida"><div class="cta">
+  <div><h2>Ficou com dúvida?</h2><p>Não achou o item ou quer confirmar? Fale com a gente no WhatsApp.</p></div>
+  <div class="row"><a class="btn" id="wa" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a>
+  <a class="btn alt" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div></div></section>
+
+ <section><details><summary>Como deixar este guia no celular</summary>
+  <ol><li>iPhone (Safari): toque em Compartilhar e escolha “Adicionar à Tela de Início”.</li>
+  <li>Android (Chrome): toque nos três pontos e escolha “Adicionar à tela inicial”.</li></ol></details></section>
+</main>
+<footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: novembro de 2026</p></div></footer>
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"><div class="sheet" id="sheet"></div></div>
+<script>
+const ITEMS=/*ITEMS*/,BINS=/*BINS*/,IMGS=/*IMGS*/;
+const $=s=>document.querySelector(s),norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+let bin='all',term='';
+const chips=$('#chips');
+function chipsRender(){const c={};ITEMS.forEach(i=>c[i.b]=(c[i.b]||0)+1);
+ chips.innerHTML=`<button class="chip" aria-pressed="${bin==='all'}" data-b="all">Todas <b>${ITEMS.length}</b></button>`+Object.keys(BINS).filter(k=>c[k]).map(k=>`<button class="chip" style="--c:${BINS[k].c};--t:${BINS[k].t}" aria-pressed="${bin===k}" data-b="${k}"><i></i>${BINS[k].n} <b>${c[k]||0}</b></button>`).join('')}
+chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;bin=b.dataset.b;chipsRender();render()});
+$('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&bin!=='all'){bin='all';chipsRender()}render()});
+const ORD=Object.keys(BINS),SORTED=ITEMS.slice().sort((a,b)=>ORD.indexOf(a.b)-ORD.indexOf(b.b)||(!!IMGS[b.i])-(!!IMGS[a.i]));
+const STOP=['de','da','do','das','dos','e','com','sem','para','a','o'],hay=i=>i._h||(i._h=norm(i.n+' '+i.k+' '+BINS[i.b].n));
+function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));const r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));
+ $('#count').textContent=r.length+(r.length===1?' item':' itens')+'. Toque em um item para ver a lixeira em destaque.';
+ $('#grid').innerHTML=r.length?r.map(i=>`<article class="item" tabindex="0" role="button" data-i="${i.i}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3><span class="pill">${BINS[i.b].n}</span><p>${i.m}</p></div></article>`).join(''):`<div class="empty" style="grid-column:1/-1">Nenhum item encontrado. Fale com a gente no WhatsApp, logo abaixo.</div>`}
+chipsRender();render();
+/* quiz */
+const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function opts(i){const used=[...new Set(ITEMS.map(x=>x.b))].filter(k=>k!==i.b);return shuffle([i.b,...shuffle(used).slice(0,3)])}
+function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask()}
+function ask(){done=false;const i=qs[qi];
+ qz.innerHTML=(qi===0&&progTxt()?`<p class="prog">${progTxt()}</p>`:'')+`<div class="qtop"><span>Pergunta ${qi+1} de 5</span><span>${sc} certas</span></div><div class="bar"><i style="width:${qi/5*100}%"></i></div>
+ <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>Onde vai: ${i.n}?</h3></div>
+ <div class="opts">${opts(i).map(k=>`<button class="opt" style="--c:${BINS[k].c};--t:${BINS[k].t}" data-b="${k}">${BINS[k].n}</button>`).join('')}</div><div id="fbk"></div>`}
+qz.addEventListener('click',e=>{
+ if(e.target.id==='next'){qi++;qi<5?ask():fim();return}
+ if(e.target.id==='again'){start();return}
+ if(e.target.id==='goguia'){view('guia',true);return}
+ const o=e.target.closest('.opt');if(!o||done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
+ qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
+ $('#fbk').innerHTML=`<div class="fb">${ok?'Certo! ':'Quase. '}Vai em ${BINS[i.b].n}. ${i.m}</div><p><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`});
+function fim(){const p=saveProg(sc);const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Dê uma olhada no guia para fixar os itens que errou.':'Vale rever o guia e tentar de novo.';
+ let u='';try{u=location.href.split('#')[0]}catch(x){}
+ const share='https://wa.me/?text='+encodeURIComponent(`Acertei ${sc} de 5 no teste do Guia de descarte! ${u}`);
+ qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Jogar de novo</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
+
+/* populares, ajuda, destaque, leitura */
+const POP=[['Copinho','copinho'],['Talher','talher'],['Máscara','máscara'],['Mouse','mouse'],['Borra de café','borra'],['Papel toalha','papel toalha']];
+$('#pop').insertAdjacentHTML('beforeend',POP.map(p=>`<button class="pb" data-t="${p[1]}">${p[0]}</button>`).join(''));
+$('#pop').addEventListener('click',e=>{const b=e.target.closest('.pb');if(!b)return;$('#q').value=b.dataset.t;term=norm(b.dataset.t);bin='all';chipsRender();render()});
+$('#helpb').addEventListener('click',()=>{const h=$('#helpbox');h.hidden=!h.hidden;$('#helpb').setAttribute('aria-expanded',String(!h.hidden))});
+$('#cpy').addEventListener('click',async()=>{const m='Dúvida sobre este resíduo: ';let ok=false;try{await navigator.clipboard.writeText(m);ok=true}catch(e){}$('#cpyok').textContent=ok?'Mensagem copiada. Cole no WhatsApp e complete.':'Não deu para copiar. Escreva no WhatsApp: '+m});
+let lastF=null;
+function openI(n){const i=ITEMS[n];lastF=document.activeElement;const s=$('#sheet');s.style.setProperty('--c',BINS[i.b].c);s.style.setProperty('--t',BINS[i.b].t);
+ s.innerHTML=`<div class="sm">Este item vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#sabia" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<button class="btn" id="ovx">Fechar</button>`;
+ const pl=$('#ovp');if(pl)pl.addEventListener('click',e=>{e.preventDefault();closeI();view('guia',true);setTimeout(()=>{const f=$('#fplast');f.scrollIntoView({behavior:'smooth',block:'center'});f.classList.add('hl');setTimeout(()=>f.classList.remove('hl'),2600)},60)});
+ $('#ov').hidden=false;$('#ovx').focus()}
+function closeI(){$('#ov').hidden=true;if(lastF&&lastF.focus)lastF.focus()}
+$('#grid').addEventListener('click',e=>{const a=e.target.closest('.item');if(a)openI(+a.dataset.i)});
+$('#grid').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const a=e.target.closest('.item');if(a){e.preventDefault();openI(+a.dataset.i)}}});
+$('#ov').addEventListener('click',e=>{if(e.target.id==='ov'||e.target.id==='ovx')closeI()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#ov').hidden)closeI()});
+const ZS=[1,1.15,1.3];let zi=0;
+function zoom(n){zi=n;document.querySelectorAll('main,footer').forEach(x=>x.style.zoom=ZS[zi]);$('#zb').textContent=['Aa','A+','A++'][zi];try{localStorage.setItem('gd_z',String(zi))}catch(e){}}
+$('#zb').addEventListener('click',()=>zoom((zi+1)%3));
+try{const z=+localStorage.getItem('gd_z');if(z>0&&z<3)zoom(z)}catch(e){}
+/* progresso neste aparelho */
+function prog(){try{return JSON.parse(localStorage.getItem('gd_p'))||{best:0,n:0}}catch(e){return{best:0,n:0}}}
+function saveProg(s){const p=prog();p.n++;if(s>p.best)p.best=s;try{localStorage.setItem('gd_p',JSON.stringify(p))}catch(e){}return p}
+function progTxt(){const p=prog();return p.n?`Seu melhor resultado: ${p.best} de 5 · ${p.n} ${p.n===1?'teste feito':'testes feitos'} neste aparelho.`:''}
+start();
+/* abas */
+function view(v,push){v=v==='teste'?'teste':'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';
+ document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));if(push){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo({top:0})}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.v,true)));
+window.addEventListener('hashchange',()=>view(location.hash.slice(1)));
+view(location.hash.slice(1));
+/* compartilhar */
+try{const u=location.href.split('#')[0];$('#sh').href='https://wa.me/?text='+encodeURIComponent('Guia de descarte: '+u)}catch(e){}
+</script>
+</body>
+</html>
