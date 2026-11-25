@@ -42,10 +42,11 @@ h1{font-size:clamp(40px,8vw,68px);color:var(--green);margin:6px 0 8px}
 .chip:focus-visible,.btn:focus-visible,.opt:focus-visible,summary:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
 .count{color:var(--mut);font-size:14px;margin:14px 0 10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-@media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.ph{aspect-ratio:1;padding:6px}.item h3{font-size:19px}.body{padding:10px 12px 12px}.item p{font-size:13.5px}.pill{font-size:11.5px;padding:3px 10px}}
+@media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.ph{aspect-ratio:1}.ph img{padding:6px}.item h3{font-size:19px}.body{padding:10px 12px 12px}.item p{font-size:13.5px}.pill{font-size:11.5px;padding:3px 10px}}
 .item{background:var(--card);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;border-top:5px solid var(--c)}
-.ph{background:#FFF8EF;aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:10px}
-.ph img{max-width:100%;max-height:100%;object-fit:contain}
+.ph{background:#FFF8EF;aspect-ratio:1;position:relative;overflow:hidden}
+/* imagem posicionada de forma absoluta: o Safari do iPhone não resolve max-height em % dentro de caixa com aspect-ratio */
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box}
 .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
 .item h3{font-size:24px}
 .item .body p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -112,7 +113,7 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 @media (min-width:640px){.ov{align-items:center}.sheet{border-radius:28px}}
 .sheet .sm{font:600 14px var(--fb);letter-spacing:.12em;text-transform:uppercase;opacity:.9}
 .sheet h2{color:var(--t,#fff);font-size:clamp(38px,9vw,56px);margin:4px 0 14px}
-.sheet .ph{border-radius:18px;aspect-ratio:4/3;max-height:230px;margin-bottom:14px}
+.sheet .ph{border-radius:18px;aspect-ratio:auto;height:min(230px,62vw);margin-bottom:14px}
 .sheet h3{font-size:26px;margin-bottom:6px}
 .sheet p{margin:0 0 18px;font-size:17px;opacity:.96}
 .sheet .more{margin:-6px 0 16px}.sheet .more a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
