@@ -175,3 +175,11 @@ ERROS_COMUNS=[
  ('Resíduo que não é orgânico na lixeira de orgânico','No orgânico vai só resto de comida e borra de café. Guardanapo, embalagem, filtro de papel e saquinho de chá vão no lixo comum.','not:organico'),
  ('Resíduo com lixeira própria no lixo comum','Pilha, lâmpada, eletrônico e embalagem de produto químico precisam de tratamento específico. Procure a lixeira certa no guia.','not:comum'),
 ]
+
+# Sinônimos da busca: palavra digitada -> palavras equivalentes (sem acento, minúsculas).
+SINONIMOS={'latinha':['lata'],'refrigerante':['lata','garrafa'],'cerveja':['lata','garrafa','vidro'],'garrafinha':['garrafa'],'pet':['garrafa'],
+ 'sacolinha':['sacola'],'saco':['sacola'],'caixa':['papelao','caixote'],'celular':['bateria','carregador'],'fone':['headset'],'teclado':['kit'],'mouse':['kit'],
+ 'computador':['monitor','placa'],'tela':['monitor'],'oleo':['filtro'],'toalha':['papel'],'spray':['aerossol'],'desodorante':['aerossol'],'madeira':['palete','caixote'],
+ 'jaleco':['avental'],'uniforme':['macacao','avental'],'bobina':['stretch','ribbon'],'filme':['stretch'],'durex':['fita'],'pote':['pote'],'marmita':['isopor'],
+ 'copinho':['copo'],'descartavel':['copo','talher','avental','macacao'],'cafe':['cafe','borra','capsula'],'lixa':['pano'],'papelao':['papelao'],'cartucho':['tinta'],
+ 'tinta':['tinta','pincel'],'luvas':['luva'],'vidros':['vidro'],'cabo':['cabo','extensao','carregador'],'eletronico':['monitor','placa','calculadora','kit','headset']}

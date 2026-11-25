@@ -293,11 +293,20 @@ $('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&b
 const ORD=Object.keys(BINS),SORTED=ITEMS.slice().sort((a,b)=>ORD.indexOf(a.b)-ORD.indexOf(b.b)||(!!IMGS[b.i])-(!!IMGS[a.i]));
 const STOP=['de','da','do','das','dos','e','com','sem','para','a','o'],hay=i=>i._h||(i._h=norm(i.n+' '+i.k+' '+BINS[i.b].n));
 const card=i=>`<div class="cw"><article class="item" tabindex="0" role="button" data-i="${i.i}" data-b="${i.b}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3></div><div class="bn">${BINS[i.b].n}</div></article></div>`;
+const SIN=/*SIN*/;
+function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;const d=[];for(let i=0;i<=a.length;i++)d[i]=[i];for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1)}return d[a.length][b.length]}
+const words=i=>i._w||(i._w=hay(i).split(/[^a-z0-9]+/).filter(Boolean));
+/* busca tolerante: plural, sinônimos e pequenos erros de digitação (só quando a busca exata não acha nada) */
+function smartMatch(i,w){const vs=[w];if(w.length>3&&w.endsWith('s'))vs.push(w.slice(0,-1));(SIN[w]||[]).forEach(s=>vs.push(s));
+ const h=hay(i);return vs.some(v=>h.includes(v)||(v.length>=4&&words(i).some(x=>lev(v,x)<=(v.length>=8?2:1))))}
+let smart=false;
 function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
- const r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));
+ let r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));smart=false;
+ if(!r.length&&term){r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&tk.every(w=>smartMatch(i,w)));smart=r.length>0}
  $('#hero').classList.toggle('searching',!!term);
  const lb=bin!=='all'?BINS[bin].n:'';
- $('#count').textContent=r.length+(r.length===1?' resíduo':' resíduos')+(lb?' em '+lb:'')+(term?' para “'+$('#q').value.trim()+'”':'');
+ $('#count').textContent=r.length+(r.length===1?' resíduo':' resíduos')+(lb?' em '+lb:'')+(term?(smart?(r.length===1?' parecido com “':' parecidos com “'):' para “')+$('#q').value.trim()+'”':'');
  $('#clr').hidden=!(term||bin!=='all');$('#fbl').textContent=bin==='all'?'Filtrar por lixeira':'Lixeira: '+BINS[bin].n;
  $('#grid').innerHTML=r.length?r.map(card).join(''):`<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 14px">Nenhum resíduo encontrado. Descreva o resíduo ou mande uma foto no WhatsApp e a gente responde.</p><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a></div>`}
 chipsRender();render();

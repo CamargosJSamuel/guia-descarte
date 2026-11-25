@@ -44,3 +44,4 @@ Em Settings > Pages, em "Source", escolha **GitHub Actions**.
 - Link direto: `?r=<nome-do-resíduo>` abre o resíduo; botão Compartilhar no resíduo aberto.
 - Fotos: `jpg()` em `build.py` padroniza enquadramento e fundo (quadrado, creme).
 - QR Code: o botão do topo usa src/qr.svg (gerado com segno para a URL do site). Se a URL mudar, gere de novo.
+- Busca: exata primeiro; se não achar, tolera plural, sinônimos (`SINONIMOS` em `dados.py`) e erros de digitação.
