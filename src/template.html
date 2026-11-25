@@ -200,6 +200,7 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 <div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"><div class="sheet" id="sheet"></div></div>
 <script>
 const ITEMS=/*ITEMS*/,BINS=/*BINS*/,IMGS=/*IMGS*/;
+const ERRB=/*ERRB*/,ERRI=/*ERRI*/;
 const $=s=>document.querySelector(s),norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 let bin='all',term='';
 const chips=$('#chips');
@@ -232,7 +233,9 @@ function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
- $('#fbk').innerHTML=`<div class="fb">${ok?'Certo! ':'Quase. '}Vai em ${BINS[i.b].n}. ${i.m}</div><p><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`}
+ $('#fbk').innerHTML=`<div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`}
+/* explicação do erro: texto próprio do item (ERRI) ou motivo do item + texto da lixeira escolhida (ERRB) */
+function errText(i,k){return ERRI[i.n+'|'+k]||(i.m+' '+(ERRB[k]||''))}
 /* arrastar a foto até a lixeira (também funciona com toque) */
 let dg=null;
 const optAt=(x,y)=>{const el=document.elementFromPoint(x,y);return el&&el.closest?el.closest('.opt'):null};

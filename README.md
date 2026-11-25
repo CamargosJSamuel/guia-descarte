@@ -25,6 +25,9 @@ Abra `docs/index.html` no navegador.
 - **Atualizar a data de revisão:** procure "novembro de 2026" em `src/template.html` (2 lugares).
 - Para publicar: `git add . && git commit -m "ajuste" && git push`. O site atualiza em 1 a 2 minutos.
 
+## Explicação de erro no teste rápido
+No fim de `dados.py`: `ERRO_BIN` tem um texto por lixeira ("por que não nesta lixeira") e `ERRO_ITEM` tem textos próprios para confusões comuns, criados com `E([itens],[lixeiras erradas],'texto')`. Sem texto próprio, o teste mostra o motivo do item mais o texto da lixeira escolhida.
+
 ## Uso sem internet (instalar no celular)
 O site vira um aplicativo instalável (PWA). `src/sw.js` guarda a página no aparelho e `src/static/` tem o manifesto e os ícones. A versão do cache muda sozinha a cada build, então ajustes chegam na próxima abertura com internet.
 
