@@ -240,7 +240,7 @@ body:has(#gquiz:not([hidden])) .wafab,body:has(#gplay:not([hidden])) .wafab{disp
 .cb{padding:14px 16px 16px;display:grid;gap:10px}
 .bub{background:var(--bg);border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:15px}
 .qr{display:flex;gap:8px;flex-wrap:wrap}.qr button{font:600 14px var(--fb);min-height:40px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
-.chl{font-size:14.5px;color:var(--green);font-weight:600;text-align:center}
+.chat .btn.alt{color:var(--green);border-color:var(--green)}.chl{font-size:14.5px;color:var(--green);font-weight:600;text-align:center}
 footer{padding-bottom:90px}
 </style>
 </head>
@@ -309,9 +309,10 @@ footer{padding-bottom:90px}
 <div class="chat" id="chat" role="dialog" aria-label="Tirar dúvida" hidden>
  <div class="ch"><b>Precisa de ajuda?</b><button id="chx" aria-label="Fechar">×</button></div>
  <div class="cb"><div class="bub"><b>Ficou na dúvida? Fique tranquilo(a).</b></div>
-  <div class="bub">Ao tocar no botão abaixo, você fala direto com o analista da área de Meio Ambiente, que tem o conhecimento para te ajudar.</div>
+  <div class="bub">Ao tocar em um dos botões abaixo, você fala direto com o analista da área de Meio Ambiente, que tem o conhecimento para te ajudar. No tablet da empresa, use o Teams.</div>
   <div class="bub">Pode ficar à vontade: ele está à disposição para tirar qualquer dúvida. Não pense duas vezes antes de mandar mensagem. Descreva o resíduo ou envie uma foto.</div>
-  <a class="btn" id="chs" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Falar com o analista</a>
+  <a class="btn" id="chs" href="https://teams.microsoft.com/l/chat/0/0?users=samuel.camargo@jdecoffee.com" target="_blank" rel="noopener">Falar pelo Teams</a>
+  <a class="btn alt" id="chw" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
   <a class="chl" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div>
 </div>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: %%REV%%</p></div></footer>
