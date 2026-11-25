@@ -195,6 +195,7 @@ header{padding:14px 0 6px}
 .fbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
 .chips[hidden]{display:none}
 .hero.searching .fbtn{display:none}
+.fix{margin:16px 0}.fix h3{margin:0 0 8px;font-size:22px}.fix ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}.fix li{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:15.5px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -323,7 +324,8 @@ function opts(i){const used=new Set(ITEMS.map(x=>x.b)),esp=Object.keys(ERRI).fil
  const c=CONF[i.b]||[],pool=[...shuffle(esp).slice(0,2),c[0],...shuffle(c.slice(1)),...shuffle([...used])];
  const d=[];for(const k of pool)if(k&&k!==i.b&&used.has(k)&&!d.includes(k))d.push(k);
  return shuffle([i.b,...d.slice(0,3)])}
-function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask()}
+let wr=[];
+function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;wr=[];ask()}
 function ask(){done=false;const i=qs[qi];
  qz.innerHTML=(qi===0&&progTxt()?`<p class="prog">${progTxt()}</p>`:'')+`<div class="qtop"><span>Pergunta ${qi+1} de 5</span><span>${sc} certas</span></div><div class="bar"><i style="width:${qi/5*100}%"></i></div>
  <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>Onde vai: ${i.n}?</h3></div>
@@ -334,7 +336,7 @@ qz.addEventListener('click',e=>{
  if(e.target.id==='again'){start();return}
  if(e.target.id==='goguia'){view('guia',true);return}
  const o=e.target.closest('.opt');if(o)answer(o)});
-function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
+function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;else wr.push({i,k:o.dataset.b});
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
@@ -355,10 +357,10 @@ function buzz(p){try{if(!RM.matches&&navigator.vibrate)navigator.vibrate(p)}catc
 function confetti(x,y,n){if(RM.matches)return;const c=document.createElement('canvas');c.className='cf';c.setAttribute('aria-hidden','true');c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);
  const g=c.getContext('2d'),K=['#2F6E43','#7A992E','#FFE21F','#D42828','#004AAD','#FF691F'],P=Array.from({length:n},()=>({x,y,vx:(Math.random()-.5)*10,vy:-Math.random()*10-3,s:5+Math.random()*5,c:K[Math.random()*K.length|0],r:Math.random()*6,vr:(Math.random()-.5)*.4}));let f=0;
  (function t(){g.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillStyle=p.c;g.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);g.restore()});if(++f<90)requestAnimationFrame(t);else c.remove()})()}
-function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,sc===5?140:80)}const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Dê uma olhada no guia para fixar os resíduos que errou.':'Vale rever o guia e tentar de novo.';
+function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,sc===5?140:80)}const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Veja abaixo o que vale fixar.':'Vale rever o que está abaixo e tentar de novo.';
  let u='';try{u=location.href.split('#')[0]}catch(x){}
  const share='https://wa.me/?text='+encodeURIComponent(`Acertei ${sc} de 5 no teste do Guia de descarte! ${u}`);
- qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Jogar de novo</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
+ qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div>${wr.length?`<div class="fix"><h3>Para fixar</h3><ul>${wr.map(e=>`<li><b>${e.i.n}</b> vai em <b>${BINS[e.i.b].n}</b>, e não em ${BINS[e.k].n}. ${errText(e.i,e.k)}</li>`).join('')}</ul></div>`:''}<p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Fazer outro teste</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
 
 /* populares, ajuda, destaque, leitura */
 let lastF=null;

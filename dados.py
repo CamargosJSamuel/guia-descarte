@@ -64,7 +64,77 @@ I += (
  +N('aerossol','Embalagem pressurizada: lixeira própria. Vale para tinta spray, desengripante, lubrificante, inseticida e ar comprimido. Mesmo vazia, pode guardar resíduo.',['Lata de aerossol (spray em geral)'],'spray tinta desengripante lubrificante inseticida ar comprimido')
 )
 PHOTOS={'Envelope':'envelope','Saco de papel limpo':'saco','Divisória de papelão':'divisoria','Sacola plástica':'sacola','Pote e tampa de plástico':'pote_pp','Pote de vidro':'pote_vidro','Garrafa de vidro':'vgarrafa','Cacos de vidro':'vcacos','Frasco de laboratório limpo':'vfrasco','Lata de bebida':'lata','Peça metálica de manutenção':'peca','Parafuso, porca e arruela':'parafuso','Ferramenta quebrada':'ferramenta','Arame':'arame','Copo de papel':'copo_papel','Avental descartável (TNT)':'avental','Garrafa PET':'pet','Garrafa de polietileno (leite e suco)':'pe','Macacão descartável':'macacao','Guardanapo':'guardanapo','Cápsula de café usada':'capsula','Filtro de papel com borra':'filtro_cafe','Saquinho de chá':'cha','Big bag':'bigbag','Palete quebrado':'palete','Caixote':'caixote','Filtro de óleo':'filtro_oleo','Lata de tinta':'lata_tinta','Pincel com tinta':'pincel','Cascas de fruta':'fruta','Podas e folhas':'poda','Poeira de café':'poeira','EPI contaminado com produto químico':'epi_cont_site','Curativo usado':'gaze_usada','Luva de procedimento':'luva','Papel higiênico':'papel_hig','Pilha':'pilha2','Bateria de lítio (celular e ferramenta)':'bateria_litio','Monitor':'monitor','Cabo e carregador':'cabo_carregador','Calculadora':'calculadora','Extensão elétrica':'extensao','Placa eletrônica':'placa','Lâmpada fluorescente tubular':'fl_tubular','Lâmpada fluorescente compacta':'fl_compacta','Lâmpada de LED':'led','Lâmpada de emergência':'emergencia','Lata de aerossol (spray em geral)':'aerossol'}
-I=[(a,bb,m,('site_new/%s.png'%PHOTOS[a]) if a in PHOTOS else f,kw) for (a,bb,m,f,kw) in I]
+# Motivo exibido ao abrir o resíduo e ao acertar no teste (texto didático: o que é, por que vai nessa lixeira).
+MOT={
+'Folha de papel':'Papel limpo e seco é uma das matérias-primas mais aproveitadas na reciclagem: as fibras são separadas e viram papel novo. Por isso vai na lixeira de papel e papelão. Molhado ou engordurado, ele perde esse aproveitamento.',
+'Papelão':'O papelão é feito de fibras de papel que podem ser recicladas várias vezes. Limpo e seco, vai na lixeira de papel e papelão. Úmido ou sujo de óleo e comida, as fibras estragam.',
+'Tubete de papelão':'É papel enrolado, feito de fibras que podem ser recicladas. Por isso vai na lixeira de papel e papelão, desde que esteja limpo e seco.',
+'Plástico stretch':'O filme stretch é um plástico (polietileno) que pode ser reciclado quando está limpo e seco. Por isso vai na lixeira de plástico. Separe o tubo de papelão, que vai na lixeira dele.',
+'Tubete de plástico':'É um plástico rígido, que pode ser moído e reaproveitado quando está limpo. Por isso vai na lixeira de plástico.',
+'Resto de comida':'Resto de comida é matéria orgânica: com ajuda de microrganismos ele se decompõe e pode virar composto, um adubo. Por isso vai no orgânico. Misturado a outros materiais, estraga o composto.',
+'Película do café':'A película é uma casquinha do próprio grão de café, ou seja, matéria orgânica que se decompõe. Por isso vai no orgânico e pode virar composto.',
+'Descarte de café':'Borra e grãos de café são matéria orgânica, que se decompõe e pode virar composto. Por isso vão no orgânico, sem filtro nem embalagem junto.',
+'Embalagem aluminizada':'A embalagem de café tem várias camadas coladas, de plástico e alumínio. Essa mistura é difícil de separar na coleta seletiva comum, por isso ela tem uma lixeira própria, com destino adequado.',
+'Teflon':'O teflon (PTFE) é um plástico especial, muito resistente ao calor, que não entra nos processos comuns de reciclagem de plástico. Por isso vai no lixo comum, que segue para um destino adequado.',
+'Etiqueta adesiva':'A etiqueta junta papel, cola e, muitas vezes, um filme plástico. Essa mistura atrapalha a reciclagem do papel. Por isso vai no lixo comum.',
+'Fita adesiva transparente':'A fita é um filme plástico com cola, e a cola dificulta a separação e a reciclagem. Por isso vai no lixo comum.',
+'Isopor (poliestireno)':'O isopor é poliestireno expandido: muito leve e volumoso, o que torna o transporte e a reciclagem pouco vantajosos, e poucas cooperativas aceitam. Por isso vai no lixo comum.',
+'Ribbon':'O ribbon é um filme plástico coberto de tinta, usado em impressoras de etiquetas. A tinta e o tipo de filme dificultam o reaproveitamento na reciclagem comum. Por isso vai no lixo comum.',
+'Folha de papel plastificada':'O plástico fica colado ao papel, e as duas camadas são difíceis de separar. Por isso ela não entra na reciclagem de papel e vai no lixo comum.',
+'Papel toalha':'Depois de usado, o papel toalha fica úmido e sujo, e fibras sujas não seguem para a reciclagem de papel. Por isso vai no lixo comum.',
+'Touca':'A touca é descartável, feita de tecido não tecido (TNT) de uso único. Esse material não segue para a reciclagem comum. Por isso vai no lixo comum.',
+'EPI usado':'O EPI sem contaminação química é de uso individual e feito de materiais misturados, como tecido e elástico. Como não teve contato com produto perigoso, não precisa de tratamento especial e vai no lixo comum.',
+'Pano Perfex contaminado':'O pano absorveu produto químico, e o produto continua nele. Por isso precisa de tratamento adequado: vai na lixeira de resíduo perigoso contaminado, e não no lixo comum.',
+'EPI contaminado com produto químico':'O EPI teve contato com produto químico, que continua nele. Por isso precisa de tratamento adequado: vai na lixeira de resíduo perigoso contaminado, e não no lixo comum.',
+'Embalagem vazia de produto químico':'Mesmo vazia, a embalagem guarda resíduos do produto nas paredes e na tampa. Por isso segue para o perigoso, para um tratamento adequado.',
+'Embalagem com resto de produto químico':'Ainda tem produto químico dentro, que pode vazar ou reagir com outros materiais. Por isso vai no perigoso, bem fechada.',
+'Travesseiro e manta de absorção':'Esses materiais servem para absorver derramamentos, então já saem do uso carregados com o produto que absorveram. Por isso vão no perigoso, e não no lixo comum.',
+'Kit mouse e teclado':'Têm placas e circuitos eletrônicos, com metais e plásticos que podem ser aproveitados, mas só depois de separados em um processo próprio. Por isso vão na lixeira de resíduo eletrônico, onde são triados.',
+'Headset':'Tem fios, alto-falantes e circuitos eletrônicos, com materiais que só podem ser aproveitados depois de separados em um processo próprio. Por isso vai na lixeira de resíduo eletrônico, onde é triado.',
+'Envelope':'O envelope é de papel, que pode ser reciclado se estiver limpo e seco. Por isso vai na lixeira de papel e papelão.',
+'Saco de papel limpo':'É papel (kraft), que pode ser reciclado se estiver limpo e seco. Se tiver resto de comida ou gordura, perde esse aproveitamento. Limpo, vai na lixeira de papel e papelão.',
+'Divisória de papelão':'É papelão, feito de fibras de papel que podem ser recicladas. Limpo e seco, vai na lixeira de papel e papelão.',
+'Sacola plástica':'A sacola é de plástico fino (polietileno), que pode ser aproveitado na reciclagem se estiver limpo e seco. Por isso vai na lixeira de plástico. Com resto de comida, perde esse aproveitamento.',
+'Pote e tampa de plástico':'Potes e tampas de polipropileno (PP, nº 5) podem ser reciclados quando estão limpos e secos, em vários formatos. Atenção: o poliestireno (copo e isopor) é outro plástico e vai no lixo comum.',
+'Garrafa PET':'O PET (nº 1) é um dos plásticos mais reciclados: vira fibras para tecidos, novas embalagens e outros produtos. Vai na lixeira de plástico, vazia e escorrida.',
+'Garrafa de polietileno (leite e suco)':'O polietileno de alta densidade (PEAD, nº 2) é um plástico resistente e bem aproveitado na reciclagem. Vai na lixeira de plástico, vazio e escorrido.',
+'Pote de vidro':'O vidro pode ser derretido e transformado em vidro novo, várias vezes, sem perder qualidade. Por isso vai na lixeira de vidro, vazio e escorrido.',
+'Garrafa de vidro':'O vidro pode ser derretido e transformado em vidro novo, várias vezes, sem perder qualidade. Por isso vai na lixeira de vidro, vazia e escorrida.',
+'Cacos de vidro':'O vidro pode ser derretido e transformado em vidro novo, mesmo quebrado. Por isso vai na lixeira de vidro. Embrulhe os cacos para ninguém se cortar.',
+'Frasco de laboratório limpo':'Sem resíduo químico, o vidro pode ser reciclado normalmente e vai na lixeira de vidro. Se ainda tiver resíduo do produto, vai no perigoso.',
+'Lata de bebida':'O metal da lata pode ser derretido e reaproveitado, e a reciclagem de metal é bastante consolidada. Vai na lixeira de metal, vazia e escorrida.',
+'Peça metálica de manutenção':'Sucata metálica é metal que pode ser derretido e usado de novo. Por isso vai na lixeira de metal.',
+'Parafuso, porca e arruela':'Peças pequenas de metal também podem ser derretidas e usadas de novo. Por isso vão na lixeira de metal.',
+'Ferramenta quebrada':'Ferramentas são feitas principalmente de aço, um metal que pode ser derretido e reaproveitado. Por isso vão na lixeira de metal.',
+'Arame':'O arame é de metal, que pode ser derretido e reaproveitado. Por isso vai na lixeira de metal.',
+'Palete quebrado':'A madeira pode ser reaproveitada ou reciclada, por isso tem lixeira própria, separada do lixo comum. Peças quebradas também vão nela.',
+'Caixote':'A madeira pode ser reaproveitada ou reciclada, por isso tem lixeira própria, separada do lixo comum.',
+'Filtro de óleo':'Está impregnado de óleo, que é um resíduo perigoso. Por isso segue para o perigoso e para um tratamento adequado, e não para a reciclagem de metal.',
+'Lata de tinta':'Guarda resíduos de tinta, que são perigosos. Por isso segue para o perigoso e para um tratamento adequado, e não para a reciclagem de metal.',
+'Pincel com tinta':'A tinta que ficou no pincel é resíduo perigoso. Por isso ele segue para o perigoso e para um tratamento adequado.',
+'Big bag':'O big bag é um saco grande de tecido plástico que, na prática, quase nunca está limpo por dentro: sempre sobra resíduo do que ele transportou. Por isso vai no lixo comum.',
+'Cascas de fruta':'Cascas de fruta são matéria orgânica, que se decompõe e pode virar composto. Por isso vão no orgânico.',
+'Podas e folhas':'Podas e folhas são matéria orgânica, que se decompõe e pode virar composto. Por isso vão no orgânico.',
+'Curativo usado':'Teve contato com paciente no atendimento, então é tratado como resíduo de serviço de saúde, com destino próprio. Por isso vai no ambulatorial.',
+'Luva de procedimento':'Teve contato com paciente no atendimento, então é tratada como resíduo de serviço de saúde, com destino próprio. Por isso vai no ambulatorial.',
+'Papel higiênico':'É resíduo de banheiro, com fluidos do corpo. Mesmo sendo de papel, não é reciclado. Por isso vai no sanitário, que tem destino adequado.',
+'Pilha':'Pilhas contêm metais e substâncias que precisam de manejo adequado, e por isso não vão no lixo comum. Seguem em lixeira própria, para serem encaminhadas à reciclagem ou a outro tratamento adequado.',
+'Bateria de lítio (celular e ferramenta)':'Baterias contêm metais e substâncias que precisam de manejo adequado, e por isso não vão no lixo comum. Seguem em lixeira própria, para serem encaminhadas à reciclagem ou a outro tratamento adequado.',
+'Monitor':'Tem placas, fios e peças de vários materiais, alguns aproveitáveis. Por isso vai na lixeira de resíduo eletrônico, onde é triado e encaminhado ao destino adequado.',
+'Cabo e carregador':'Têm fios de cobre e circuitos de vários materiais, alguns aproveitáveis. Por isso vão na lixeira de resíduo eletrônico, onde são triados e encaminhados ao destino adequado.',
+'Calculadora':'Tem placa, tela e peças de vários materiais, alguns aproveitáveis. Por isso vai na lixeira de resíduo eletrônico, onde é triada e encaminhada ao destino adequado.',
+'Extensão elétrica':'Tem fios de cobre e plásticos que só podem ser aproveitados depois de separados. Por isso vai na lixeira de resíduo eletrônico, onde é triada e encaminhada ao destino adequado.',
+'Placa eletrônica':'Tem metais e outros materiais, alguns aproveitáveis, que exigem separação em processo próprio. Por isso vai na lixeira de resíduo eletrônico, onde é triada e encaminhada ao destino adequado.',
+'Lâmpada fluorescente tubular':'Contém mercúrio, que pode ser liberado se o vidro quebrar. Por isso vai na lixeira própria de lâmpadas, onde segue para descontaminação. Não quebre.',
+'Lâmpada fluorescente compacta':'Contém mercúrio, que pode ser liberado se o vidro quebrar. Por isso vai na lixeira própria de lâmpadas, onde segue para descontaminação. Não quebre.',
+'Lâmpada de LED':'Tem componentes eletrônicos e vidro ou plástico, que exigem separação em processo próprio. Por isso vai na lixeira própria de lâmpadas.',
+'Lâmpada de emergência':'Tem componentes eletrônicos e, em geral, bateria, que exigem manejo adequado. Por isso vai na lixeira própria de lâmpadas.',
+'Lata de aerossol (spray em geral)':'É uma embalagem pressurizada e, mesmo vazia, pode guardar gás e resíduo do produto. Por isso tem lixeira própria. Vale para tinta spray, desengripante, lubrificante, inseticida e ar comprimido.',
+}
+
+for _a,*_ in I:
+    assert _a in MOT or _a in ('Copo de poliestireno','Talher de plástico','Copo de papel','Avental descartável (TNT)','Macacão descartável','Guardanapo','Cápsula de café usada','Filtro de papel com borra','Saquinho de chá'),'sem motivo novo: '+_a
+I=[(a,bb,MOT.get(a,m),('site_new/%s.png'%PHOTOS[a]) if a in PHOTOS else f,kw) for (a,bb,m,f,kw) in I]
 
 # ---------------------------------------------------------------------------
 # Explicação de erro no teste rápido
@@ -97,45 +167,48 @@ def E(itens,lixeiras,texto):
         for l in lixeiras:
             assert l in B and l!=names[i],'lixeira inválida: %s em %s'%(l,i)
             ERRO_ITEM[i+'|'+l]=texto
-PS='Poliestireno (PS, nº 6) não é igual ao PET ou ao polipropileno: é leve, de baixo valor e pouco aceito pela reciclagem. Misturado ao plástico limpo, pode prejudicar o lote.'
+PS='Parece plástico, mas o poliestireno (PS, nº 6) é diferente do PET e do polipropileno: é leve, de baixo valor e pouco aceito pela reciclagem. Misturado ao plástico limpo, pode prejudicar o lote inteiro. Por isso vai no lixo comum.'
 E(['Isopor (poliestireno)','Copo de poliestireno','Talher de plástico'],['plastico'],PS)
-E(['Copo de papel'],['papel'],'O copo tem uma camada fina de plástico por dentro, que atrapalha a reciclagem do papel.')
-E(['Copo de papel'],['plastico'],'Apesar do plástico por dentro, o copo é feito principalmente de papel. A mistura dos dois dificulta a reciclagem.')
-E(['Filtro de papel com borra'],['organico'],'Só a borra vai no orgânico. O filtro de papel vai no lixo comum.')
-E(['Saquinho de chá'],['organico'],'O saquinho pode ter plástico na composição. Só o chá, sem o saquinho, pode ir no orgânico.')
-E(['Saquinho de chá'],['papel'],'O saquinho pode ter plástico e fica com resto de chá. Por isso vai no lixo comum.')
-E(['Cápsula de café usada'],['metal','plastico'],'A cápsula tem alumínio ou plástico misturado ao pó de café. Separar esses materiais exige um processo próprio.')
-E(['Cápsula de café usada'],['organico'],'O pó de café é orgânico, mas a cápsula junto não. Por isso vai no lixo comum.')
-E(['Embalagem aluminizada'],['plastico','metal','papel'],'É plástico e alumínio colados, difíceis de separar. Por isso tem lixeira própria.')
-E(['Papel toalha'],['papel'],'Papel toalha usado fica sujo e não segue para reciclagem.')
-E(['Guardanapo'],['papel','organico'],'Guardanapo usado fica sujo de comida e gordura, o que prejudica a reciclagem.')
-E(['Etiqueta adesiva','Folha de papel plastificada'],['papel'],'Tem cola ou plástico junto do papel, o que atrapalha a reciclagem.')
-E(['Embalagem vazia de produto químico','Embalagem com resto de produto químico'],['plastico','metal','comum'],'Mesmo vazia, a embalagem guarda resíduo do produto químico. Por isso vai no perigoso.')
-E(['EPI contaminado com produto químico','Pano Perfex contaminado','Travesseiro e manta de absorção'],['comum'],'Teve contato com produto químico, então precisa de destino próprio, no perigoso.')
-E(['Frasco de laboratório limpo'],['perigoso'],'Limpo e sem resíduo químico, o vidro é reciclável.')
-E(['Lata de aerossol (spray em geral)'],['metal'],'Apesar de ser de metal, é embalagem pressurizada e pode guardar resíduo. Por isso tem lixeira própria.')
-E(['Lâmpada de LED','Lâmpada de emergência'],['eletronico'],'Lâmpadas, inclusive as de LED, têm lixeira própria de lâmpadas.')
-E(['Lâmpada fluorescente tubular','Lâmpada fluorescente compacta'],['comum','vidro'],'Contém mercúrio. Por isso tem lixeira própria, e não deve ser quebrada.')
-E(['Pilha','Bateria de lítio (celular e ferramenta)'],['comum','eletronico'],'Pilhas e baterias têm metais e substâncias que exigem descarte próprio, na lixeira de pilhas e baterias.')
-E(['Resto de comida','Cascas de fruta','Podas e folhas'],['comum'],'Restos de comida, cascas e folhas viram composto quando vão no orgânico.')
-E(['Película do café','Descarte de café'],['comum'],'Borra, grãos e película são resíduo do grão e vão no orgânico, que vira composto.')
-E(['Luva de procedimento','Curativo usado'],['comum','plastico','sanitario'],'Teve contato com paciente no atendimento, por isso vai no ambulatorial.')
-E(['Papel higiênico'],['papel','comum'],'Papel higiênico é resíduo de banheiro, mesmo sendo de papel. Por isso vai no sanitário.')
-E(['Pote e tampa de plástico'],['comum'],'O polipropileno (PP, nº 5) é reciclável se estiver limpo e seco, diferente do poliestireno (copo e isopor).')
-E(['Garrafa PET'],['comum'],'O PET (nº 1) é reciclável se estiver vazio e escorrido.')
-E(['Garrafa de polietileno (leite e suco)'],['comum'],'O polietileno (PEAD, nº 2) é reciclável se estiver limpo e vazio.')
-E(['Big bag'],['plastico','papel'],'Em geral o big bag fica com resíduo do que transportou. Por isso vai no lixo comum.')
-E(['Tubete de plástico','Plástico stretch'],['comum'],'Plástico limpo vai para reciclagem, na lixeira de plástico.')
-E(['Cacos de vidro','Garrafa de vidro','Pote de vidro'],['comum'],'Vidro é reciclável. Embrulhe os cacos para ninguém se cortar.')
-E(['Lata de bebida'],['comum'],'Metal é reciclável. Esvazie e enxágue antes.')
-E(['Peça metálica de manutenção','Parafuso, porca e arruela','Ferramenta quebrada','Arame'],['comum'],'Sucata metálica é reciclável, na lixeira de metal.')
-E(['Filtro de óleo','Lata de tinta','Pincel com tinta'],['metal','plastico','comum'],'Está contaminado com óleo, graxa ou tinta. Por isso vai no perigoso, e não na reciclagem.')
-E(['Monitor','Cabo e carregador','Calculadora','Extensão elétrica','Placa eletrônica','Kit mouse e teclado','Headset'],['plastico','comum'],'Tem componentes eletrônicos. Por isso vai no resíduo eletrônico.')
-E(['Papelão','Folha de papel','Envelope','Saco de papel limpo','Divisória de papelão','Tubete de papelão'],['comum'],'Papel limpo e seco é reciclável, na lixeira de papel e papelão.')
-E(['Palete quebrado','Caixote'],['comum'],'Madeira tem lixeira própria.')
-E(['Teflon','Fita adesiva transparente','Ribbon'],['plastico'],'Plástico com cola, tinta ou outro material misturado atrapalha a reciclagem. Por isso vai no lixo comum.')
-E(['Touca','EPI usado'],['plastico','papel'],'Descartável de uso único, que não segue para reciclagem. Por isso vai no lixo comum.')
-E(['Avental descartável (TNT)','Macacão descartável'],['plastico','papel'],'O TNT é descartável, de uso único, e fica sujo com o uso. Por isso vai no lixo comum.')
+E(['Copo de papel'],['papel'],'O copo parece de papel, mas tem uma camada fina de plástico por dentro, para não vazar. Separar as duas camadas exige um processo que poucas recicladoras fazem. Por isso vai no lixo comum.')
+E(['Copo de papel'],['plastico'],'O plástico do copo é só uma camada fina por dentro: o material principal é papel. Como os dois estão colados, nenhuma das duas reciclagens aproveita o copo. Por isso vai no lixo comum.')
+E(['Filtro de papel com borra'],['organico'],'A borra é orgânica, mas o filtro é de papel tratado e não se decompõe do mesmo jeito. Por isso o filtro vai no lixo comum, e só a borra, sem o filtro, vai no orgânico.')
+E(['Filtro de papel com borra'],['papel'],'O filtro está molhado e com borra, e papel sujo não segue para a reciclagem de papel. Por isso vai no lixo comum.')
+E(['Saquinho de chá'],['organico'],'O chá é orgânico, mas o saquinho pode ter plástico na composição, e nem sempre dá para saber. Por isso o saquinho vai no lixo comum, e só o chá, sem o saquinho, pode ir no orgânico.')
+E(['Saquinho de chá'],['papel'],'O saquinho pode ter plástico e fica molhado, com resto de chá. Papel sujo e misturado não segue para a reciclagem. Por isso vai no lixo comum.')
+E(['Cápsula de café usada'],['metal','plastico'],'A cápsula junta alumínio ou plástico com o pó de café molhado. Em larga escala, separar esses materiais não é simples, e a reciclagem comum não faz isso. Por isso vai no lixo comum.')
+E(['Cápsula de café usada'],['organico'],'O pó de café é orgânico, mas a cápsula junto não se decompõe. Como os dois estão juntos, o composto seria prejudicado. Por isso vai no lixo comum.')
+E(['Embalagem aluminizada'],['plastico','metal','papel'],'A embalagem parece de plástico, mas tem camadas coladas de plástico e alumínio. Nenhuma reciclagem comum consegue separar as duas. Por isso tem lixeira própria, com destino adequado.')
+E(['Papel toalha'],['papel'],'O papel toalha é de papel, mas depois de usado fica úmido e sujo, e fibras sujas não seguem para a reciclagem de papel. Por isso vai no lixo comum.')
+E(['Guardanapo'],['papel'],'O guardanapo é de papel, mas depois de usado fica sujo de comida e gordura, e isso atrapalha a reciclagem do papel limpo. Por isso vai no lixo comum.')
+E(['Guardanapo'],['organico'],'O guardanapo usado tem fibras e muitas vezes tratamentos que não se decompõem bem no composto. Por isso vai no lixo comum, e só os restos de comida vão no orgânico.')
+E(['Etiqueta adesiva','Folha de papel plastificada'],['papel'],'Tem cola ou plástico junto do papel. Essa mistura atrapalha a reciclagem do papel limpo. Por isso vai no lixo comum.')
+E(['Etiqueta adesiva','Folha de papel plastificada','Fita adesiva transparente','Ribbon','Teflon'],['organico'],'Não é matéria orgânica: não se decompõe e estragaria o composto. Por isso vai no lixo comum.')
+E(['Embalagem vazia de produto químico','Embalagem com resto de produto químico'],['plastico','metal','comum'],'Mesmo vazia, a embalagem guarda resíduos do produto químico, e isso a torna inadequada para reciclagem comum ou para o lixo comum. Por isso vai no perigoso.')
+E(['EPI contaminado com produto químico','Pano Perfex contaminado','Travesseiro e manta de absorção'],['comum'],'O material está impregnado de produto químico, que não pode ir para o mesmo destino do lixo comum. Por isso vai no perigoso, para um tratamento adequado.')
+E(['Frasco de laboratório limpo'],['perigoso'],'Sem resíduo químico, o frasco é só vidro, que pode ser reciclado. Mandar para o perigoso desperdiça essa possibilidade. Por isso vai na lixeira de vidro.')
+E(['Lata de aerossol (spray em geral)'],['metal'],'A lata é de metal, mas é pressurizada e pode guardar gás e resíduo do produto. Por isso ela não vai com a sucata, e tem lixeira própria.')
+E(['Lâmpada de LED','Lâmpada de emergência'],['eletronico'],'A lâmpada tem componentes eletrônicos, mas lâmpadas, inclusive as de LED, têm lixeira própria, com destino adequado. Por isso vai na lixeira de lâmpadas.')
+E(['Lâmpada fluorescente tubular','Lâmpada fluorescente compacta'],['comum','vidro'],'Parece vidro, mas contém mercúrio, que pode ser liberado se ela quebrar. Por isso vai na lixeira própria de lâmpadas, onde segue para descontaminação.')
+E(['Pilha','Bateria de lítio (celular e ferramenta)'],['comum','eletronico'],'Pilhas e baterias têm metais e substâncias que precisam de manejo adequado, diferente do lixo comum e do eletrônico. Por isso vão na lixeira de pilhas e baterias.')
+E(['Resto de comida','Cascas de fruta','Podas e folhas'],['comum'],'É matéria orgânica, que se decompõe e pode virar composto. No lixo comum esse aproveitamento se perde. Por isso vai no orgânico.')
+E(['Película do café','Descarte de café'],['comum'],'Borra, grãos e película são resíduo do próprio grão, ou seja, matéria orgânica que pode virar composto. Por isso vão no orgânico.')
+E(['Luva de procedimento','Curativo usado'],['comum','plastico','sanitario'],'Teve contato com paciente no atendimento, então é tratado como resíduo de serviço de saúde, com destino próprio. Por isso vai no ambulatorial.')
+E(['Papel higiênico'],['papel','comum'],'O papel higiênico é de papel, mas é resíduo de banheiro e não segue para reciclagem. Por isso vai no sanitário, que tem destino adequado.')
+E(['Pote e tampa de plástico'],['comum'],'O polipropileno (PP, nº 5) pode ser reciclado se estiver limpo e seco, diferente do poliestireno (copo e isopor). Por isso vai na lixeira de plástico.')
+E(['Garrafa PET'],['comum'],'O PET (nº 1) é um dos plásticos mais reciclados, se estiver vazio e escorrido. Por isso vai na lixeira de plástico.')
+E(['Garrafa de polietileno (leite e suco)'],['comum'],'O polietileno de alta densidade (PEAD, nº 2) é bem aproveitado na reciclagem, se estiver limpo e vazio. Por isso vai na lixeira de plástico.')
+E(['Big bag'],['plastico','papel'],'O big bag é de tecido plástico, mas quase nunca está limpo por dentro: sobra resíduo do que ele transportou. Com resíduo, ele atrapalha a reciclagem. Por isso vai no lixo comum.')
+E(['Tubete de plástico','Plástico stretch'],['comum'],'Plástico limpo pode ser reciclado. No lixo comum esse aproveitamento se perde. Por isso vai na lixeira de plástico.')
+E(['Cacos de vidro','Garrafa de vidro','Pote de vidro'],['comum'],'O vidro pode ser derretido e virar vidro novo. No lixo comum esse aproveitamento se perde. Por isso vai na lixeira de vidro. Embrulhe os cacos para ninguém se cortar.')
+E(['Lata de bebida'],['comum'],'O metal da lata pode ser derretido e reaproveitado. No lixo comum esse aproveitamento se perde. Por isso vai na lixeira de metal.')
+E(['Peça metálica de manutenção','Parafuso, porca e arruela','Ferramenta quebrada','Arame'],['comum'],'Sucata metálica pode ser derretida e usada de novo. No lixo comum esse aproveitamento se perde. Por isso vai na lixeira de metal.')
+E(['Filtro de óleo','Lata de tinta','Pincel com tinta'],['metal','plastico','comum'],'Está impregnado de óleo, graxa ou tinta, que são resíduos perigosos e contaminam o que estiver junto. Por isso vai no perigoso, para um tratamento adequado.')
+E(['Monitor','Cabo e carregador','Calculadora','Extensão elétrica','Placa eletrônica','Kit mouse e teclado','Headset'],['plastico','comum'],'Tem placas, fios e peças de vários materiais, alguns aproveitáveis, que precisam ser separados em um processo próprio. Por isso vai na lixeira de resíduo eletrônico.')
+E(['Papelão','Folha de papel','Envelope','Saco de papel limpo','Divisória de papelão','Tubete de papelão'],['comum'],'Papel limpo e seco pode ser reciclado. No lixo comum esse aproveitamento se perde. Por isso vai na lixeira de papel e papelão.')
+E(['Palete quebrado','Caixote'],['comum'],'A madeira pode ser reaproveitada ou reciclada. No lixo comum esse aproveitamento se perde. Por isso vai na lixeira de madeira.')
+E(['Teflon','Fita adesiva transparente','Ribbon'],['plastico'],'Parece plástico, mas tem cola, tinta ou um tipo especial de material, que atrapalha a reciclagem do plástico limpo. Por isso vai no lixo comum.')
+E(['Touca','EPI usado'],['plastico','papel'],'É descartável, de uso único, feito de materiais misturados, como tecido e elástico, que não seguem para a reciclagem. Por isso vai no lixo comum.')
+E(['Avental descartável (TNT)','Macacão descartável'],['plastico','papel'],'O TNT é um tecido feito de fibras plásticas, descartável e de uso único, e fica sujo com o uso. Por isso não segue para a reciclagem e vai no lixo comum.')
 
 # Confusões comuns por lixeira correta: as primeiras opções são as que mais enganam.
 # O teste rápido usa estas listas (e os pares de ERRO_ITEM) para montar alternativas parecidas.
