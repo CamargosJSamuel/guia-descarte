@@ -143,12 +143,6 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 .cf{position:fixed;inset:0;pointer-events:none;z-index:60}
 @media (prefers-reduced-motion:reduce){.opt.no{animation:none}.opt{transition:none}}
 .inst{margin:0 0 12px}
-.fav{position:absolute;top:6px;right:6px;width:44px;height:44px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
-.fav span{width:34px;height:34px;border-radius:50%;background:rgba(255,248,239,.94);box-shadow:0 1px 4px rgba(0,0,0,.2);display:grid;place-items:center}
-.fav svg{width:19px;height:19px;fill:none;stroke:#7A6A58;stroke-width:2;stroke-linejoin:round}
-.fav[aria-pressed="true"] svg{fill:#E0A100;stroke:#B07A00}
-.fav:focus-visible{outline:3px solid var(--olive);outline-offset:-2px;border-radius:50%}
-.chip.fv svg{display:none}
 .totop{position:fixed;right:16px;bottom:18px;z-index:15;width:50px;height:50px;border-radius:50%;border:0;background:var(--green);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.28);display:grid;place-items:center;cursor:pointer}
 .totop[hidden]{display:none}
 .totop svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
@@ -236,25 +230,20 @@ const ERRB=/*ERRB*/,ERRI=/*ERRI*/,CONF=/*CONF*/;
 const $=s=>document.querySelector(s),norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 let bin='all',term='';
 const chips=$('#chips');
-/* favoritos (guardados neste aparelho) */
 const slug=s=>norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-let FAV=new Set();try{FAV=new Set(JSON.parse(localStorage.getItem('gd_f'))||[])}catch(e){}
-const isFav=i=>FAV.has(slug(i.n));
-const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>';
-function toggleFav(i){const k=slug(i.n);FAV.has(k)?FAV.delete(k):FAV.add(k);try{localStorage.setItem('gd_f',JSON.stringify([...FAV]))}catch(e){}if(bin==='fav'&&!ITEMS.some(isFav))bin='all';chipsRender();render()}
 function toResults(){if($('#grid').getBoundingClientRect().top<innerHeight*.6)return;const y=$('#grid').getBoundingClientRect().top+scrollY-($('.tabs').offsetHeight+$('.rbar').offsetHeight+8);window.scrollTo({top:Math.max(0,y),behavior:'smooth'})}
-function chipsRender(){const c={};ITEMS.forEach(i=>c[i.b]=(c[i.b]||0)+1);const nf=ITEMS.filter(isFav).length;
- chips.innerHTML=`<button class="chip" aria-pressed="${bin==='all'}" data-b="all">Todas <b>${ITEMS.length}</b></button>`+(nf?`<button class="chip fv" style="--c:#E0A100;--t:#1b1b1b" aria-pressed="${bin==='fav'}" data-b="fav">★ Favoritos <b>${nf}</b></button>`:'')+Object.keys(BINS).filter(k=>c[k]).map(k=>`<button class="chip" style="--c:${BINS[k].c};--t:${BINS[k].t}" aria-pressed="${bin===k}" data-b="${k}"><i></i>${BINS[k].n} <b>${c[k]||0}</b></button>`).join('')}
+function chipsRender(){const c={};ITEMS.forEach(i=>c[i.b]=(c[i.b]||0)+1);
+ chips.innerHTML=`<button class="chip" aria-pressed="${bin==='all'}" data-b="all">Todas <b>${ITEMS.length}</b></button>`+Object.keys(BINS).filter(k=>c[k]).map(k=>`<button class="chip" style="--c:${BINS[k].c};--t:${BINS[k].t}" aria-pressed="${bin===k}" data-b="${k}"><i></i>${BINS[k].n} <b>${c[k]||0}</b></button>`).join('')}
 chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;bin=b.dataset.b;chipsRender();render();toResults()});
 $('#clr').addEventListener('click',()=>{$('#q').value='';term='';bin='all';chipsRender();render();window.scrollTo({top:0,behavior:'smooth'})});
 $('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&bin!=='all'){bin='all';chipsRender()}render()});
 const ORD=Object.keys(BINS),SORTED=ITEMS.slice().sort((a,b)=>ORD.indexOf(a.b)-ORD.indexOf(b.b)||(!!IMGS[b.i])-(!!IMGS[a.i]));
 const STOP=['de','da','do','das','dos','e','com','sem','para','a','o'],hay=i=>i._h||(i._h=norm(i.n+' '+i.k+' '+BINS[i.b].n));
-const card=i=>`<div class="cw"><article class="item" tabindex="0" role="button" data-i="${i.i}" data-b="${i.b}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3></div><div class="bn">${BINS[i.b].n}</div></article><button class="fav" data-i="${i.i}" aria-pressed="${isFav(i)}" aria-label="${isFav(i)?'Remover dos favoritos':'Favoritar'}: ${i.n}"><span>${STAR}</span></button></div>`;
+const card=i=>`<div class="cw"><article class="item" tabindex="0" role="button" data-i="${i.i}" data-b="${i.b}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3></div><div class="bn">${BINS[i.b].n}</div></article></div>`;
 function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
- const r=SORTED.filter(i=>(bin==='all'||(bin==='fav'?isFav(i):i.b===bin))&&(!term||tk.every(w=>hay(i).includes(w))));
+ const r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));
  $('#hero').classList.toggle('searching',!!term);
- const lb=bin==='fav'?'Favoritos':bin!=='all'?BINS[bin].n:'';
+ const lb=bin!=='all'?BINS[bin].n:'';
  $('#count').textContent=r.length+(r.length===1?' resíduo':' resíduos')+(lb?' em '+lb:'')+(term?' para “'+$('#q').value.trim()+'”':'');
  $('#clr').hidden=!(term||bin!=='all');
  $('#grid').innerHTML=r.length?r.map(card).join(''):`<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 14px">Nenhum resíduo encontrado. Descreva o resíduo ou mande uma foto no WhatsApp e a gente responde.</p><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a></div>`}
@@ -310,9 +299,8 @@ $('#pop').insertAdjacentHTML('beforeend',POP.map(p=>`<button class="pb" data-t="
 $('#pop').addEventListener('click',e=>{const b=e.target.closest('.pb');if(!b)return;$('#q').value=b.dataset.t;term=norm(b.dataset.t);bin='all';chipsRender();render()});
 let lastF=null;
 function openI(n){const i=ITEMS[n];lastF=document.activeElement;const s=$('#sheet');s.style.setProperty('--c',BINS[i.b].c);s.style.setProperty('--t',BINS[i.b].t);
- s.innerHTML=`<div class="sm">Este resíduo vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#aprender" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<div class="acts"><button class="btn" id="ovx">Fechar</button><button class="btn" id="ovf" aria-pressed="${isFav(i)}">${isFav(i)?'★ Nos favoritos':'☆ Favoritar'}</button><button class="btn" id="ovs">Compartilhar</button></div><p class="ovm" id="ovm" aria-live="polite"></p>`;
- $('#ovf').addEventListener('click',()=>{toggleFav(i);const f=isFav(i);$('#ovf').textContent=f?'★ Nos favoritos':'☆ Favoritar';$('#ovf').setAttribute('aria-pressed',String(f))});
- $('#ovs').addEventListener('click',()=>shareItem(i));
+ s.innerHTML=`<div class="sm">Este resíduo vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#aprender" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<div class="acts"><button class="btn" id="ovx">Fechar</button><button class="btn" id="ovs">Compartilhar</button></div><p class="ovm" id="ovm" aria-live="polite"></p>`;
+  $('#ovs').addEventListener('click',()=>shareItem(i));
  try{history.replaceState(null,'',location.pathname+'?r='+slug(i.n)+location.hash)}catch(e){}
  const pl=$('#ovp');if(pl)pl.addEventListener('click',e=>{e.preventDefault();closeI();view('aprender',true);setTimeout(()=>{const f=$('#fplast');f.scrollIntoView({behavior:'smooth',block:'center'});f.classList.add('hl');setTimeout(()=>f.classList.remove('hl'),2600)},60)});
  $('#ov').hidden=false;$('#ovx').focus()}
@@ -321,7 +309,7 @@ async function shareItem(i){const url=location.origin+location.pathname+'?r='+sl
  try{if(navigator.share){await navigator.share({title:'Guia de descarte',text:`${i.n}: vai em ${BINS[i.b].n}.`,url});return}}catch(e){if(e&&e.name==='AbortError')return}
  let ok=false;try{await navigator.clipboard.writeText(url);ok=true}catch(e){}
  m.textContent=ok?'Link copiado. Cole onde quiser.':'Copie o link: '+url}
-$('#grid').addEventListener('click',e=>{const f=e.target.closest('.fav');if(f){toggleFav(ITEMS[+f.dataset.i]);return}const a=e.target.closest('.item');if(a)openI(+a.dataset.i)});
+$('#grid').addEventListener('click',e=>{const a=e.target.closest('.item');if(a)openI(+a.dataset.i)});
 $('#grid').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const a=e.target.closest('.item');if(a){e.preventDefault();openI(+a.dataset.i)}}});
 $('#ov').addEventListener('click',e=>{if(e.target.id==='ov'||e.target.id==='ovx')closeI()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#ov').hidden)closeI()});
