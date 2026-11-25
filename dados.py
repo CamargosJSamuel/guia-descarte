@@ -160,7 +160,7 @@ assert set(CONFUSAO)==set(B), 'CONFUSAO precisa ter todas as lixeiras'
 
 # Para onde vai cada lixeira depois da coleta (aba Aprender). Texto curto e didático.
 DESTINOS=[
- ('Reciclagem','O material é separado, processado e vira matéria-prima para novos produtos.',['papel','plastico','metal','madeira','pilhas','aerossol']),
+ ('Reciclagem','O material é separado, processado e vira matéria-prima para novos produtos.',['papel','plastico','vidro','metal','madeira','pilhas','aerossol']),
  ('Compostagem','Os restos orgânicos se decompõem de forma controlada e viram composto, um adubo.',['organico']),
  ('Blendagem e coprocessamento','Resíduos são misturados (blendagem) para virar combustível alternativo e usados em fornos industriais no lugar de combustível comum (coprocessamento).',['comum','aluminizada','perigoso','sanitario']),
  ('Triagem e transbordo','Antes do destino final, o material é separado e reagrupado. Aí se define o que segue para a reciclagem e o que segue para a blendagem e o coprocessamento.',['eletronico']),
