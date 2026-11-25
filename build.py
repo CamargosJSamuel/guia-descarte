@@ -1,7 +1,7 @@
 """Gera docs/index.html (página única) a partir de dados.py, src/template.html e fotos/."""
 import base64, hashlib, io, json, shutil, glob, os
 from PIL import Image
-from dados import B, I, ERRO_BIN, ERRO_ITEM, CONFUSAO
+from dados import B, I, ERRO_BIN, ERRO_ITEM, CONFUSAO, DESTINOS, ERROS_COMUNS
 PH='fotos/'
 def jpg(fn,px=400,bg=(255,248,239),fill=0.84):
     """Foto quadrada padronizada: recorta ao objeto, uniformiza o fundo (creme) e centraliza com a mesma margem."""
@@ -36,7 +36,7 @@ html=open('src/template.html',encoding='utf-8').read()
 from datetime import datetime
 from zoneinfo import ZoneInfo
 REV=datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%d/%m/%Y às %H:%M')
-html=html.replace('/*CONF*/',json.dumps(CONFUSAO,ensure_ascii=False)).replace('/*ERRB*/',json.dumps(ERRO_BIN,ensure_ascii=False)).replace('/*ERRI*/',json.dumps(ERRO_ITEM,ensure_ascii=False)).replace('/*ITEMS*/',json.dumps(items,ensure_ascii=False)).replace('/*BINS*/',json.dumps({k:dict(n=v[0],c=v[1],t=v[2]) for k,v in B.items()},ensure_ascii=False)).replace('/*IMGS*/',json.dumps(imgs)).replace('%%KDP%%',kdp).replace('%%REV%%',REV).replace('%%QR%%',open('src/qr.svg',encoding='utf-8').read())
+html=html.replace('/*DEST*/',json.dumps(DESTINOS,ensure_ascii=False)).replace('/*ERC*/',json.dumps(ERROS_COMUNS,ensure_ascii=False)).replace('/*CONF*/',json.dumps(CONFUSAO,ensure_ascii=False)).replace('/*ERRB*/',json.dumps(ERRO_BIN,ensure_ascii=False)).replace('/*ERRI*/',json.dumps(ERRO_ITEM,ensure_ascii=False)).replace('/*ITEMS*/',json.dumps(items,ensure_ascii=False)).replace('/*BINS*/',json.dumps({k:dict(n=v[0],c=v[1],t=v[2]) for k,v in B.items()},ensure_ascii=False)).replace('/*IMGS*/',json.dumps(imgs)).replace('%%KDP%%',kdp).replace('%%REV%%',REV).replace('%%QR%%',open('src/qr.svg',encoding='utf-8').read())
 open('docs/index.html','w',encoding='utf-8').write(html); print(len(html)/1e6,'MB')
 
 # arquivos estáticos (ícones, manifesto) e service worker com versão do conteúdo

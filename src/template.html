@@ -196,6 +196,15 @@ body.tv .qhint{display:none}
 @media (prefers-reduced-motion:reduce){.arw{animation:none}}
 .ov.itop{align-items:flex-start;justify-content:flex-end;padding-right:24px}.ov.itop .sheet{border-radius:0 0 28px 28px;margin-top:84px}
 .ov.ibot .sheet{margin-bottom:84px;border-radius:28px}
+.dst{background:var(--card);border-radius:16px;padding:14px 16px;margin:0 0 10px;box-shadow:var(--shadow)}
+.dst h3{margin:0 0 4px;font-size:20px}.dst p{margin:0 0 10px;font-size:15px;color:var(--mut)}
+.dch{display:flex;flex-wrap:wrap;gap:6px}
+.dch span{display:inline-flex;align-items:center;gap:6px;font:600 14px var(--fb);min-height:30px;padding:0 10px;border-radius:999px;border:2px solid var(--c)}
+.dch i{width:10px;height:10px;border-radius:50%;background:var(--c);border:1px solid rgba(128,128,128,.5)}
+.erc{display:block;width:100%;text-align:left;background:var(--card);border:0;border-radius:16px;padding:14px 16px;margin:0 0 10px;box-shadow:var(--shadow);cursor:pointer;color:var(--ink);font:inherit;min-height:44px}
+.erc b{display:block;font-size:17px;margin-bottom:4px}.erc span{display:block;font-size:15px;color:var(--mut)}.erc em{display:block;font-style:normal;font-weight:700;color:var(--green);margin-top:8px;font-size:15px}
+.ib.ibq{background:transparent;color:var(--green)}
+:root[data-theme="dark"] .ib.ibq{color:var(--green);background:transparent}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ib.ibq{color:var(--green);background:transparent}}
 </style>
 </head>
 <body>
@@ -237,8 +246,10 @@ body.tv .qhint{display:none}
  <div id="v-aprender" role="tabpanel" aria-labelledby="t-aprender" hidden>
  <section id="cores" style="padding-top:28px"><h2>Por que cada lixeira tem uma cor?</h2>
   <p class="lead2">A cor não tem ligação com o material. Ela é um <b>código combinado em todo o Brasil</b>, para que a mesma cor signifique o mesmo resíduo em qualquer lugar: na empresa, na escola, na rua. Esse código vem da Resolução Conama nº 275/2001.</p>
-  <ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b><span>Dica nossa: não tem truque, é só memorizar.</span></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b><span>Dica nossa: não tem truque, é só memorizar.</span></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b><span>Dica nossa: lembra o verde de garrafa.</span></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b><span>Dica nossa: lembra o brilho do metal.</span></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b><span>Dica nossa: lembra carvão.</span></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b><span>Dica nossa: laranja é cor de alerta.</span></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b><span>Dica nossa: lembra a cor de hospital.</span></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b><span>Não é usado no dia a dia da maioria dos locais.</span></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b><span>Dica nossa: lembra a cor da terra.</span></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b><span>Dica nossa: é a cor “sem categoria”.</span></div></li></ul>
-  <p class="note">Na empresa, algumas lixeiras seguem o mesmo código e outras têm regras próprias. Em caso de dúvida, o guia sempre mostra a lixeira certa de cada resíduo. As frases “dica nossa” são só para ajudar a lembrar e não fazem parte da norma.</p></section>
+  <ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b></div></li></ul>
+  </section>
+ <section id="destino"><h2>Para onde vai depois da coleta?</h2><p class="lead2">Cada lixeira tem um destino. Veja o que acontece com o que você separa.</p><div id="destlist"></div></section>
+ <section id="erros"><h2>Erros mais comuns</h2><p class="lead2">São os que mais acontecem por aqui. Toque para ver o resíduo no guia.</p><div id="erlist"></div></section>
  <section id="escorrer"><h2>Antes de descartar: esvazie e deixe escorrer</h2>
   <p class="lead2">Resto de comida, bebida ou gordura numa embalagem pode sujar o que estava limpo e atrapalhar a reciclagem de todo o lote.</p>
   <ol class="how"><li><b>Esvazie.</b> Tire todo o conteúdo e raspe o grosso com um guardanapo.</li>
@@ -298,6 +309,10 @@ function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
  $('#clr').hidden=!(term||bin!=='all');
  $('#grid').innerHTML=r.length?r.map(card).join(''):`<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 14px">Nenhum resíduo encontrado. Descreva o resíduo ou mande uma foto no WhatsApp e a gente responde.</p><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a></div>`}
 chipsRender();render();
+const DEST=/*DEST*/,ERC=/*ERC*/;
+$('#destlist').innerHTML=DEST.map(d=>`<div class="dst"><h3>${d[0]}</h3><p>${d[1]}</p><div class="dch">${d[2].filter(k=>BINS[k]).map(k=>`<span style="--c:${BINS[k].c}"><i></i>${BINS[k].n}</span>`).join('')}</div></div>`).join('');
+$('#erlist').innerHTML=ERC.map(e=>{const it=ITEMS.find(x=>x.n===e[2]);return `<button class="erc" data-i="${it?it.i:''}"><b>${e[0]}</b><span>${e[1]}</span>${it?'<em>Ver no guia →</em>':''}</button>`}).join('');
+$('#erlist').addEventListener('click',e=>{const b=e.target.closest('.erc');if(b&&b.dataset.i!=='')openI(+b.dataset.i)});
 /* quiz */
 const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}

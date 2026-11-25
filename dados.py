@@ -157,3 +157,20 @@ CONFUSAO={
 'aerossol':['metal','perigoso','comum','plastico'],
 }
 assert set(CONFUSAO)==set(B), 'CONFUSAO precisa ter todas as lixeiras'
+
+# Para onde vai cada lixeira depois da coleta (aba Aprender). Texto curto e didático.
+DESTINOS=[
+ ('Reciclagem','O material é separado, processado e vira matéria-prima para novos produtos.',['papel','plastico','metal','madeira','pilhas','aerossol']),
+ ('Compostagem','Os restos orgânicos se decompõem de forma controlada e viram composto, um adubo.',['organico']),
+ ('Blendagem e coprocessamento','Resíduos são misturados (blendagem) para virar combustível alternativo e usados em fornos industriais no lugar de combustível comum (coprocessamento).',['comum','aluminizada','perigoso','sanitario']),
+ ('Triagem e transbordo','Antes do destino final, o material é separado e reagrupado. Aí se define o que segue para a reciclagem e o que segue para a blendagem e o coprocessamento.',['eletronico']),
+ ('Descontaminação de lâmpadas','Separa o mercúrio e permite reaproveitar o vidro e os metais.',['lampadas']),
+ ('Incineração','Queima controlada, em alta temperatura, própria para resíduos de serviços de saúde.',['ambulatorial']),
+]
+# Erros que mais acontecem na empresa: (título, onde costuma ir, o que fazer, resíduo do guia para abrir)
+ERROS_COMUNS=[
+ ('Copo e isopor na lixeira de plástico','O copo descartável e o isopor são poliestireno, de baixo valor e pouco aceito pela reciclagem. Vão no lixo comum.','Copo de poliestireno'),
+ ('Copo de papel na lixeira de papel','O copo tem uma camada fina de plástico por dentro, que atrapalha a reciclagem do papel. Vai no lixo comum.','Copo de papel'),
+ ('Resíduo que não é orgânico na lixeira de orgânico','No orgânico vai só resto de comida e borra de café. Guardanapo, embalagem, filtro de papel e saquinho de chá vão no lixo comum.','Guardanapo'),
+ ('Resíduo com lixeira própria no lixo comum','Pilha, lâmpada, eletrônico e embalagem de produto químico precisam de tratamento específico. Procure a lixeira certa no guia.','Pilha'),
+]
