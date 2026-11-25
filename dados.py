@@ -136,3 +136,24 @@ E(['Palete quebrado','Caixote'],['comum'],'Madeira tem lixeira própria.')
 E(['Teflon','Fita adesiva transparente','Ribbon'],['plastico'],'Plástico com cola, tinta ou outro material misturado atrapalha a reciclagem. Por isso vai no lixo comum.')
 E(['Touca','EPI usado'],['plastico','papel'],'Descartável de uso único, que não segue para reciclagem. Por isso vai no lixo comum.')
 E(['Avental descartável (TNT)','Macacão descartável'],['plastico','papel'],'O TNT é descartável, de uso único, e fica sujo com o uso. Por isso vai no lixo comum.')
+
+# Confusões comuns por lixeira correta: as primeiras opções são as que mais enganam.
+# O teste rápido usa estas listas (e os pares de ERRO_ITEM) para montar alternativas parecidas.
+CONFUSAO={
+'papel':['comum','plastico','organico','madeira'],
+'plastico':['comum','metal','papel','vidro'],
+'vidro':['comum','plastico','metal','perigoso'],
+'metal':['comum','plastico','perigoso','vidro'],
+'comum':['papel','plastico','organico','metal'],
+'madeira':['comum','papel','plastico','organico'],
+'perigoso':['comum','plastico','metal','eletronico'],
+'organico':['comum','papel','sanitario','plastico'],
+'ambulatorial':['sanitario','comum','perigoso','plastico'],
+'sanitario':['comum','ambulatorial','papel','organico'],
+'aluminizada':['plastico','comum','metal','papel'],
+'pilhas':['eletronico','comum','perigoso','metal'],
+'eletronico':['comum','pilhas','plastico','perigoso'],
+'lampadas':['eletronico','vidro','comum','perigoso'],
+'aerossol':['metal','perigoso','comum','plastico'],
+}
+assert set(CONFUSAO)==set(B), 'CONFUSAO precisa ter todas as lixeiras'

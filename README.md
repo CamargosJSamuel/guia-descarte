@@ -28,6 +28,8 @@ Abra `docs/index.html` no navegador.
 ## Explicação de erro no teste rápido
 No fim de `dados.py`: `ERRO_BIN` tem um texto por lixeira ("por que não nesta lixeira") e `ERRO_ITEM` tem textos próprios para confusões comuns, criados com `E([itens],[lixeiras erradas],'texto')`. Sem texto próprio, o teste mostra o motivo do item mais o texto da lixeira escolhida.
 
+Alternativas do teste: `CONFUSAO` (em `dados.py`) lista, para cada lixeira correta, as lixeiras que mais confundem. O teste junta isso com os pares de `ERRO_ITEM` para montar opções parecidas.
+
 ## Uso sem internet (instalar no celular)
 O site vira um aplicativo instalável (PWA). `src/sw.js` guarda a página no aparelho e `src/static/` tem o manifesto e os ícones. A versão do cache muda sozinha a cada build, então ajustes chegam na próxima abertura com internet.
 

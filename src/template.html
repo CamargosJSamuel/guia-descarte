@@ -201,7 +201,7 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 <div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"><div class="sheet" id="sheet"></div></div>
 <script>
 const ITEMS=/*ITEMS*/,BINS=/*BINS*/,IMGS=/*IMGS*/;
-const ERRB=/*ERRB*/,ERRI=/*ERRI*/;
+const ERRB=/*ERRB*/,ERRI=/*ERRI*/,CONF=/*CONF*/;
 const $=s=>document.querySelector(s),norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 let bin='all',term='';
 const chips=$('#chips');
@@ -218,7 +218,11 @@ chipsRender();render();
 /* quiz */
 const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function opts(i){const used=[...new Set(ITEMS.map(x=>x.b))].filter(k=>k!==i.b);return shuffle([i.b,...shuffle(used).slice(0,3)])}
+/* alternativas parecidas: primeiro as confusões específicas do item, depois as mais comuns da lixeira certa */
+function opts(i){const used=new Set(ITEMS.map(x=>x.b)),esp=Object.keys(ERRI).filter(k=>k.startsWith(i.n+'|')).map(k=>k.split('|')[1]);
+ const c=CONF[i.b]||[],pool=[...shuffle(esp).slice(0,2),c[0],...shuffle(c.slice(1)),...shuffle([...used])];
+ const d=[];for(const k of pool)if(k&&k!==i.b&&used.has(k)&&!d.includes(k))d.push(k);
+ return shuffle([i.b,...d.slice(0,3)])}
 function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask()}
 function ask(){done=false;const i=qs[qi];
  qz.innerHTML=(qi===0&&progTxt()?`<p class="prog">${progTxt()}</p>`:'')+`<div class="qtop"><span>Pergunta ${qi+1} de 5</span><span>${sc} certas</span></div><div class="bar"><i style="width:${qi/5*100}%"></i></div>
