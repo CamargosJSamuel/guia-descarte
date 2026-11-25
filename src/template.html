@@ -230,6 +230,18 @@ body:has(#v-teste:not([hidden]) #fbk:not(:empty)),body:has(#v-teste:not([hidden]
 .wafab{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:20;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px;border-radius:999px;background:var(--card);color:var(--green);border:2px solid var(--green);font:700 15px var(--fb);text-decoration:none;box-shadow:var(--shadow)}
 body:has(#gquiz:not([hidden])) .wafab,body:has(#gplay:not([hidden])) .wafab{display:none}
 .wafab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chat{position:fixed;left:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:40;width:min(360px,calc(100vw - 28px));background:var(--card);border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.3);border:1px solid var(--line);overflow:hidden;animation:chin .18s ease-out}
+.chat[hidden]{display:none}@keyframes chin{from{opacity:0;transform:translateY(12px) scale(.97)}}
+.ch{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 14px 12px 18px}.ch b{font:700 20px var(--fd)}
+:root[data-theme="dark"] .ch,:root:not([data-theme="light"]) .ch{color:#10261a}
+.ch button{width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:inherit;font-size:28px;line-height:1;cursor:pointer}
+.cb{padding:14px 16px 16px;display:grid;gap:10px}
+.bub{background:var(--bg);border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:15px}
+.qr{display:flex;gap:8px;flex-wrap:wrap}.qr button{font:600 14px var(--fb);min-height:40px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.chat textarea{width:100%;font:500 16px var(--fb);border:2px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:none;box-sizing:border-box}
+.chat textarea:focus{outline:3px solid var(--olive);outline-offset:1px}
+.chn{margin:0;min-height:20px;font-size:14px;color:var(--mut)}.chl{font-size:14.5px;color:var(--green);font-weight:600;text-align:center}
+footer{padding-bottom:90px}
 </style>
 </head>
 <body>
@@ -289,14 +301,20 @@ body:has(#gquiz:not([hidden])) .wafab,body:has(#gplay:not([hidden])) .wafab{disp
    <div class="fact" id="fplast"><span>06</span><p>O número no triângulo do plástico diz o tipo de resina, não se é reciclável. Copos, talheres e isopor (nº 6) quase não são aproveitados. <small style="display:block;margin-top:6px;color:var(--mut)">Fontes: eCycle, Gazeta de S.Paulo, Fast Company Brasil.</small></p></div>
   </div></div></details></section>
  </div>
- <section id="duvida"><div class="cta">
-  <div><h2>Ficou com dúvida?</h2><p>Não achou o resíduo, não sabe o nome ou quer confirmar? Descreva ou mande uma foto no WhatsApp.</p></div>
-  <div class="row"><a class="btn" id="wa" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a>
-  <a class="btn alt" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div></div></section>
+
 
 
 </main>
-<a class="wafab" id="wafab" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener" aria-label="Tirar dúvida pelo WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20.5l1.6-4.9A8 8 0 1 1 21 12z"/></svg>Dúvida?</a>
+<button class="wafab" id="wafab" aria-haspopup="dialog" aria-expanded="false" aria-controls="chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20.5l1.6-4.9A8 8 0 1 1 21 12z"/></svg>Dúvida?</button>
+<div class="chat" id="chat" role="dialog" aria-label="Tirar dúvida" hidden>
+ <div class="ch"><b>Ficou com dúvida?</b><button id="chx" aria-label="Fechar">×</button></div>
+ <div class="cb"><div class="bub">Oi! Não achou o resíduo ou quer confirmar onde vai? Escreva aqui e envie no WhatsApp. Se preferir, mande uma foto por lá.</div>
+  <div class="qr"><button data-q="Não achei este resíduo no guia: ">Não achei um resíduo</button><button data-q="Quero confirmar onde vai: ">Quero confirmar</button></div>
+  <textarea id="chq" rows="3" placeholder="Escreva sua dúvida" aria-label="Sua dúvida"></textarea>
+  <button class="btn" id="chs">Enviar no WhatsApp</button>
+  <p class="chn" id="chn" aria-live="polite"></p>
+  <a class="chl" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div>
+</div>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: %%REV%%</p></div></footer>
 <div class="qro" id="qro" hidden role="dialog" aria-modal="true" aria-label="QR Code do guia">%%QR%%<p>Aponte a câmera do celular para abrir o guia</p><small>camargosjsamuel.github.io/guia-descarte</small><button class="btn" id="qrx">Fechar</button></div>
 
@@ -344,7 +362,7 @@ const erRule=r=>r.startsWith('not:')?ITEMS.filter(x=>x.b!==r.slice(4)):ITEMS.fil
 $('#erlist').innerHTML=ERC.map((e,k)=>{const rnd=e[2].startsWith('not:');return `<button class="erc" data-k="${k}"><b>${e[0]}</b><span>${e[1]}</span><em>${rnd?'Ver um exemplo →':'Ver no guia →'}</em></button>`}).join('');
 $('#erlist').addEventListener('click',e=>{const b=e.target.closest('.erc');if(!b)return;const l=erRule(ERC[+b.dataset.k][2]);if(l.length)openI(l[Math.random()*l.length|0].i)});
 /* quiz */
-const WAH=()=>$('#wafab').href;const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
+const WA='https://wa.me/qr/SA2UZZCNP2L4F1';const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 /* alternativas parecidas: primeiro as confusões específicas do item, depois as mais comuns da lixeira certa */
 function opts(i){const used=new Set(ITEMS.map(x=>x.b)),esp=Object.keys(ERRI).filter(k=>k.startsWith(i.n+'|')).map(k=>k.split('|')[1]);
@@ -367,7 +385,7 @@ function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
- $('#fbk').innerHTML=`<div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button><a class="btn alt" href="${WAH()}" target="_blank" rel="noopener">Dúvida? WhatsApp</a></p>`}
+ $('#fbk').innerHTML=`<div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button><button class="btn alt" data-chat>Dúvida?</button></p>`}
 /* explicação do erro: texto próprio do item (ERRI) ou motivo do item + texto da lixeira escolhida (ERRB) */
 function errText(i,k){return ERRI[i.n+'|'+k]||(i.m+' '+(ERRB[k]||''))}
 /* arrastar a foto até a lixeira (também funciona com toque) */
@@ -420,7 +438,7 @@ const gFront=()=>gm&&gm.act.length?gm.act.reduce((a,b)=>(gm.mode==='rain'?b.y>a.
 function gResolve(o,k){gm.act=gm.act.filter(x=>x!==o);const r=o.e.getBoundingClientRect();o.e.remove();gm.done++;const i=o.i,ok=k===i.b,tip=$('#gtip');
  if(ok){gm.sc++;buzz(30);confetti(r.left+r.width/2,r.top+r.height/2,30);tip.className='gtip';tip.innerHTML=`<b>Certo!</b> ${i.n} vai em ${BINS[i.b].n}. ${i.m}`;gSetProg();return gm.done>=gm.n?gEnd():0}
  buzz([60,40,60]);gm.wr.push({i,k});gm.paused=true;gSetProg();
- $('#gfb').innerHTML=`<div class="fb">${k?`<b>Quase.</b> ${i.n} vai em <b>${BINS[i.b].n}</b>, não em ${BINS[k].n}.<br>${errText(i,k)}`:`<b>Não deu tempo.</b> ${i.n} vai em <b>${BINS[i.b].n}</b>.<br>${i.m}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="gnext">${gm.done>=gm.n?'Ver resultado':'Continuar'}</button><a class="btn alt" href="${WAH()}" target="_blank" rel="noopener">Dúvida? WhatsApp</a></p>`}
+ $('#gfb').innerHTML=`<div class="fb">${k?`<b>Quase.</b> ${i.n} vai em <b>${BINS[i.b].n}</b>, não em ${BINS[k].n}.<br>${errText(i,k)}`:`<b>Não deu tempo.</b> ${i.n} vai em <b>${BINS[i.b].n}</b>.<br>${i.m}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="gnext">${gm.done>=gm.n?'Ver resultado':'Continuar'}</button><button class="btn alt" data-chat>Dúvida?</button></p>`}
 function gAnswer(k){if(!gm||gm.mode==='pair'||gm.paused)return;const o=gFront();if(o)gResolve(o,k)}
 function gEnd(){stopGame();const m=gm.mode,s=gm.sc,n=gm.n,b=gbest(m,s),ok=s>=Math.ceil(n*.8),msg=s===n?'Perfeito. Você já separa como um profissional.':ok?'Muito bem. Veja abaixo o que vale fixar.':'Vale rever o que está abaixo e tentar de novo.';
  if(ok){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,s===n?140:80)}
@@ -454,6 +472,17 @@ const gEndDrag=e=>{if(!gdrag)return;const d=gdrag;gdrag=null;d.g.remove();gz.que
  if(gm.mode==='pair')pPlace(+d.src.dataset.j,b.dataset.b);else{const o=gm.act.find(x=>x.e===d.src);if(o)gResolve(o,b.dataset.b)}};
 addEventListener('pointerup',gEndDrag);addEventListener('pointercancel',gEndDrag);
 
+/* chat de dúvida */
+const chat=$('#chat'),chb=$('#wafab');
+function chatOpen(o){chat.hidden=!o;chb.setAttribute('aria-expanded',o);if(o)setTimeout(()=>$('#chq').focus(),50)}
+chb.addEventListener('click',e=>{e.stopPropagation();chatOpen(chat.hidden)});
+$('#chx').addEventListener('click',()=>chatOpen(false));
+document.addEventListener('click',e=>{const d=e.target.closest('[data-chat]');if(d){e.stopPropagation();chatOpen(true);return}if(!chat.hidden&&!chat.contains(e.target))chatOpen(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chat.hidden){chatOpen(false);chb.focus()}});
+chat.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{const q=$('#chq');q.value=b.dataset.q;q.focus()}));
+$('#chs').addEventListener('click',async()=>{const v=$('#chq').value.trim(),n=$('#chn');
+ if(v){try{await navigator.clipboard.writeText(v);n.textContent='Texto copiado. Cole na conversa do WhatsApp.'}catch(e){n.textContent='Abra o WhatsApp e escreva sua dúvida.'}}else n.textContent='';
+ window.open(WA,'_blank','noopener')});
 /* populares, ajuda, destaque, leitura */
 let lastF=null;
 function openI(n){const i=ITEMS[n];rmArw();lastF=document.activeElement;const s=$('#sheet');s.style.setProperty('--c',BINS[i.b].c);s.style.setProperty('--t',BINS[i.b].t);
