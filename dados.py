@@ -75,9 +75,9 @@ I=[(a,bb,m,('site_new/%s.png'%PHOTOS[a]) if a in PHOTOS else f,kw) for (a,bb,m,f
 ERRO_BIN={
 'papel':'Papel e papelão é só para papel limpo e seco. Outros materiais, ou papel sujo, atrapalham a reciclagem.',
 'plastico':'Plástico é só para embalagens plásticas limpas e secas. Outros materiais misturados atrapalham a reciclagem.',
-'vidro':'Vidro é só para itens de vidro. Outros materiais misturados atrapalham a reciclagem.',
+'vidro':'Vidro é só para resíduos de vidro. Outros materiais misturados atrapalham a reciclagem.',
 'metal':'Metal é só para latas e sucata metálica. Outros materiais misturados atrapalham a reciclagem.',
-'comum':'Lixo comum é para o que não tem lixeira própria nem reciclagem. Este item tem um destino específico.',
+'comum':'Lixo comum é para o que não tem lixeira própria nem reciclagem. Este resíduo tem um destino específico.',
 'madeira':'Madeira é só para peças de madeira, como palete e caixote.',
 'perigoso':'Resíduo perigoso contaminado é só para o que teve contato com produto químico, óleo ou tinta. Colocar ali o que está limpo tira a chance de reciclar.',
 'organico':'Orgânico é só para restos de comida e vegetais, que viram composto. Outros materiais estragam o composto.',

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Layout: cabeçalho com busca em destaque, filtros por lixeira, grade de itens, quiz e contato. Identidade verde do SIPAT-MA. */
+/* Layout: cabeçalho com busca em destaque, filtros por lixeira, grade de resíduos, quiz e contato. Identidade verde do SIPAT-MA. */
 :root{--bg:#FFF8EF;--card:#FFFFFF;--ink:#24301E;--mut:#5C6B52;--green:#2F6E43;--olive:#7A992E;--line:#E3EBC9;--plate:#FFF8EF;--shadow:0 1px 2px rgba(36,48,30,.06),0 8px 24px rgba(36,48,30,.06);
 --fd:"Barlow Condensed","Liberation Sans Narrow",Arial Narrow,sans-serif;--fb:"Barlow",system-ui,-apple-system,Segoe UI,sans-serif}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121C16;--card:#1B2921;--ink:#EAF1DF;--mut:#A8B89A;--green:#7FC08F;--olive:#A5C456;--line:#2B3B30;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25)}}
@@ -155,12 +155,12 @@ footer p{margin:0;color:var(--mut);font-size:14px}
  <div class="hero">
   <div class="eyebrow">Meio Ambiente</div>
   <h1>Guia de descarte</h1>
-  <p class="lead">Digite o nome do item e veja em qual lixeira ele vai, com o motivo.</p>
+  <p class="lead">Digite o nome do resíduo e veja em qual lixeira ele vai, com o motivo.</p>
   <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar item"></label>
+   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label>
   <div class="pop" id="pop"><small>Mais buscados:</small></div>
-  <button class="help" id="helpb" aria-expanded="false" aria-controls="helpbox">Não sei o nome do item</button>
-  <div class="helpbox" id="helpbox" hidden><p>Descreva o item ou mande uma foto no WhatsApp. A gente responde onde ele vai.</p>
+  <button class="help" id="helpb" aria-expanded="false" aria-controls="helpbox">Não sei o nome do resíduo</button>
+  <div class="helpbox" id="helpbox" hidden><p>Descreva o resíduo ou mande uma foto no WhatsApp. A gente responde onde ele vai.</p>
    <div class="row"><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a><button class="btn alt" id="cpy">Copiar mensagem pronta</button></div>
    <p id="cpyok" style="margin:10px 0 0" aria-live="polite"></p></div>
   <div class="chips" id="chips" role="group" aria-label="Filtrar por lixeira"></div>
@@ -183,11 +183,11 @@ footer p{margin:0;color:var(--mut);font-size:14px}
  </div>
  <div id="v-teste" role="tabpanel" aria-labelledby="t-teste" hidden>
   <section style="padding-top:28px"><h2>Teste o que você aprendeu</h2>
-  <p class="sub">Cinco itens sorteados. Escolha a lixeira certa e veja o motivo.</p>
+  <p class="sub">Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.</p>
   <div class="quiz" id="qz"></div></section>
  </div>
  <section id="duvida"><div class="cta">
-  <div><h2>Ficou com dúvida?</h2><p>Não achou o item ou quer confirmar? Fale com a gente no WhatsApp.</p></div>
+  <div><h2>Ficou com dúvida?</h2><p>Não achou o resíduo ou quer confirmar? Fale com a gente no WhatsApp.</p></div>
   <div class="row"><a class="btn" id="wa" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a>
   <a class="btn alt" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div></div></section>
 
@@ -212,8 +212,8 @@ $('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&b
 const ORD=Object.keys(BINS),SORTED=ITEMS.slice().sort((a,b)=>ORD.indexOf(a.b)-ORD.indexOf(b.b)||(!!IMGS[b.i])-(!!IMGS[a.i]));
 const STOP=['de','da','do','das','dos','e','com','sem','para','a','o'],hay=i=>i._h||(i._h=norm(i.n+' '+i.k+' '+BINS[i.b].n));
 function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));const r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));
- $('#count').textContent=r.length+(r.length===1?' item':' itens')+'. Toque em um item para ver a lixeira em destaque.';
- $('#grid').innerHTML=r.length?r.map(i=>`<article class="item" tabindex="0" role="button" data-i="${i.i}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3><span class="pill">${BINS[i.b].n}</span><p>${i.m}</p></div></article>`).join(''):`<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 14px">Nenhum item encontrado. Descreva o item ou mande uma foto no WhatsApp e a gente responde.</p><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a></div>`}
+ $('#count').textContent=r.length+(r.length===1?' resíduo':' resíduos')+'. Toque em um resíduo para ver a lixeira em destaque.';
+ $('#grid').innerHTML=r.length?r.map(i=>`<article class="item" tabindex="0" role="button" data-i="${i.i}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3><span class="pill">${BINS[i.b].n}</span><p>${i.m}</p></div></article>`).join(''):`<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 14px">Nenhum resíduo encontrado. Descreva o resíduo ou mande uma foto no WhatsApp e a gente responde.</p><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a></div>`}
 chipsRender();render();
 /* quiz */
 const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
@@ -255,7 +255,7 @@ function buzz(p){try{if(!RM.matches&&navigator.vibrate)navigator.vibrate(p)}catc
 function confetti(x,y,n){if(RM.matches)return;const c=document.createElement('canvas');c.className='cf';c.setAttribute('aria-hidden','true');c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);
  const g=c.getContext('2d'),K=['#2F6E43','#7A992E','#FFE21F','#D42828','#004AAD','#FF691F'],P=Array.from({length:n},()=>({x,y,vx:(Math.random()-.5)*10,vy:-Math.random()*10-3,s:5+Math.random()*5,c:K[Math.random()*K.length|0],r:Math.random()*6,vr:(Math.random()-.5)*.4}));let f=0;
  (function t(){g.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillStyle=p.c;g.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);g.restore()});if(++f<90)requestAnimationFrame(t);else c.remove()})()}
-function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,sc===5?140:80)}const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Dê uma olhada no guia para fixar os itens que errou.':'Vale rever o guia e tentar de novo.';
+function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,sc===5?140:80)}const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Dê uma olhada no guia para fixar os resíduos que errou.':'Vale rever o guia e tentar de novo.';
  let u='';try{u=location.href.split('#')[0]}catch(x){}
  const share='https://wa.me/?text='+encodeURIComponent(`Acertei ${sc} de 5 no teste do Guia de descarte! ${u}`);
  qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Jogar de novo</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
