@@ -43,7 +43,7 @@ h1{font-size:clamp(40px,8vw,68px);color:var(--green);margin:6px 0 8px}
 .rbar{position:sticky;top:var(--tabh,64px);z-index:4;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;margin:6px 0 8px;padding:4px 0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);color:var(--mut);font-size:15px}
 .rbar #count{font-weight:600}
 .clr{font:700 15px var(--fb);min-height:44px;color:var(--green);background:transparent;border:2px solid var(--line);border-radius:12px;padding:0 16px;cursor:pointer}
-.hero.searching .chips,.hero.searching .pop{display:none}.hero.searching{padding-bottom:0}
+.hero.searching .chips{display:none}.hero.searching{padding-bottom:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 @media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.ph img{padding:6px}.item h3{font-size:20px}.body{padding:10px 12px 8px}.bn{padding:8px 12px;min-height:54px}}
 .cw{position:relative;display:flex}
@@ -102,10 +102,6 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media (max-width:420px){.plate img{height:54px}.top .kdp img{height:17px}}
 
-.pop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 0;max-width:640px}
-.pop small{color:var(--mut);font-weight:600;font-size:14px;margin-right:2px}
-.pb{font:500 15px var(--fb);min-height:42px;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:0 14px;cursor:pointer}
-.pb:hover{border-color:var(--olive)}
 .help{margin-top:14px;font:600 15px var(--fb);color:var(--green);background:transparent;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
 .helpbox{margin-top:8px;max-width:640px;background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px}
 .helpbox p{margin:0 0 12px;color:var(--mut)}
@@ -126,7 +122,7 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 .tabs .tabin{align-items:center}
 .rev{font:500 14px var(--fb);color:var(--mut);text-align:right}
 @media (min-width:760px){.tab{flex:0 0 auto;min-width:170px}.zb{margin-left:auto}}
-@media (max-width:600px){.chips{gap:6px}.chip{font-size:14.5px;min-height:40px;padding:0 11px;gap:6px}.pb{min-height:40px}}
+@media (max-width:600px){.chips{gap:6px}.chip{font-size:14.5px;min-height:40px;padding:0 11px;gap:6px}}
 .zb{flex:0 0 auto;font:700 16px var(--fb);min-height:44px;min-width:48px;color:var(--green);background:transparent;border:2px solid var(--line);border-radius:12px;padding:0 12px;cursor:pointer}
 .zb:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
 .prog{color:var(--mut);font-size:14px;margin:0 0 14px}
@@ -219,7 +215,6 @@ header{padding:14px 0 6px}
   <p class="lead">Digite o nome do resíduo e veja em qual lixeira ele vai, com o motivo.</p>
   <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
    <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label>
-  <div class="pop" id="pop"><small>Mais buscados:</small></div>
   <button class="fbtn" id="fbtn" aria-expanded="false" aria-controls="chips"><span id="fbl">Filtrar por lixeira</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   <div class="chips" id="chips" hidden role="group" aria-label="Filtrar por lixeira"></div>
  </div>
@@ -357,9 +352,6 @@ function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(in
  qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Jogar de novo</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
 
 /* populares, ajuda, destaque, leitura */
-const POP=[['Copinho','copinho'],['Talher','talher'],['Máscara','máscara'],['Mouse','mouse'],['Borra de café','borra'],['Papel toalha','papel toalha']];
-$('#pop').insertAdjacentHTML('beforeend',POP.map(p=>`<button class="pb" data-t="${p[1]}">${p[0]}</button>`).join(''));
-$('#pop').addEventListener('click',e=>{const b=e.target.closest('.pb');if(!b)return;$('#q').value=b.dataset.t;term=norm(b.dataset.t);bin='all';chipsRender();render()});
 let lastF=null;
 function openI(n){const i=ITEMS[n];rmArw();lastF=document.activeElement;const s=$('#sheet');s.style.setProperty('--c',BINS[i.b].c);s.style.setProperty('--t',BINS[i.b].t);
  s.innerHTML=`<div class="sm">Este resíduo vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#aprender" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<div class="acts"><button class="btn" id="ovx">Fechar</button><button class="btn" id="ovs">Compartilhar</button></div><p class="ovm" id="ovm" aria-live="polite"></p>`;
