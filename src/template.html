@@ -23,12 +23,12 @@ header{padding:22px 0 8px}
 .plate{background:#FFF8EF;border-radius:14px;padding:6px 10px;display:flex;align-items:center}
 .plate img{display:block;height:64px;width:auto}
 .top .kdp img{height:22px}
-.hero{padding:26px 0 8px}
+.hero{padding:18px 0 6px}
 .eyebrow{font-family:var(--fd);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);font-size:14px}
 h1{font-size:clamp(40px,8vw,68px);color:var(--green);margin:6px 0 8px}
-.lead{max-width:52ch;color:var(--mut);font-size:18px;margin:0 0 18px}
+.lead{max-width:52ch;color:var(--mut);font-size:17px;margin:0 0 6px}
 .search{position:relative;max-width:640px}
-.search input{width:100%;font:500 18px var(--fb);color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px 18px 16px 52px;box-shadow:var(--shadow);outline:none}
+.search input{width:100%;font:500 17px var(--fb);color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 18px 14px 50px;box-shadow:var(--shadow);outline:none}
 .search input:focus-visible{border-color:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 22%,transparent)}
 .search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:22px;height:22px;stroke:var(--mut)}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 4px;padding:2px 0 8px}
@@ -38,21 +38,19 @@ h1{font-size:clamp(40px,8vw,68px);color:var(--green);margin:6px 0 8px}
 .chip b{font-weight:600;color:var(--mut);font-size:14px}
 .chip[aria-pressed="true"]{background:var(--c,var(--green));color:var(--t,#fff)}.chip[aria-pressed="true"] i{background:var(--t,#fff)}.chip[aria-pressed="true"] b{color:inherit;opacity:.8}
 .chip i{border:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}.ph0{aspect-ratio:auto!important;height:34px;padding:0!important;opacity:.95}
-.grid{align-items:stretch;grid-auto-rows:1fr}
+.grid{align-items:stretch;align-content:start}
 .chip:focus-visible,.btn:focus-visible,.opt:focus-visible,summary:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
-.rbar{position:sticky;top:var(--tabh,64px);z-index:4;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;margin:6px 0 8px;padding:4px 0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);color:var(--mut);font-size:15px}
-.rbar #count{font-weight:600}
 .clr{font:700 15px var(--fb);min-height:44px;color:var(--green);background:transparent;border:2px solid var(--line);border-radius:12px;padding:0 16px;cursor:pointer}
-.hero.searching .chips{display:none}.hero.searching{padding-bottom:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.searching .chips,.searching .fbtn{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:14px}
 @media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.ph img{padding:6px}.item h3{font-size:20px}.body{padding:10px 12px 8px}.bn{padding:8px 12px;min-height:54px}}
 .cw{position:relative;display:flex}
 .item{flex:1;min-width:0;background:var(--card);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-.ph{background:#FFF8EF;aspect-ratio:1;position:relative;overflow:hidden}
+.ph{background:#FFF8EF;aspect-ratio:5/4;position:relative;overflow:hidden}
 /* imagem posicionada de forma absoluta: o Safari do iPhone não resolve max-height em % dentro de caixa com aspect-ratio */
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box}
 .body{padding:12px 14px 10px;display:flex;flex:1}
-.item h3{font-size:22px;line-height:1.08;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:2.16em}
+.item h3{font-size:22px;line-height:1.08;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .bn{background:var(--c);color:var(--t,#fff);font:600 14px/1.2 var(--fb);padding:10px 14px;min-height:46px;display:flex;align-items:center}
 .pill{align-self:flex-start;background:var(--c);color:var(--t,#fff);border:1.5px solid color-mix(in srgb,var(--ink) 22%,var(--c));border-radius:999px;padding:4px 12px;font:600 13px var(--fb);letter-spacing:.02em}
 .item p{margin:0;color:var(--mut);font-size:15px}
@@ -194,8 +192,13 @@ header{padding:14px 0 6px}
 .fbtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
 .fbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
 .chips[hidden]{display:none}
-.hero.searching .fbtn{display:none}
 .fix{margin:16px 0}.fix h3{margin:0 0 8px;font-size:22px}.fix ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}.fix li{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:15.5px;line-height:1.45}
+.tools{position:sticky;top:var(--tabh,64px);z-index:4;margin:0 -18px;padding:8px 18px;background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(8px)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 0 0}
+.frow .fbtn{margin:0}.frow .clr{min-height:44px;margin-left:auto}
+#grid{min-height:calc(100vh - 80px)}
+.cnt{margin:8px 0 12px;font-weight:600;font-size:15px;color:var(--mut);min-height:22px}
+@media (max-width:600px){.hero{padding:12px 0 2px}h1{font-size:clamp(34px,10vw,44px);margin:4px 0 6px}.lead{font-size:16px}}
 </style>
 </head>
 <body>
@@ -214,12 +217,12 @@ header{padding:14px 0 6px}
   <div class="eyebrow">Meio Ambiente</div>
   <h1>Guia de descarte</h1>
   <p class="lead">Digite o nome do resíduo e veja em qual lixeira ele vai, com o motivo.</p>
-  <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label>
-  <button class="fbtn" id="fbtn" aria-expanded="false" aria-controls="chips"><span id="fbl">Filtrar por lixeira</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-  <div class="chips" id="chips" hidden role="group" aria-label="Filtrar por lixeira"></div>
  </div>
- <div class="rbar"><span id="count" aria-live="polite"></span><button class="clr" id="clr" hidden>Limpar</button></div>
+ <div class="tools" id="tools"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label></div>
+ <div class="frow"><button class="fbtn" id="fbtn" aria-expanded="false" aria-controls="chips"><span id="fbl">Filtrar por lixeira</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><button class="clr" id="clr" hidden>Limpar</button></div>
+ <div class="chips" id="chips" hidden role="group" aria-label="Filtrar por lixeira"></div>
+ <p class="cnt" id="count" aria-live="polite"></p>
  <div class="grid" id="grid"></div>
 
 
@@ -283,17 +286,18 @@ const $=s=>document.querySelector(s),norm=s=>s.normalize('NFD').replace(/[̀-ͯ]
 let bin='all',term='';
 const chips=$('#chips');
 const slug=s=>norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-function toResults(){if($('#grid').getBoundingClientRect().top<innerHeight*.6)return;const y=$('#grid').getBoundingClientRect().top+scrollY-($('.tabs').offsetHeight+$('.rbar').offsetHeight+8);window.scrollTo({top:Math.max(0,y),behavior:'smooth'})}
+function toResults(){const g=$('#grid');if(g.getBoundingClientRect().top<innerHeight*.6)return;const y=g.getBoundingClientRect().top+scrollY-($('.tabs').offsetHeight+$('#tools').offsetHeight+8);window.scrollTo({top:Math.max(0,y),behavior:'smooth'})}
 function chipsRender(){const c={};ITEMS.forEach(i=>c[i.b]=(c[i.b]||0)+1);
  chips.innerHTML=`<button class="chip" aria-pressed="${bin==='all'}" data-b="all">Todas <b>${ITEMS.length}</b></button>`+Object.keys(BINS).filter(k=>c[k]).map(k=>`<button class="chip" style="--c:${BINS[k].c};--t:${BINS[k].t}" aria-pressed="${bin===k}" data-b="${k}"><i></i>${BINS[k].n} <b>${c[k]||0}</b></button>`).join('')}
 function fOpen(o){chips.hidden=!o;$('#fbtn').setAttribute('aria-expanded',String(o))}
 $('#fbtn').addEventListener('click',()=>fOpen(chips.hidden));
 chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;bin=b.dataset.b;chipsRender();render();fOpen(false);toResults()});
 $('#clr').addEventListener('click',()=>{$('#q').value='';term='';bin='all';chipsRender();render();window.scrollTo({top:0,behavior:'smooth'})});
-$('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&bin!=='all'){bin='all';chipsRender()}render()});
+$('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&bin!=='all'){bin='all';chipsRender()}render();
+ if(term&&innerWidth<760){const tp=$('#tools').getBoundingClientRect().top,th=$('.tabs').offsetHeight;if(tp>th+4)window.scrollTo({top:scrollY+tp-th,behavior:'smooth'})}});
 const ORD=Object.keys(BINS),SORTED=ITEMS.slice().sort((a,b)=>ORD.indexOf(a.b)-ORD.indexOf(b.b)||(!!IMGS[b.i])-(!!IMGS[a.i]));
 const STOP=['de','da','do','das','dos','e','com','sem','para','a','o'],hay=i=>i._h||(i._h=norm(i.n+' '+i.k+' '+BINS[i.b].n));
-const card=i=>`<div class="cw"><article class="item" tabindex="0" role="button" data-i="${i.i}" data-b="${i.b}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="" loading="lazy"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3></div><div class="bn">${BINS[i.b].n}</div></article></div>`;
+const card=i=>`<div class="cw"><article class="item" tabindex="0" role="button" data-i="${i.i}" data-b="${i.b}" aria-label="${i.n}: ver a lixeira" style="--c:${BINS[i.b].c};--t:${BINS[i.b].t}">${IMGS[i.i]?`<div class="ph"><img src="${IMGS[i.i]}" alt="" decoding="async"></div>`:`<div class="ph ph0" style="background:var(--c)"></div>`}<div class="body"><h3>${i.n}</h3></div><div class="bn">${BINS[i.b].n}</div></article></div>`;
 const SIN=/*SIN*/;
 function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;const d=[];for(let i=0;i<=a.length;i++)d[i]=[i];for(let j=1;j<=b.length;j++)d[0][j]=j;
  for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1)}return d[a.length][b.length]}
@@ -305,7 +309,7 @@ let smart=false;
 function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
  let r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));smart=false;
  if(!r.length&&term){r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&tk.every(w=>smartMatch(i,w)));smart=r.length>0}
- $('#hero').classList.toggle('searching',!!term);
+ $('#v-guia').classList.toggle('searching',!!term);
  const lb=bin!=='all'?BINS[bin].n:'';
  $('#count').textContent=r.length+(r.length===1?' resíduo':' resíduos')+(lb?' em '+lb:'')+(term?(smart?(r.length===1?' parecido com “':' parecidos com “'):' para “')+$('#q').value.trim()+'”':'');
  $('#clr').hidden=!(term||bin!=='all');$('#fbl').textContent=bin==='all'?'Filtrar por lixeira':'Lixeira: '+BINS[bin].n;
