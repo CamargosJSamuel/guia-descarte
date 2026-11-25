@@ -199,6 +199,14 @@ header{padding:14px 0 6px}
 #grid{min-height:calc(100vh - 80px)}
 .cnt{margin:8px 0 12px;font-weight:600;font-size:15px;color:var(--mut);min-height:22px}
 @media (max-width:600px){.hero{padding:12px 0 2px}h1{font-size:clamp(34px,10vw,44px);margin:4px 0 6px}.lead{font-size:16px}}
+.acc{background:var(--card);border-radius:18px;box-shadow:var(--shadow);margin:0 0 10px}
+.acc summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:16px 52px 16px 18px;position:relative;min-height:56px;justify-content:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"";position:absolute;right:20px;top:50%;width:10px;height:10px;border:solid var(--green);border-width:0 3px 3px 0;transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.acc[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.acc summary h2{margin:0;font-size:22px}.acc summary span{font-size:14.5px;color:var(--mut)}
+.accb{padding:0 14px 14px}.accb .dst,.accb .erc,.accb .fact{box-shadow:none;background:var(--bg)}.accb .cores li{box-shadow:none;background:var(--bg)}
+#v-aprender section{padding:0}#v-aprender>section:first-child{padding-top:18px}
 </style>
 </head>
 <body>
@@ -237,30 +245,19 @@ header{padding:14px 0 6px}
  </div>
 
  <div id="v-aprender" role="tabpanel" aria-labelledby="t-aprender" hidden>
-  <nav class="atl" aria-label="Atalhos da página"><a href="#cores">Cores</a><a href="#destino">Destino</a><a href="#erros">Erros comuns</a><a href="#escorrer">Esvaziar e escorrer</a><a href="#sabia">Você sabia?</a></nav>
- <section id="cores" style="padding-top:28px"><h2>Por que cada lixeira tem uma cor?</h2>
-  <p class="lead2">A cor não tem ligação com o material. Ela é um <b>código combinado em todo o Brasil</b>, para que a mesma cor signifique o mesmo resíduo em qualquer lugar: na empresa, na escola, na rua. Esse código vem da Resolução Conama nº 275/2001.</p>
-  <ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b></div></li></ul>
-  </section>
- <section id="destino"><h2>Para onde vai depois da coleta?</h2><p class="lead2">Cada lixeira tem um destino. Veja o que acontece com o que você separa.</p><div id="destlist"></div></section>
- <section id="erros"><h2>Erros mais comuns</h2><p class="lead2">São os que mais acontecem por aqui. Toque para ver o resíduo no guia.</p><div id="erlist"></div></section>
- <section id="escorrer"><h2>Antes de descartar: esvazie e deixe escorrer</h2>
-  <p class="lead2">Resto de comida, bebida ou gordura numa embalagem pode sujar o que estava limpo e atrapalhar a reciclagem de todo o lote.</p>
-  <ol class="how"><li><b>Esvazie.</b> Tire todo o conteúdo e raspe o grosso com um guardanapo.</li>
-  <li><b>Deixe escorrer.</b> Vire a embalagem para baixo por alguns segundos.</li>
-  <li><b>Não precisa gastar água.</b> Se for fácil, um enxágue rápido ajuda. O importante é não ficar resto de comida.</li>
-  <li><b>Deixe secar</b> e coloque na lixeira do material.</li></ol>
-  <p class="note"><b>Atenção:</b> isso vale para embalagens comuns, como copos, potes e latas de bebida. Embalagem de produto químico <b>não</b> se esvazia nem se lava por conta própria: ela segue para a lixeira de resíduo perigoso, como mostra o guia.</p></section>
- <section id="sabia"><h2>Você sabia?</h2>
-  <div class="facts">
+ <section id="erros"><details class="acc" open><summary><h2>Erros mais comuns</h2><span>Os que mais acontecem por aqui</span></summary><div class="accb"><div id="erlist"></div></div></details></section>
+ <section id="cores"><details class="acc"><summary><h2>Por que cada lixeira tem uma cor?</h2><span>Um código único no Brasil</span></summary><div class="accb"><p class="lead2">A cor é um código combinado em todo o país (Conama nº 275/2001): a mesma cor vale na empresa, na escola e na rua.</p><ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b></div></li></ul></div></details></section>
+ <section id="destino"><details class="acc"><summary><h2>Para onde vai depois da coleta?</h2><span>O destino de cada lixeira</span></summary><div class="accb"><div id="destlist"></div></div></details></section>
+ <section id="escorrer"><details class="acc"><summary><h2>Esvazie e deixe escorrer</h2><span>3 passos antes de descartar</span></summary><div class="accb"><ol class="how"><li><b>Esvazie</b> e raspe o grosso com um guardanapo.</li><li><b>Deixe escorrer</b> por alguns segundos.</li><li><b>Deixe secar</b> e jogue na lixeira do material.</li></ol>
+  <p class="note"><b>Atenção:</b> embalagem de produto químico não se lava: vai para a lixeira de resíduo perigoso.</p></div></details></section>
+ <section id="sabia"><details class="acc"><summary><h2>Você sabia?</h2><span>6 curiosidades rápidas</span></summary><div class="accb"><div class="facts">
    <div class="fact"><span>01</span><p>Nós trabalhamos com aterro zero: cada resíduo precisa de um destino adequado.</p></div>
-   <div class="fact"><span>02</span><p>Papel, papelão, plástico ou metal sujos de comida, gordura ou molhados ficam mais difíceis de reciclar. Limpar e secar antes de descartar ajuda.</p></div>
-   <div class="fact"><span>03</span><p>Embalagens de várias camadas, como a aluminizada de café, juntam materiais difíceis de separar. Por isso têm lixeira própria.</p></div>
-   <div class="fact"><span>04</span><p>Embalagem de produto químico, mesmo vazia, guarda resíduo e vai para o perigoso.</p></div>
-   <div class="fact"><span>05</span><p>Um resíduo perigoso jogado no lixo comum pode contaminar tudo o que estava junto no saco.</p></div>
-   <div class="fact"><span>06</span><p>Separar na hora do descarte é o que mais facilita a reciclagem e o tratamento depois.</p></div>
-   <div class="fact" id="fplast"><span>07</span><p>Nem todo plástico é igual. O número no triângulo (1 a 7) diz de qual resina ele é feito, não se é reciclável. O polipropileno (PP, nº 5), de potes e tampas, é bem aceito se estiver limpo. O poliestireno (PS, nº 6), de copos, talheres e isopor, é leve e quebradiço, pode atrapalhar a reciclagem e hoje é pouco aproveitado. Peças misturadas, de várias resinas, também são mais difíceis de reciclar. <small style="display:block;margin-top:6px;color:var(--mut)">Fontes: eCycle, Gazeta de S.Paulo, Fast Company Brasil.</small></p></div>
-  </div></section>
+   <div class="fact"><span>02</span><p>Embalagem suja de comida ou gordura é mais difícil de reciclar. Esvazie e seque antes.</p></div>
+   <div class="fact"><span>03</span><p>A embalagem aluminizada de café junta várias camadas. Por isso tem lixeira própria.</p></div>
+   <div class="fact"><span>04</span><p>Embalagem de produto químico, mesmo vazia, vai para o resíduo perigoso.</p></div>
+   <div class="fact"><span>05</span><p>Um resíduo perigoso no lixo comum pode contaminar todo o saco.</p></div>
+   <div class="fact" id="fplast"><span>06</span><p>O número no triângulo do plástico diz o tipo de resina, não se é reciclável. Copos, talheres e isopor (nº 6) quase não são aproveitados. <small style="display:block;margin-top:6px;color:var(--mut)">Fontes: eCycle, Gazeta de S.Paulo, Fast Company Brasil.</small></p></div>
+  </div></div></details></section>
  </div>
  <section id="duvida"><div class="cta">
   <div><h2>Ficou com dúvida?</h2><p>Não achou o resíduo, não sabe o nome ou quer confirmar? Descreva ou mande uma foto no WhatsApp.</p></div>
@@ -367,7 +364,7 @@ function openI(n){const i=ITEMS[n];rmArw();lastF=document.activeElement;const s=
  s.innerHTML=`<div class="sm">Este resíduo vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#aprender" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<div class="acts"><button class="btn" id="ovx">Fechar</button><button class="btn" id="ovs">Compartilhar</button></div><p class="ovm" id="ovm" aria-live="polite"></p>`;
   $('#ovs').addEventListener('click',()=>shareItem(i));
  try{history.replaceState(null,'',location.pathname+'?r='+slug(i.n)+location.hash)}catch(e){}
- const pl=$('#ovp');if(pl)pl.addEventListener('click',e=>{e.preventDefault();closeI();view('aprender',true);setTimeout(()=>{const f=$('#fplast');f.scrollIntoView({behavior:'smooth',block:'center'});f.classList.add('hl');setTimeout(()=>f.classList.remove('hl'),2600)},60)});
+ const pl=$('#ovp');if(pl)pl.addEventListener('click',e=>{e.preventDefault();closeI();view('aprender',true);$('#sabia details').open=true;setTimeout(()=>{const f=$('#fplast');f.scrollIntoView({behavior:'smooth',block:'center'});f.classList.add('hl');setTimeout(()=>f.classList.remove('hl'),2600)},60)});
  $('#ov').hidden=false;$('#ovx').focus()}
 function closeI(){$('#ov').hidden=true;rmArw();try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}if(lastF&&lastF.focus)lastF.focus()}
 async function shareItem(i){const url=location.origin+location.pathname+'?r='+slug(i.n),m=$('#ovm');
@@ -397,7 +394,6 @@ view(location.hash.slice(1));
 /* compartilhar */
 try{const u=location.origin+location.pathname;$('#sh').href='https://wa.me/?text='+encodeURIComponent('Guia de descarte: '+u)}catch(e){}
 
-document.querySelector('.atl').addEventListener('click',e=>{const l=e.target.closest('a');if(!l)return;e.preventDefault();const s=document.querySelector(l.getAttribute('href'));if(s)s.scrollIntoView({behavior:'smooth',block:'start'})});
 /* voltar ao topo, altura das abas e link direto para um resíduo */
 const tt=$('#totop');addEventListener('scroll',()=>{tt.hidden=scrollY<700},{passive:true});tt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function tabh(){document.documentElement.style.setProperty('--tabh',$('.tabs').offsetHeight+'px')}tabh();addEventListener('resize',tabh);addEventListener('load',tabh);
