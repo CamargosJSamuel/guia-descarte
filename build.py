@@ -36,7 +36,7 @@ html=open('src/template.html',encoding='utf-8').read()
 from datetime import datetime
 from zoneinfo import ZoneInfo
 REV=datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%d/%m/%Y às %H:%M')
-html=html.replace('/*CONF*/',json.dumps(CONFUSAO,ensure_ascii=False)).replace('/*ERRB*/',json.dumps(ERRO_BIN,ensure_ascii=False)).replace('/*ERRI*/',json.dumps(ERRO_ITEM,ensure_ascii=False)).replace('/*ITEMS*/',json.dumps(items,ensure_ascii=False)).replace('/*BINS*/',json.dumps({k:dict(n=v[0],c=v[1],t=v[2]) for k,v in B.items()},ensure_ascii=False)).replace('/*IMGS*/',json.dumps(imgs)).replace('%%KDP%%',kdp).replace('%%REV%%',REV)
+html=html.replace('/*CONF*/',json.dumps(CONFUSAO,ensure_ascii=False)).replace('/*ERRB*/',json.dumps(ERRO_BIN,ensure_ascii=False)).replace('/*ERRI*/',json.dumps(ERRO_ITEM,ensure_ascii=False)).replace('/*ITEMS*/',json.dumps(items,ensure_ascii=False)).replace('/*BINS*/',json.dumps({k:dict(n=v[0],c=v[1],t=v[2]) for k,v in B.items()},ensure_ascii=False)).replace('/*IMGS*/',json.dumps(imgs)).replace('%%KDP%%',kdp).replace('%%REV%%',REV).replace('%%QR%%',open('src/qr.svg',encoding='utf-8').read())
 open('docs/index.html','w',encoding='utf-8').write(html); print(len(html)/1e6,'MB')
 
 # arquivos estáticos (ícones, manifesto) e service worker com versão do conteúdo

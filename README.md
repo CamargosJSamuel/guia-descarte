@@ -43,3 +43,5 @@ Em Settings > Pages, em "Source", escolha **GitHub Actions**.
 - Abas: Guia, Teste e Aprender (Você sabia? e instalação no celular).
 - Link direto: `?r=<nome-do-resíduo>` abre o resíduo; botão Compartilhar no resíduo aberto.
 - Fotos: `jpg()` em `build.py` padroniza enquadramento e fundo (quadrado, creme).
+- QR Code: o botão do topo usa src/qr.svg (gerado com segno para a URL do site). Se a URL mudar, gere de novo.
+- Teste: modos Teste (5) e Jogo 60 s, selos e recorde (no aparelho) e Modo telão (teclas 1-4 e Enter).

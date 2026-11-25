@@ -159,14 +159,35 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 .rt{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .ib{font:700 15px var(--fb);min-height:44px;display:inline-flex;align-items:center;gap:8px;color:#fff;background:var(--green);border:0;border-radius:999px;padding:0 16px;cursor:pointer}
 .ib[hidden]{display:none}
+.ibq{background:transparent;color:var(--green);border:2px solid var(--green)}
+.rt{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center}.rt .rev{flex:0 0 100%}.rt .ib{flex:0 0 auto}
+.qro{position:fixed;inset:0;z-index:40;background:#fff;color:#1b1b1b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;text-align:center}
+.qro[hidden]{display:none}
+.qro svg{width:min(86vw,62vh,520px);height:auto}
+.qro p{margin:0;font:600 18px var(--fb)}.qro small{font:500 15px var(--fb);color:#555;word-break:break-all}
 .ib svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 :root[data-theme="dark"] .ib{color:#10261a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ib{color:#10261a}}
+.seg{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.seg button{font:700 15px var(--fb);min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.seg .tvb{margin-left:auto;border-style:dashed}
+.selos{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.selo{font:600 14px var(--fb);display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border-radius:999px;border:2px solid var(--line);color:var(--mut)}
+.selo.on{background:var(--olive);border-color:var(--olive);color:#fff}
+.gscore{font:700 48px/1 var(--fd);color:var(--green);margin:6px 0}
+.glist{margin:10px 0;padding-left:20px}.glist li{margin:0 0 6px}
+.tvx{position:fixed;top:12px;right:12px;z-index:30;font:700 16px var(--fb);min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--green);color:#fff;cursor:pointer}
+.tvx[hidden]{display:none}
+body.tv header,body.tv footer,body.tv .tabs,body.tv .totop,body.tv #duvida,body.tv .seg,body.tv .selos,body.tv #mt,body.tv #ms{display:none!important}
+body.tv .qhint{display:none}
+:root[data-theme="dark"] .seg button[aria-pressed="true"],:root[data-theme="dark"] .tvx{color:#10261a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"],:root:not([data-theme="light"]) .tvx{color:#10261a}}
 </style>
 </head>
 <body>
 <header><div class="wrap top">
  <div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div>
- <div class="rt"><div class="rev">Última revisão<br>%%REV%%</div><button class="ib" id="ib" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Instalar app</button></div>
+ <div class="rt"><div class="rev">Última revisão<br>%%REV%%</div><button class="ib" id="ib" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Instalar app</button><button class="ib ibq" id="qrb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM20 14v6h-3"/></svg>QR Code</button></div>
 </div></header>
 <nav class="tabs" aria-label="Seções"><div class="wrap tabin" role="tablist">
  <button class="tab" role="tab" id="t-guia" aria-selected="true" data-v="guia">Guia</button>
@@ -192,8 +213,10 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 
  </div>
  <div id="v-teste" role="tabpanel" aria-labelledby="t-teste" hidden>
-  <section style="padding-top:28px"><h2>Teste o que você aprendeu</h2>
-  <p class="sub">Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.</p>
+  <section style="padding-top:28px"><div class="seg" role="group" aria-label="Modo"><button id="md-t" aria-pressed="true">Teste (5)</button><button id="md-j" aria-pressed="false">Jogo 60 s</button><button id="tv" class="tvb">Modo telão</button></div>
+  <h2 id="mt">Teste o que você aprendeu</h2>
+  <p class="sub" id="ms">Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.</p>
+  <div class="selos" id="selos"></div>
   <div class="quiz" id="qz"></div></section>
  </div>
 
@@ -222,6 +245,8 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 
 </main>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: %%REV%%</p></div></footer>
+<div class="qro" id="qro" hidden role="dialog" aria-modal="true" aria-label="QR Code do guia">%%QR%%<p>Aponte a câmera do celular para abrir o guia</p><small>camargosjsamuel.github.io/guia-descarte</small><button class="btn" id="qrx">Fechar</button></div>
+<button class="tvx" id="tvx" hidden>Sair do telão</button>
 <button class="totop" id="totop" aria-label="Voltar ao topo" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg></button>
 <div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"><div class="sheet" id="sheet"></div></div>
 <script>
@@ -256,7 +281,8 @@ function opts(i){const used=new Set(ITEMS.map(x=>x.b)),esp=Object.keys(ERRI).fil
  const c=CONF[i.b]||[],pool=[...shuffle(esp).slice(0,2),c[0],...shuffle(c.slice(1)),...shuffle([...used])];
  const d=[];for(const k of pool)if(k&&k!==i.b&&used.has(k)&&!d.includes(k))d.push(k);
  return shuffle([i.b,...d.slice(0,3)])}
-function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask()}
+let mode='teste';
+function start(){stopG();qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask();renderSelos()}
 function ask(){done=false;const i=qs[qi];
  qz.innerHTML=(qi===0&&progTxt()?`<p class="prog">${progTxt()}</p>`:'')+`<div class="qtop"><span>Pergunta ${qi+1} de 5</span><span>${sc} certas</span></div><div class="bar"><i style="width:${qi/5*100}%"></i></div>
  <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>Onde vai: ${i.n}?</h3></div>
@@ -265,9 +291,10 @@ function ask(){done=false;const i=qs[qi];
 qz.addEventListener('click',e=>{
  if(e.target.id==='next'){qi++;qi<5?ask():fim();return}
  if(e.target.id==='again'){start();return}
+ if(e.target.id==='gagain'){gStart();return}
  if(e.target.id==='goguia'){view('guia',true);return}
  const o=e.target.closest('.opt');if(o)answer(o)});
-function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
+function answer(o){if(mode==='jogo')return gAnswer(o);if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
@@ -318,12 +345,49 @@ function zoom(n){zi=n;document.querySelectorAll('main,footer').forEach(x=>x.styl
 $('#zb').addEventListener('click',()=>zoom((zi+1)%3));
 try{const z=+localStorage.getItem('gd_z');if(z>0&&z<3)zoom(z)}catch(e){}
 /* progresso neste aparelho */
-function prog(){try{return JSON.parse(localStorage.getItem('gd_p'))||{best:0,n:0}}catch(e){return{best:0,n:0}}}
-function saveProg(s){const p=prog();p.n++;if(s>p.best)p.best=s;try{localStorage.setItem('gd_p',JSON.stringify(p))}catch(e){}return p}
+function prog(){try{return Object.assign({best:0,n:0,gbest:0,gseq:0,gn:0},JSON.parse(localStorage.getItem('gd_p')))}catch(e){return{best:0,n:0,gbest:0,gseq:0,gn:0}}}
+function put(p){try{localStorage.setItem('gd_p',JSON.stringify(p))}catch(e){}}
+function saveProg(s){const p=prog();p.n++;if(s>p.best)p.best=s;put(p);return p}
 function progTxt(){const p=prog();return p.n?`Seu melhor resultado: ${p.best} de 5 · ${p.n} ${p.n===1?'teste feito':'testes feitos'} neste aparelho.`:''}
-start();
+const SELOS=[['Primeiro teste',p=>p.n>=1],['Nota máxima',p=>p.best>=5],['5 testes feitos',p=>p.n>=5],['Jogo: 100 pontos',p=>p.gbest>=100],['Jogo: sequência de 8',p=>p.gseq>=8]];
+function renderSelos(){const p=prog();$('#selos').innerHTML=SELOS.map(s=>`<span class="selo${s[1](p)?' on':''}">${s[1](p)?'✓':'○'} ${s[0]}</span>`).join('')+(p.gn?`<span class="selo">Recorde no jogo: ${p.gbest} pontos</span>`:'')}
+/* jogo de 60 segundos */
+let gs=null,gt=null,gto=null;
+function stopG(){clearInterval(gt);clearTimeout(gto);gt=gto=null;gs=null}
+function gStart(){stopG();gs={end:Date.now()+60000,score:0,hit:0,streak:0,max:0,err:[],list:shuffle(ITEMS),k:0};gAsk();gt=setInterval(gTick,100)}
+function gTick(){if(!gs)return;const left=Math.max(0,gs.end-Date.now()),b=$('#gbar'),l=$('#gtime');if(b)b.style.width=(left/600)+'%';if(l)l.textContent=Math.ceil(left/1000)+' s';if(left<=0)gFim()}
+function gAsk(){done=false;const i=gs.list[gs.k++%gs.list.length];gs.cur=i;
+ qz.innerHTML=`<div class="qtop"><span id="gtime">${Math.ceil(Math.max(0,gs.end-Date.now())/1000)} s</span><span>${gs.score} pontos${gs.streak>=3?' · sequência '+gs.streak:''}</span></div><div class="bar"><i id="gbar" style="width:${Math.max(0,gs.end-Date.now())/600}%"></i></div>
+ <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>${i.n}</h3></div><p class="qhint">Arraste a foto ou toque na lixeira certa. Quanto mais acertos seguidos, mais pontos.</p>
+ <div class="opts">${opts(i).map(k=>`<button class="opt" style="--c:${BINS[k].c};--t:${BINS[k].t}" data-b="${k}">${BINS[k].n}</button>`).join('')}</div>`}
+function gAnswer(o){if(!gs||done)return;done=true;const i=gs.cur,ok=o.dataset.b===i.b;
+ qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
+ if(ok){gs.hit++;gs.score+=10+Math.min(gs.streak,5)*2;gs.streak++;gs.max=Math.max(gs.max,gs.streak);buzz(25);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,18)}
+ else{gs.streak=0;if(!gs.err.some(e=>e.i===i))gs.err.push({i,k:o.dataset.b});buzz([50,30,50])}
+ gto=setTimeout(()=>{if(gs)gAsk()},ok?450:1200)}
+function gFim(){if(!gs)return;const g=gs;stopG();const p=prog();p.gn++;const novo=g.score>p.gbest;if(novo)p.gbest=g.score;if(g.max>p.gseq)p.gseq=g.max;put(p);renderSelos();
+ if(g.score>=100||novo)confetti(innerWidth/2,innerHeight*.35,90);
+ qz.innerHTML=`<div class="qtop"><span>Tempo esgotado</span></div><div class="gscore">${g.score} pontos</div><p>${g.hit} ${g.hit===1?'acerto':'acertos'} · melhor sequência: ${g.max}${novo?' · novo recorde!':''}</p>`+
+ (g.err.length?`<p><b>Para fixar:</b></p><ul class="glist">${g.err.slice(0,5).map(e=>`<li>${e.i.n}: vai em <b>${BINS[e.i.b].n}</b>.</li>`).join('')}</ul>`:'<p>Nenhum erro. Ótimo!</p>')+
+ `<p><button class="btn" id="gagain">Jogar de novo</button> <button class="btn" id="goguia">Ver o guia</button></p>`}
+function setMode(m){mode=m;stopG();$('#md-t').setAttribute('aria-pressed',String(m==='teste'));$('#md-j').setAttribute('aria-pressed',String(m==='jogo'));
+ $('#mt').textContent=m==='jogo'?'Jogo: lixeira certa':'Teste o que você aprendeu';
+ $('#ms').textContent=m==='jogo'?'Você tem 60 segundos. Acerte a lixeira de quantos resíduos conseguir.':'Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.';
+ if(m==='jogo'){qz.innerHTML='<p>Pronto para jogar? O tempo começa ao tocar no botão.</p><p><button class="btn" id="gagain">Começar</button></p>'}else start();renderSelos()}
+$('#md-t').addEventListener('click',()=>setMode('teste'));$('#md-j').addEventListener('click',()=>setMode('jogo'));
+/* modo telão: letras grandes, tela cheia e teclas 1 a 4 / Enter para quem conduz */
+let tvz='';
+function tvOn(){setMode(mode);view('teste');document.body.classList.add('tv');tvz=document.querySelector('main').style.zoom||'';document.querySelectorAll('main').forEach(x=>x.style.zoom=1.7);$('#tvx').hidden=false;try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}catch(e){}}
+function tvOff(){document.body.classList.remove('tv');document.querySelectorAll('main').forEach(x=>x.style.zoom=tvz);$('#tvx').hidden=true;try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}}
+$('#tv').addEventListener('click',tvOn);$('#tvx').addEventListener('click',tvOff);
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&document.body.classList.contains('tv'))tvOff()});
+document.addEventListener('keydown',e=>{if(!document.body.classList.contains('tv'))return;
+ if(/^[1-4]$/.test(e.key)){const o=qz.querySelectorAll('.opt')[+e.key-1];if(o&&!o.disabled)answer(o)}
+ else if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){const b=$('#next')||$('#again')||$('#gagain');if(b){e.preventDefault();b.click()}}
+ else if(e.key==='Escape')tvOff()});
+start();renderSelos();
 /* abas */
-function view(v,push){v=v==='teste'||v==='aprender'?v:'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
+function view(v,push){v=v==='teste'||v==='aprender'?v:'guia';if(v!=='teste')stopG();$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));if(push){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo({top:0})}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.v,true)));
 window.addEventListener('hashchange',()=>view(location.hash.slice(1)));
@@ -352,6 +416,7 @@ function showIb(){$('#ib').hidden=standalone||false}
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;$('#inst').hidden=false});
 async function instalar(){if(dip){dip.prompt();try{await dip.userChoice}catch(e){}dip=null;$('#inst').hidden=true;return}
  lastF=$('#ib');$('#sheet').style.setProperty('--c','#2F6E43');$('#sheet').style.setProperty('--t','#fff');$('#ov').hidden=false;$('#sheet').innerHTML=`<h2 id="ovt" style="margin:0 0 10px">Instalar o guia no celular</h2><ol class="how"><li>${ios?'No Safari, toque em Compartilhar (quadrado com seta) e escolha “Adicionar à Tela de Início”.':'No Chrome, toque nos três pontos e escolha “Instalar app” ou “Adicionar à tela inicial”.'}</li><li>Depois abra o guia pelo ícone, mesmo sem internet.</li></ol><div class="acts"><button class="btn" id="ovx">Entendi</button></div>`;$('#ovx').addEventListener('click',closeI);$('#ovx').focus()}
+$('#qrb').addEventListener('click',()=>{$('#qro').hidden=false;$('#qrx').focus()});$('#qrx').addEventListener('click',()=>{$('#qro').hidden=true;$('#qrb').focus()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#qro').hidden)$('#qrx').click()});
 $('#inst').addEventListener('click',instalar);$('#ib').addEventListener('click',instalar);showIb();
 addEventListener('appinstalled',()=>{$('#inst').hidden=true;$('#ib').hidden=true});
 </script>
