@@ -237,7 +237,7 @@ header{padding:14px 0 6px}
  </div>
 
  <div id="v-aprender" role="tabpanel" aria-labelledby="t-aprender" hidden>
-  <nav class="atl" aria-label="Atalhos da página"><a href="#cores">Cores</a><a href="#destino">Destino</a><a href="#erros">Erros comuns</a><a href="#escorrer">Esvaziar e escorrer</a><a href="#sabia">Você sabia?</a><a href="#instalar">Instalar</a></nav>
+  <nav class="atl" aria-label="Atalhos da página"><a href="#cores">Cores</a><a href="#destino">Destino</a><a href="#erros">Erros comuns</a><a href="#escorrer">Esvaziar e escorrer</a><a href="#sabia">Você sabia?</a></nav>
  <section id="cores" style="padding-top:28px"><h2>Por que cada lixeira tem uma cor?</h2>
   <p class="lead2">A cor não tem ligação com o material. Ela é um <b>código combinado em todo o Brasil</b>, para que a mesma cor signifique o mesmo resíduo em qualquer lugar: na empresa, na escola, na rua. Esse código vem da Resolução Conama nº 275/2001.</p>
   <ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b></div></li></ul>
@@ -261,11 +261,6 @@ header{padding:14px 0 6px}
    <div class="fact"><span>06</span><p>Separar na hora do descarte é o que mais facilita a reciclagem e o tratamento depois.</p></div>
    <div class="fact" id="fplast"><span>07</span><p>Nem todo plástico é igual. O número no triângulo (1 a 7) diz de qual resina ele é feito, não se é reciclável. O polipropileno (PP, nº 5), de potes e tampas, é bem aceito se estiver limpo. O poliestireno (PS, nº 6), de copos, talheres e isopor, é leve e quebradiço, pode atrapalhar a reciclagem e hoje é pouco aproveitado. Peças misturadas, de várias resinas, também são mais difíceis de reciclar. <small style="display:block;margin-top:6px;color:var(--mut)">Fontes: eCycle, Gazeta de S.Paulo, Fast Company Brasil.</small></p></div>
   </div></section>
- <section id="instalar"><h2>Deixar o guia no celular</h2>
-  <p>Depois de instalado, o guia abre mesmo sem sinal. Abra o guia uma vez com internet antes.</p>
-  <p class="inst"><button class="btn" id="inst" hidden>Instalar no celular</button></p>
-  <ol class="how"><li>iPhone (Safari): toque em Compartilhar e escolha “Adicionar à Tela de Início”.</li>
-  <li>Android (Chrome): toque nos três pontos e escolha “Instalar app” ou “Adicionar à tela inicial”.</li></ol></section>
  </div>
  <section id="duvida"><div class="cta">
   <div><h2>Ficou com dúvida?</h2><p>Não achou o resíduo, não sabe o nome ou quer confirmar? Descreva ou mande uma foto no WhatsApp.</p></div>
@@ -421,10 +416,10 @@ if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventList
 let dip=null;const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
 const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 function showIb(){$('#ib').hidden=standalone||false}
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;$('#inst').hidden=false});
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e});
 function sinfo(){const ua=navigator.userAgent,ipad=/iPad/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),iph=/iPhone|iPod/i.test(ua),v=+((ua.match(/Version\/(\d+)/)||[])[1]||0),other=/CriOS|FxiOS|EdgiOS|OPiOS|GSA\//.test(ua);return{ipad,iph,v,other}}
 function rmArw(){const a=$('#arw');if(a)a.remove();$('#ov').classList.remove('itop','ibot')}
-async function instalar(){if(dip){dip.prompt();try{await dip.userChoice}catch(e){}dip=null;$('#inst').hidden=true;return}
+async function instalar(){if(dip){dip.prompt();try{await dip.userChoice}catch(e){}dip=null;return}
  const s=sinfo(),ios=s.ipad||s.iph;lastF=$('#ib');const sh=$('#sheet');sh.style.setProperty('--c','#2F6E43');sh.style.setProperty('--t','#fff');rmArw();
  let passo,arw=null;
  if(s.other)passo='Abra este endereço no <b>Safari</b> para instalar. Outros navegadores do iPhone e do iPad não instalam o guia.';
@@ -436,8 +431,8 @@ async function instalar(){if(dip){dip.prompt();try{await dip.userChoice}catch(e)
  const ov=$('#ov');if(arw){ov.classList.add(arw.cls==='up'?'itop':'ibot');ov.insertAdjacentHTML('beforeend',`<div class="arw ${arw.cls}" id="arw" style="${arw.css}"><svg viewBox="0 0 56 84" aria-hidden="true"><path d="${arw.d}"/></svg></div>`)}
  ov.hidden=false;$('#ovx').addEventListener('click',closeI);$('#ovx').focus()}
 $('#qrb').addEventListener('click',()=>{$('#qro').hidden=false;$('#qrx').focus()});$('#qrx').addEventListener('click',()=>{$('#qro').hidden=true;$('#qrb').focus()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#qro').hidden)$('#qrx').click()});
-$('#inst').addEventListener('click',instalar);$('#ib').addEventListener('click',instalar);showIb();
-addEventListener('appinstalled',()=>{$('#inst').hidden=true;$('#ib').hidden=true});
+$('#ib').addEventListener('click',instalar);showIb();
+addEventListener('appinstalled',()=>{$('#ib').hidden=true});
 </script>
 </body>
 </html>
