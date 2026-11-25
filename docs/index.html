@@ -483,7 +483,7 @@ function saveProg(s){const p=prog();p.n++;if(s>p.best)p.best=s;put(p);return p}
 function progTxt(){const p=prog();return p.n?`Seu melhor resultado: ${p.best} de 5 · ${p.n} ${p.n===1?'teste feito':'testes feitos'} neste aparelho.`:''}
 start();
 /* abas */
-function view(v,push){stopGame();v=v==='teste'||v==='aprender'?v:'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
+function view(v,push){stopGame();if(v!=='teste')gshow('menu');v=v==='teste'||v==='aprender'?v:'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));if(push){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo({top:0})}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.v,true)));
 window.addEventListener('hashchange',()=>view(location.hash.slice(1)));
