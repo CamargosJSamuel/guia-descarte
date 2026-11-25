@@ -268,7 +268,7 @@ $('#helpb').addEventListener('click',()=>{const h=$('#helpbox');h.hidden=!h.hidd
 $('#cpy').addEventListener('click',async()=>{const m='Dúvida sobre este resíduo: ';let ok=false;try{await navigator.clipboard.writeText(m);ok=true}catch(e){}$('#cpyok').textContent=ok?'Mensagem copiada. Cole no WhatsApp e complete.':'Não deu para copiar. Escreva no WhatsApp: '+m});
 let lastF=null;
 function openI(n){const i=ITEMS[n];lastF=document.activeElement;const s=$('#sheet');s.style.setProperty('--c',BINS[i.b].c);s.style.setProperty('--t',BINS[i.b].t);
- s.innerHTML=`<div class="sm">Este item vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#sabia" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<button class="btn" id="ovx">Fechar</button>`;
+ s.innerHTML=`<div class="sm">Este resíduo vai em</div><h2 id="ovt">${BINS[i.b].n}</h2><div class="ph"><img src="${IMGS[i.i]}" alt="${i.n}"></div><h3>${i.n}</h3><p>${i.m}</p>${i.b==='plastico'||/poliestireno|isopor|talher/i.test(i.n)?'<p class="more"><a href="#sabia" id="ovp">Nem todo plástico é igual. Clique para saber mais.</a></p>':''}<button class="btn" id="ovx">Fechar</button>`;
  const pl=$('#ovp');if(pl)pl.addEventListener('click',e=>{e.preventDefault();closeI();view('guia',true);setTimeout(()=>{const f=$('#fplast');f.scrollIntoView({behavior:'smooth',block:'center'});f.classList.add('hl');setTimeout(()=>f.classList.remove('hl'),2600)},60)});
  $('#ov').hidden=false;$('#ovx').focus()}
 function closeI(){$('#ov').hidden=true;if(lastF&&lastF.focus)lastF.focus()}
