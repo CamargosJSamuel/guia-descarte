@@ -38,3 +38,9 @@ Em `src/template.html`, procure `const STATS={code:''}` e coloque o código do s
 
 ## Publicação (uma vez)
 Em Settings > Pages, em "Source", escolha **GitHub Actions**.
+
+## Recursos de uso
+- Abas: Guia, Teste e Aprender (Você sabia? e instalação no celular).
+- Favoritos: estrela no card ou no resíduo aberto; ficam salvos no aparelho (`gd_f`).
+- Link direto: `?r=<nome-do-resíduo>` abre o resíduo; botão Compartilhar no resíduo aberto.
+- Fotos: `jpg()` em `build.py` padroniza enquadramento e fundo (quadrado, creme).
