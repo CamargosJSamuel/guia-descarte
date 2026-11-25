@@ -207,6 +207,29 @@ header{padding:14px 0 6px}
 .acc summary h2{margin:0;font-size:22px}.acc summary span{font-size:14.5px;color:var(--mut)}
 .accb{padding:0 14px 14px}.accb .dst,.accb .erc,.accb .fact{box-shadow:none;background:var(--bg)}.accb .cores li{box-shadow:none;background:var(--bg)}
 #v-aprender section{padding:0}#v-aprender>section:first-child{padding-top:18px}
+.gmenu{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;max-width:760px}
+.gmc{display:block;width:100%;text-align:left;background:var(--card);border:0;border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);cursor:pointer;color:var(--ink);font:inherit;min-height:112px}
+.gmc b{display:block;font:700 23px var(--fd);margin-bottom:4px}.gmc span{display:block;font-size:15px;color:var(--mut)}.gmc em{display:block;font-style:normal;font-weight:700;color:var(--green);margin-top:8px}
+.back{font:600 15px var(--fb);min-height:44px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;margin:0 0 12px}
+.gst{position:relative;overflow:hidden;border-radius:16px;background:var(--bg);border:2px solid var(--line);margin:4px 0 8px;touch-action:none}
+.gst.rain{height:300px}.gst.belt{height:116px;background:repeating-linear-gradient(90deg,var(--line) 0 2px,transparent 2px 28px)}
+.gi{position:absolute;left:0;top:0;background:#FFF8EF;border-radius:14px;box-shadow:var(--shadow);cursor:grab;touch-action:none;will-change:transform;display:flex}
+.gi img{width:100%;height:100%;object-fit:contain;padding:6px;pointer-events:none}.gi.front{outline:3px solid var(--olive)}
+.gbins{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gb{text-align:center;padding:8px 3px;font-size:13px;line-height:1.2;min-height:60px;display:flex;align-items:center;justify-content:center;position:relative}
+.gb .n{position:absolute;top:-7px;right:-3px;background:var(--ink);color:var(--bg);border-radius:999px;font-size:12px;padding:1px 7px}
+.gtip{min-height:46px;margin:4px 0 10px;font-size:15px;color:var(--mut)}.gtip.bad{color:#B3261E}
+.gtray{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 8px}
+.gc{background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:6px;cursor:grab;font:inherit;color:var(--ink);touch-action:none;text-align:center;display:block}
+.gc .gcp{aspect-ratio:1;background:#FFF8EF;border-radius:10px;display:flex}.gc img{width:100%;height:100%;object-fit:contain;padding:4px;pointer-events:none}
+.gc b{display:block;font-size:13px;line-height:1.2;margin-top:4px;min-height:2.4em}
+.gc.sel{outline:3px solid var(--olive)}.gc.done{visibility:hidden}.gc.shk{animation:shk .35s}
+#fbk:not(:empty),#gfb:not(:empty){position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);box-shadow:0 -10px 32px rgba(0,0,0,.2);border-radius:22px 22px 0 0;padding:16px 20px calc(14px + env(safe-area-inset-bottom));max-height:46vh;overflow:auto;border-top:3px solid var(--olive)}
+#fbk .fb,#gfb .fb{background:none;padding:0;margin:0 0 12px;max-width:720px;margin-inline:auto}#fbk p,#gfb p{max-width:720px;margin:0 auto}
+body:has(#v-teste:not([hidden]) #fbk:not(:empty)),body:has(#v-teste:not([hidden]) #gfb:not(:empty)){padding-bottom:230px}
+.wafab{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:20;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px;border-radius:999px;background:var(--card);color:var(--green);border:2px solid var(--green);font:700 15px var(--fb);text-decoration:none;box-shadow:var(--shadow)}
+body:has(#gquiz:not([hidden])) .wafab,body:has(#gplay:not([hidden])) .wafab{display:none}
+.wafab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
@@ -239,20 +262,27 @@ header{padding:14px 0 6px}
  </div>
  <div id="v-teste" role="tabpanel" aria-labelledby="t-teste" hidden>
   <section style="padding-top:28px">
-  <h2 id="mt">Teste o que você aprendeu</h2>
-  <p class="sub" id="ms">Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.</p>
-  <div class="quiz" id="qz"></div></section>
+  <h2 id="mt">Jogos</h2>
+  <p class="sub" id="ms">Escolha como quer praticar. Em todos, o guia explica cada erro.</p>
+  <div class="gmenu" id="gmenu">
+   <button class="gmc" data-g="quiz"><b>Teste rápido</b><span>5 resíduos. Arraste ou toque na lixeira certa.</span><em>Jogar →</em></button>
+   <button class="gmc" data-g="rain"><b>Chuva de resíduos</b><span>O resíduo cai e você escolhe a lixeira antes que ele chegue ao chão.</span><em>Jogar →</em></button>
+   <button class="gmc" data-g="belt"><b>Esteira</b><span>Os resíduos passam na esteira. Separe na ordem, sem pressa.</span><em>Jogar →</em></button>
+   <button class="gmc" data-g="pair"><b>Arrastar e separar</b><span>6 resíduos na bandeja. Leve cada um até a lixeira certa.</span><em>Jogar →</em></button>
+  </div>
+  <div id="gquiz" hidden><button class="back" data-back>← Jogos</button><div class="quiz" id="qz"></div></div>
+  <div id="gplay" hidden><button class="back" data-back>← Jogos</button><div class="quiz" id="gz"></div></div></section>
  </div>
 
  <div id="v-aprender" role="tabpanel" aria-labelledby="t-aprender" hidden>
- <section id="erros"><details class="acc" open><summary><h2>Erros mais comuns</h2><span>Os que mais acontecem por aqui</span></summary><div class="accb"><div id="erlist"></div></div></details></section>
+ <section id="erros"><details class="acc"><summary><h2>Erros mais comuns</h2><span>Os que mais acontecem por aqui</span></summary><div class="accb"><div id="erlist"></div></div></details></section>
  <section id="cores"><details class="acc"><summary><h2>Por que cada lixeira tem uma cor?</h2><span>Um código único no Brasil</span></summary><div class="accb"><p class="lead2">A cor é um código combinado em todo o país (Conama nº 275/2001): a mesma cor vale na empresa, na escola e na rua.</p><ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b></div></li></ul></div></details></section>
  <section id="destino"><details class="acc"><summary><h2>Para onde vai depois da coleta?</h2><span>O destino de cada lixeira</span></summary><div class="accb"><div id="destlist"></div></div></details></section>
- <section id="escorrer"><details class="acc"><summary><h2>Esvazie e deixe escorrer</h2><span>3 passos antes de descartar</span></summary><div class="accb"><ol class="how"><li><b>Esvazie</b> e raspe o grosso com um guardanapo.</li><li><b>Deixe escorrer</b> por alguns segundos.</li><li><b>Deixe secar</b> e jogue na lixeira do material.</li></ol>
-  <p class="note"><b>Atenção:</b> embalagem de produto químico não se lava: vai para a lixeira de resíduo perigoso.</p></div></details></section>
+ <section id="escorrer"><details class="acc"><summary><h2>Esvazie antes de descartar</h2><span>Nada de copo ou garrafa com resto</span></summary><div class="accb"><p class="lead2">Antes de jogar copo, garrafa ou pote, <b>esvazie o que sobrou</b>. Não precisa raspar, escorrer nem lavar: algumas gotas ficam e tudo bem. O que não pode é jogar com restos ou líquido dentro, como uma garrafa com refrigerante.</p>
+  <p class="note"><b>Atenção:</b> embalagem de produto químico não se esvazia nem se lava por conta própria: vai para a lixeira de resíduo perigoso.</p></div></details></section>
  <section id="sabia"><details class="acc"><summary><h2>Você sabia?</h2><span>6 curiosidades rápidas</span></summary><div class="accb"><div class="facts">
    <div class="fact"><span>01</span><p>Nós trabalhamos com aterro zero: cada resíduo precisa de um destino adequado.</p></div>
-   <div class="fact"><span>02</span><p>Embalagem suja de comida ou gordura é mais difícil de reciclar. Esvazie e seque antes.</p></div>
+   <div class="fact"><span>02</span><p>Embalagem com resto de comida ou bebida é mais difícil de reciclar. Esvaziar antes já ajuda muito.</p></div>
    <div class="fact"><span>03</span><p>A embalagem aluminizada de café junta várias camadas. Por isso tem lixeira própria.</p></div>
    <div class="fact"><span>04</span><p>Embalagem de produto químico, mesmo vazia, vai para o resíduo perigoso.</p></div>
    <div class="fact"><span>05</span><p>Um resíduo perigoso no lixo comum pode contaminar todo o saco.</p></div>
@@ -266,6 +296,7 @@ header{padding:14px 0 6px}
 
 
 </main>
+<a class="wafab" id="wafab" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener" aria-label="Tirar dúvida pelo WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20.5l1.6-4.9A8 8 0 1 1 21 12z"/></svg>Dúvida?</a>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: %%REV%%</p></div></footer>
 <div class="qro" id="qro" hidden role="dialog" aria-modal="true" aria-label="QR Code do guia">%%QR%%<p>Aponte a câmera do celular para abrir o guia</p><small>camargosjsamuel.github.io/guia-descarte</small><button class="btn" id="qrx">Fechar</button></div>
 
@@ -313,7 +344,7 @@ const erRule=r=>r.startsWith('not:')?ITEMS.filter(x=>x.b!==r.slice(4)):ITEMS.fil
 $('#erlist').innerHTML=ERC.map((e,k)=>{const rnd=e[2].startsWith('not:');return `<button class="erc" data-k="${k}"><b>${e[0]}</b><span>${e[1]}</span><em>${rnd?'Ver um exemplo →':'Ver no guia →'}</em></button>`}).join('');
 $('#erlist').addEventListener('click',e=>{const b=e.target.closest('.erc');if(!b)return;const l=erRule(ERC[+b.dataset.k][2]);if(l.length)openI(l[Math.random()*l.length|0].i)});
 /* quiz */
-const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
+const WAH=()=>$('#wafab').href;const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 /* alternativas parecidas: primeiro as confusões específicas do item, depois as mais comuns da lixeira certa */
 function opts(i){const used=new Set(ITEMS.map(x=>x.b)),esp=Object.keys(ERRI).filter(k=>k.startsWith(i.n+'|')).map(k=>k.split('|')[1]);
@@ -336,7 +367,7 @@ function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
- $('#fbk').innerHTML=`<div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`}
+ $('#fbk').innerHTML=`<div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button><a class="btn alt" href="${WAH()}" target="_blank" rel="noopener">Dúvida? WhatsApp</a></p>`}
 /* explicação do erro: texto próprio do item (ERRI) ou motivo do item + texto da lixeira escolhida (ERRB) */
 function errText(i,k){return ERRI[i.n+'|'+k]||(i.m+' '+(ERRB[k]||''))}
 /* arrastar a foto até a lixeira (também funciona com toque) */
@@ -357,6 +388,71 @@ function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(in
  let u='';try{u=location.href.split('#')[0]}catch(x){}
  const share='https://wa.me/?text='+encodeURIComponent(`Acertei ${sc} de 5 no teste do Guia de descarte! ${u}`);
  qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div>${wr.length?`<div class="fix"><h3>Para fixar</h3><ul>${wr.map(e=>`<li><b>${e.i.n}</b> vai em <b>${BINS[e.i.b].n}</b>, e não em ${BINS[e.k].n}. ${errText(e.i,e.k)}</li>`).join('')}</ul></div>`:''}<p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Fazer outro teste</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
+
+
+/* ===== jogos: chuva, esteira e arrastar ===== */
+const gz=$('#gz'),G={raf:0,run:false};let gm=null,gdrag=null;
+const gmenu=$('#gmenu'),gquiz=$('#gquiz'),gplay=$('#gplay');
+const GT={quiz:'Teste rápido',rain:'Chuva de resíduos',belt:'Esteira',pair:'Arrastar e separar'};
+function gshow(w,m){gmenu.hidden=w!=='menu';gquiz.hidden=w!=='quiz';gplay.hidden=w!=='play';$('#mt').textContent=w==='menu'?'Jogos':GT[m||'quiz'];$('#ms').hidden=w!=='menu'}
+function stopGame(){G.run=false;cancelAnimationFrame(G.raf);document.querySelectorAll('.ghost').forEach(x=>x.remove());gdrag=null;dg=null;if(gm)gm.paused=true}
+function gpool(n){const by={};ITEMS.forEach(x=>(by[x.b]=by[x.b]||[]).push(x));const ks=shuffle(Object.keys(by).filter(k=>by[k].length>=3&&BINS[k])).slice(0,4);return{bins:ks,items:shuffle(ITEMS.filter(x=>ks.includes(x.b))).slice(0,n)}}
+const gbinsHtml=ks=>`<div class="gbins" id="gbins">${ks.map(k=>`<button class="opt gb" style="--c:${BINS[k].c};--t:${BINS[k].t}" data-b="${k}">${BINS[k].n}</button>`).join('')}</div>`;
+const gbest=(m,s)=>{let b=0;try{b=+localStorage.getItem('gd_'+m)||0;if(s>b){b=s;localStorage.setItem('gd_'+m,b)}}catch(e){if(s>b)b=s}return b};
+function gSetProg(){const d=gm.mode==='pair'?gm.placed:gm.done;$('#gp').textContent=d+' de '+gm.n;$('#gs').textContent=gm.sc+(gm.mode==='pair'?' de primeira':' certas');$('#gbar').style.width=d/gm.n*100+'%'}
+function gHead(){return `<div class="qtop"><span id="gp"></span><span id="gs"></span></div><div class="bar"><i id="gbar"></i></div>`}
+function gStart(mode){stopGame();gshow('play',mode);if(mode==='pair')return pStart();
+ const n=mode==='belt'?8:10,P=gpool(n);
+ gm={mode,n,bins:P.bins,q:P.items.slice(),act:[],spawned:0,done:0,sc:0,wr:[],paused:false,cd:.5,S:innerWidth<420?68:80};
+ gz.innerHTML=gHead()+`<div class="gst ${mode}" id="gst"></div><p class="gtip" id="gtip">${mode==='rain'?'Toque na lixeira certa antes que o resíduo chegue ao chão. Também dá para arrastar.':'Toque na lixeira certa para o resíduo em destaque. Também dá para arrastar.'}</p>${gbinsHtml(P.bins)}<div id="gfb"></div>`;
+ gSetProg();G.run=true;G.last=performance.now();G.raf=requestAnimationFrame(gTick)}
+function gSpawn(){const i=gm.q.shift(),S=gm.S,st=$('#gst'),W=st.clientWidth,H=st.clientHeight,e=document.createElement('div');e.className='gi';e.style.width=e.style.height=S+'px';e.innerHTML=`<img src="${IMGS[i.i]}" alt="${i.n}">`;st.appendChild(e);
+ const o={i,e,x:gm.mode==='rain'?Math.random()*(W-S):W,y:gm.mode==='rain'?-S:(H-S)/2};gm.act.push(o);gm.spawned++}
+function gTick(now){if(!G.run)return;G.raf=requestAnimationFrame(gTick);const dt=Math.min(.05,(now-G.last)/1000);G.last=now;if(!gm||gm.paused)return;
+ const st=$('#gst'),W=st.clientWidth,H=st.clientHeight,S=gm.S;
+ if(gm.mode==='rain'){if(!gm.act.length&&gm.q.length){gm.cd-=dt;if(gm.cd<=0){gSpawn();gm.cd=.5}}
+  const T=RM.matches?12:Math.max(4.6,8.6-gm.spawned*.4),v=(H+S)/T;gm.act.forEach(o=>o.y+=v*dt);}
+ else{const v=W/9,last=gm.act[gm.act.length-1];if(gm.q.length&&(!last||last.x<W-S-46))gSpawn();gm.act.forEach(o=>o.x-=v*dt)}
+ gm.act.forEach(o=>o.e.style.transform=`translate3d(${o.x}px,${o.y}px,0)`);
+ const f=gFront();gm.act.forEach(o=>o.e.classList.toggle('front',o===f));
+ const miss=gm.act.find(o=>gm.mode==='rain'?o.y>=H-S:o.x<-S);if(miss)gResolve(miss,null)}
+const gFront=()=>gm&&gm.act.length?gm.act.reduce((a,b)=>(gm.mode==='rain'?b.y>a.y:b.x<a.x)?b:a):null;
+function gResolve(o,k){gm.act=gm.act.filter(x=>x!==o);const r=o.e.getBoundingClientRect();o.e.remove();gm.done++;const i=o.i,ok=k===i.b,tip=$('#gtip');
+ if(ok){gm.sc++;buzz(30);confetti(r.left+r.width/2,r.top+r.height/2,30);tip.className='gtip';tip.innerHTML=`<b>Certo!</b> ${i.n} vai em ${BINS[i.b].n}. ${i.m}`;gSetProg();return gm.done>=gm.n?gEnd():0}
+ buzz([60,40,60]);gm.wr.push({i,k});gm.paused=true;gSetProg();
+ $('#gfb').innerHTML=`<div class="fb">${k?`<b>Quase.</b> ${i.n} vai em <b>${BINS[i.b].n}</b>, não em ${BINS[k].n}.<br>${errText(i,k)}`:`<b>Não deu tempo.</b> ${i.n} vai em <b>${BINS[i.b].n}</b>.<br>${i.m}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="gnext">${gm.done>=gm.n?'Ver resultado':'Continuar'}</button><a class="btn alt" href="${WAH()}" target="_blank" rel="noopener">Dúvida? WhatsApp</a></p>`}
+function gAnswer(k){if(!gm||gm.mode==='pair'||gm.paused)return;const o=gFront();if(o)gResolve(o,k)}
+function gEnd(){stopGame();const m=gm.mode,s=gm.sc,n=gm.n,b=gbest(m,s),ok=s>=Math.ceil(n*.8),msg=s===n?'Perfeito. Você já separa como um profissional.':ok?'Muito bem. Veja abaixo o que vale fixar.':'Vale rever o que está abaixo e tentar de novo.';
+ if(ok){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,s===n?140:80)}
+ gz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${ok?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/></svg><div><h3>${s} de ${n}</h3><p>${msg}</p><p class="prog">Seu melhor neste jogo: ${b} de ${n}.</p></div></div>${gm.wr.length?`<div class="fix"><h3>Para fixar</h3><ul>${gm.wr.map(e=>`<li><b>${e.i.n}</b> vai em <b>${BINS[e.i.b].n}</b>${e.k?`, e não em ${BINS[e.k].n}`:''}. ${e.k?errText(e.i,e.k):e.i.m}</li>`).join('')}</ul></div>`:''}<p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="gagain">Jogar de novo</button><button class="btn alt" data-back>Outros jogos</button></p>`}
+/* arrastar e separar */
+function pStart(){const P=gpool(6);gm={mode:'pair',n:6,bins:P.bins,items:P.items,sel:null,miss:new Set(),wr:[],placed:0,sc:0,cnt:{},paused:false};
+ gz.innerHTML=gHead()+`<div class="gtray" id="gtray">${P.items.map((x,j)=>`<button class="gc" data-j="${j}"><div class="gcp"><img src="${IMGS[x.i]}" alt=""></div><b>${x.n}</b></button>`).join('')}</div><p class="gtip" id="gtip">Arraste cada resíduo até a lixeira certa, ou toque no resíduo e depois na lixeira.</p>${gbinsHtml(P.bins)}<div id="gfb"></div>`;gSetProg()}
+function pPlace(j,k){const x=gm.items[j],c=gz.querySelector(`.gc[data-j="${j}"]`),tip=$('#gtip');if(!c||c.classList.contains('done'))return;
+ if(k===x.b){c.classList.add('done');c.classList.remove('sel');gm.sel=null;gm.placed++;if(!gm.miss.has(j))gm.sc++;gm.cnt[k]=(gm.cnt[k]||0)+1;
+  const b=gz.querySelector(`.gb[data-b="${k}"]`);let n=b.querySelector('.n');if(!n){n=document.createElement('span');n.className='n';b.appendChild(n)}n.textContent=gm.cnt[k];
+  buzz(30);const r=b.getBoundingClientRect();confetti(r.left+r.width/2,r.top,24);tip.className='gtip';tip.innerHTML=`<b>Certo!</b> ${x.n} vai em ${BINS[x.b].n}. ${x.m}`;gSetProg();if(gm.placed>=gm.n)setTimeout(gEnd,700)}
+ else{buzz([60,40,60]);if(!gm.miss.has(j)){gm.miss.add(j);gm.wr.push({i:x,k})}c.classList.remove('shk');void c.offsetWidth;c.classList.add('shk');tip.className='gtip bad';tip.innerHTML=`<b>${x.n}</b> não vai em ${BINS[k].n}. ${errText(x,k)}`}}
+/* eventos */
+gmenu.addEventListener('click',e=>{const b=e.target.closest('.gmc');if(!b)return;const g=b.dataset.g;if(g==='quiz'){stopGame();start();gshow('quiz','quiz')}else gStart(g);window.scrollTo({top:0})});
+$('#v-teste').addEventListener('click',e=>{if(e.target.closest('[data-back]')){stopGame();gshow('menu');return}});
+gz.addEventListener('click',e=>{
+ if(e.target.id==='gnext'){$('#gfb').innerHTML='';gm.paused=false;G.last=performance.now();if(gm.done>=gm.n)gEnd();return}
+ if(e.target.id==='gagain'){gStart(gm.mode);return}
+ const b=e.target.closest('.gb');if(b){if(gm&&gm.mode==='pair'){if(gm.sel!=null)pPlace(gm.sel,b.dataset.b)}else gAnswer(b.dataset.b);return}
+ const c=e.target.closest('.gc');if(c&&gm&&gm.mode==='pair'&&!c.classList.contains('done')){gz.querySelectorAll('.gc').forEach(x=>x.classList.toggle('sel',x===c&&gm.sel!==+c.dataset.j));gm.sel=gm.sel===+c.dataset.j?null:+c.dataset.j}});
+/* arrastar (chuva, esteira e bandeja); toque simples na bandeja continua selecionando */
+const gbAt=(x,y)=>{const el=document.elementFromPoint(x,y);return el&&el.closest?el.closest('.gb'):null};
+gz.addEventListener('pointerdown',e=>{if(!gm||(e.pointerType==='mouse'&&e.button!==0))return;const src=e.target.closest(gm.mode==='pair'?'.gc':'.gi');if(!src||(gm.mode!=='pair'&&gm.paused))return;
+ const img=src.querySelector('img'),r=src.getBoundingClientRect(),g=document.createElement('div');g.className='ghost';g.style.width=g.style.height=Math.min(r.width,96)+'px';g.innerHTML=`<img src="${img.src}" alt="">`;g.style.display='none';document.body.appendChild(g);
+ gdrag={g,src,x0:e.clientX,y0:e.clientY,moved:false};if(gm.mode!=='pair')gm.paused=true});
+addEventListener('pointermove',e=>{if(!gdrag)return;if(!gdrag.moved&&Math.hypot(e.clientX-gdrag.x0,e.clientY-gdrag.y0)>6){gdrag.moved=true;gdrag.g.style.display='flex'}if(!gdrag.moved)return;
+ gdrag.g.style.left=e.clientX+'px';gdrag.g.style.top=e.clientY+'px';const b=gbAt(e.clientX,e.clientY);gz.querySelectorAll('.gb').forEach(x=>x.classList.toggle('over',x===b))});
+const gEndDrag=e=>{if(!gdrag)return;const d=gdrag;gdrag=null;d.g.remove();gz.querySelectorAll('.gb').forEach(x=>x.classList.remove('over'));if(!gm)return;
+ if(gm.mode!=='pair'){gm.paused=false;G.last=performance.now()}
+ if(!d.moved||e.type!=='pointerup')return;const b=gbAt(e.clientX,e.clientY);if(!b)return;
+ if(gm.mode==='pair')pPlace(+d.src.dataset.j,b.dataset.b);else{const o=gm.act.find(x=>x.e===d.src);if(o)gResolve(o,b.dataset.b)}};
+addEventListener('pointerup',gEndDrag);addEventListener('pointercancel',gEndDrag);
 
 /* populares, ajuda, destaque, leitura */
 let lastF=null;
@@ -386,7 +482,7 @@ function saveProg(s){const p=prog();p.n++;if(s>p.best)p.best=s;put(p);return p}
 function progTxt(){const p=prog();return p.n?`Seu melhor resultado: ${p.best} de 5 · ${p.n} ${p.n===1?'teste feito':'testes feitos'} neste aparelho.`:''}
 start();
 /* abas */
-function view(v,push){v=v==='teste'||v==='aprender'?v:'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
+function view(v,push){stopGame();v=v==='teste'||v==='aprender'?v:'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));if(push){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo({top:0})}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.v,true)));
 window.addEventListener('hashchange',()=>view(location.hash.slice(1)));
