@@ -160,7 +160,8 @@ assert set(CONFUSAO)==set(B), 'CONFUSAO precisa ter todas as lixeiras'
 
 # Para onde vai cada lixeira depois da coleta (aba Aprender). Texto curto e didático.
 DESTINOS=[
- ('Reciclagem','O material é separado, processado e vira matéria-prima para novos produtos.',['papel','plastico','vidro','metal','madeira','pilhas','aerossol']),
+ ('Reciclagem','O material é separado, processado e vira matéria-prima para novos produtos.',['papel','plastico','vidro','metal','madeira','aerossol']),
+ ('Pilhas e baterias','Em geral seguem para reciclagem, que recupera componentes como os metais. Conforme o tipo, podem receber outro tratamento adequado, sempre por empresas licenciadas (Resolução Conama nº 401/2008).',['pilhas']),
  ('Compostagem','Os restos orgânicos se decompõem de forma controlada e viram composto, um adubo.',['organico']),
  ('Blendagem e coprocessamento','Resíduos são misturados (blendagem) para virar combustível alternativo e usados em fornos industriais no lugar de combustível comum (coprocessamento).',['comum','aluminizada','perigoso','sanitario']),
  ('Triagem e transbordo','Antes do destino final, o material é separado e reagrupado. Aí se define o que segue para a reciclagem e o que segue para a blendagem e o coprocessamento.',['eletronico']),
@@ -171,6 +172,6 @@ DESTINOS=[
 ERROS_COMUNS=[
  ('Copo e isopor na lixeira de plástico','O copo descartável e o isopor são poliestireno, de baixo valor e pouco aceito pela reciclagem. Vão no lixo comum.','Copo de poliestireno'),
  ('Copo de papel na lixeira de papel','O copo tem uma camada fina de plástico por dentro, que atrapalha a reciclagem do papel. Vai no lixo comum.','Copo de papel'),
- ('Resíduo que não é orgânico na lixeira de orgânico','No orgânico vai só resto de comida e borra de café. Guardanapo, embalagem, filtro de papel e saquinho de chá vão no lixo comum.','Guardanapo'),
- ('Resíduo com lixeira própria no lixo comum','Pilha, lâmpada, eletrônico e embalagem de produto químico precisam de tratamento específico. Procure a lixeira certa no guia.','Pilha'),
+ ('Resíduo que não é orgânico na lixeira de orgânico','No orgânico vai só resto de comida e borra de café. Guardanapo, embalagem, filtro de papel e saquinho de chá vão no lixo comum.','not:organico'),
+ ('Resíduo com lixeira própria no lixo comum','Pilha, lâmpada, eletrônico e embalagem de produto químico precisam de tratamento específico. Procure a lixeira certa no guia.','not:comum'),
 ]

@@ -311,8 +311,9 @@ function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
 chipsRender();render();
 const DEST=/*DEST*/,ERC=/*ERC*/;
 $('#destlist').innerHTML=DEST.map(d=>`<div class="dst"><h3>${d[0]}</h3><p>${d[1]}</p><div class="dch">${d[2].filter(k=>BINS[k]).map(k=>`<span style="--c:${BINS[k].c}"><i></i>${BINS[k].n}</span>`).join('')}</div></div>`).join('');
-$('#erlist').innerHTML=ERC.map(e=>{const it=ITEMS.find(x=>x.n===e[2]);return `<button class="erc" data-i="${it?it.i:''}"><b>${e[0]}</b><span>${e[1]}</span>${it?'<em>Ver no guia →</em>':''}</button>`}).join('');
-$('#erlist').addEventListener('click',e=>{const b=e.target.closest('.erc');if(b&&b.dataset.i!=='')openI(+b.dataset.i)});
+const erRule=r=>r.startsWith('not:')?ITEMS.filter(x=>x.b!==r.slice(4)):ITEMS.filter(x=>x.n===r);
+$('#erlist').innerHTML=ERC.map((e,k)=>{const rnd=e[2].startsWith('not:');return `<button class="erc" data-k="${k}"><b>${e[0]}</b><span>${e[1]}</span><em>${rnd?'Ver um exemplo →':'Ver no guia →'}</em></button>`}).join('');
+$('#erlist').addEventListener('click',e=>{const b=e.target.closest('.erc');if(!b)return;const l=erRule(ERC[+b.dataset.k][2]);if(l.length)openI(l[Math.random()*l.length|0].i)});
 /* quiz */
 const qz=$('#qz');let qs=[],qi=0,sc=0,done=false;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
