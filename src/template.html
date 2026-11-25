@@ -140,7 +140,8 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 .totop{position:fixed;right:16px;bottom:18px;z-index:15;width:50px;height:50px;border-radius:50%;border:0;background:var(--green);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.28);display:grid;place-items:center;cursor:pointer}
 .totop[hidden]{display:none}
 .totop svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-:root[data-theme="dark"] .totop,:root:not([data-theme="light"]) .totop{color:#10261a}
+:root[data-theme="dark"] .totop{color:#10261a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .totop{color:#10261a}}
 .sheet .acts{display:flex;gap:10px;flex-wrap:wrap}.sheet .btn{min-height:46px}
 .ovm{margin:12px 0 0!important;font-size:15px!important;min-height:22px}
 .how{padding-left:20px;margin:8px 0 0}.how li{margin:0 0 8px}
@@ -233,14 +234,13 @@ body:has(#gquiz:not([hidden])) .wafab,body:has(#gplay:not([hidden])) .wafab{disp
 .chat{position:fixed;left:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:40;width:min(360px,calc(100vw - 28px));background:var(--card);border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.3);border:1px solid var(--line);overflow:hidden;animation:chin .18s ease-out}
 .chat[hidden]{display:none}@keyframes chin{from{opacity:0;transform:translateY(12px) scale(.97)}}
 .ch{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 14px 12px 18px}.ch b{font:700 20px var(--fd)}
-:root[data-theme="dark"] .ch,:root:not([data-theme="light"]) .ch{color:#10261a}
+:root[data-theme="dark"] .ch{color:#10261a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ch{color:#10261a}}
 .ch button{width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:inherit;font-size:28px;line-height:1;cursor:pointer}
 .cb{padding:14px 16px 16px;display:grid;gap:10px}
 .bub{background:var(--bg);border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:15px}
 .qr{display:flex;gap:8px;flex-wrap:wrap}.qr button{font:600 14px var(--fb);min-height:40px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
-.chat textarea{width:100%;font:500 16px var(--fb);border:2px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:none;box-sizing:border-box}
-.chat textarea:focus{outline:3px solid var(--olive);outline-offset:1px}
-.chn{margin:0;min-height:20px;font-size:14px;color:var(--mut)}.chl{font-size:14.5px;color:var(--green);font-weight:600;text-align:center}
+.chl{font-size:14.5px;color:var(--green);font-weight:600;text-align:center}
 footer{padding-bottom:90px}
 </style>
 </head>
@@ -307,12 +307,11 @@ footer{padding-bottom:90px}
 </main>
 <button class="wafab" id="wafab" aria-haspopup="dialog" aria-expanded="false" aria-controls="chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20.5l1.6-4.9A8 8 0 1 1 21 12z"/></svg>Dúvida?</button>
 <div class="chat" id="chat" role="dialog" aria-label="Tirar dúvida" hidden>
- <div class="ch"><b>Ficou com dúvida?</b><button id="chx" aria-label="Fechar">×</button></div>
- <div class="cb"><div class="bub">Oi! Não achou o resíduo ou quer confirmar onde vai? Escreva aqui e envie no WhatsApp. Se preferir, mande uma foto por lá.</div>
-  <div class="qr"><button data-q="Não achei este resíduo no guia: ">Não achei um resíduo</button><button data-q="Quero confirmar onde vai: ">Quero confirmar</button></div>
-  <textarea id="chq" rows="3" placeholder="Escreva sua dúvida" aria-label="Sua dúvida"></textarea>
-  <button class="btn" id="chs">Enviar no WhatsApp</button>
-  <p class="chn" id="chn" aria-live="polite"></p>
+ <div class="ch"><b>Precisa de ajuda?</b><button id="chx" aria-label="Fechar">×</button></div>
+ <div class="cb"><div class="bub"><b>Ficou na dúvida? Fique tranquilo(a).</b></div>
+  <div class="bub">Ao tocar no botão abaixo, você fala direto com o analista da área de Meio Ambiente, que tem o conhecimento para te ajudar.</div>
+  <div class="bub">Pode ficar à vontade: ele está à disposição para tirar qualquer dúvida. Não pense duas vezes antes de mandar mensagem. Descreva o resíduo ou envie uma foto.</div>
+  <a class="btn" id="chs" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Falar com o analista</a>
   <a class="chl" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div>
 </div>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: %%REV%%</p></div></footer>
@@ -474,15 +473,11 @@ addEventListener('pointerup',gEndDrag);addEventListener('pointercancel',gEndDrag
 
 /* chat de dúvida */
 const chat=$('#chat'),chb=$('#wafab');
-function chatOpen(o){chat.hidden=!o;chb.setAttribute('aria-expanded',o);if(o)setTimeout(()=>$('#chq').focus(),50)}
+function chatOpen(o){chat.hidden=!o;chb.setAttribute('aria-expanded',o);if(o)setTimeout(()=>$('#chs').focus(),50)}
 chb.addEventListener('click',e=>{e.stopPropagation();chatOpen(chat.hidden)});
 $('#chx').addEventListener('click',()=>chatOpen(false));
 document.addEventListener('click',e=>{const d=e.target.closest('[data-chat]');if(d){e.stopPropagation();chatOpen(true);return}if(!chat.hidden&&!chat.contains(e.target))chatOpen(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chat.hidden){chatOpen(false);chb.focus()}});
-chat.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{const q=$('#chq');q.value=b.dataset.q;q.focus()}));
-$('#chs').addEventListener('click',async()=>{const v=$('#chq').value.trim(),n=$('#chn');
- if(v){try{await navigator.clipboard.writeText(v);n.textContent='Texto copiado. Cole na conversa do WhatsApp.'}catch(e){n.textContent='Abra o WhatsApp e escreva sua dúvida.'}}else n.textContent='';
- window.open(WA,'_blank','noopener')});
 /* populares, ajuda, destaque, leitura */
 let lastF=null;
 function openI(n){const i=ITEMS[n];rmArw();lastF=document.activeElement;const s=$('#sheet');s.style.setProperty('--c',BINS[i.b].c);s.style.setProperty('--t',BINS[i.b].t);
