@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guia de Descarte</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F6E43"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Descarte">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -128,6 +129,15 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 .badge svg{width:96px;height:96px;flex:none}
 .badge h3{font-size:46px;color:var(--green)}
 .badge p{margin:2px 0 0}
+.qrow .ph{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}.qrow .ph img{-webkit-user-drag:none;pointer-events:none}
+.qhint{margin:-4px 0 12px;color:var(--mut);font-size:14px}
+.ghost{position:fixed;z-index:50;pointer-events:none;transform:translate(-50%,-60%) rotate(-4deg);background:#FFF8EF;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;padding:6px;opacity:.96}
+.ghost img{max-width:100%;max-height:100%;object-fit:contain}
+.opt{transition:transform .12s}.opt.over{outline:3px dashed var(--ink);outline-offset:2px;transform:scale(1.03)}
+.opt.no{animation:shk .35s}@keyframes shk{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.cf{position:fixed;inset:0;pointer-events:none;z-index:60}
+@media (prefers-reduced-motion:reduce){.opt.no{animation:none}.opt{transition:none}}
+.inst{margin:0 0 12px}
 </style>
 </head>
 <body>
@@ -180,9 +190,11 @@ footer p{margin:0;color:var(--mut);font-size:14px}
   <div class="row"><a class="btn" id="wa" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a>
   <a class="btn alt" id="sh" href="#" target="_blank" rel="noopener">Compartilhar o guia</a></div></div></section>
 
- <section><details><summary>Como deixar este guia no celular</summary>
+ <section><details><summary>Como deixar este guia no celular (funciona sem internet)</summary>
+  <p style="margin:10px 0">Depois de instalado, o guia abre mesmo sem sinal. Abra o guia uma vez com internet antes.</p>
+  <p class="inst"><button class="btn" id="inst" hidden>Instalar no celular</button></p>
   <ol><li>iPhone (Safari): toque em Compartilhar e escolha “Adicionar à Tela de Início”.</li>
-  <li>Android (Chrome): toque nos três pontos e escolha “Adicionar à tela inicial”.</li></ol></details></section>
+  <li>Android (Chrome): toque nos três pontos e escolha “Instalar app” ou “Adicionar à tela inicial”.</li></ol></details></section>
 </main>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: novembro de 2026</p></div></footer>
 <div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"><div class="sheet" id="sheet"></div></div>
@@ -209,15 +221,33 @@ function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask()}
 function ask(){done=false;const i=qs[qi];
  qz.innerHTML=(qi===0&&progTxt()?`<p class="prog">${progTxt()}</p>`:'')+`<div class="qtop"><span>Pergunta ${qi+1} de 5</span><span>${sc} certas</span></div><div class="bar"><i style="width:${qi/5*100}%"></i></div>
  <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>Onde vai: ${i.n}?</h3></div>
+ <p class="qhint">Arraste a foto até a lixeira certa ou toque na resposta.</p>
  <div class="opts">${opts(i).map(k=>`<button class="opt" style="--c:${BINS[k].c};--t:${BINS[k].t}" data-b="${k}">${BINS[k].n}</button>`).join('')}</div><div id="fbk"></div>`}
 qz.addEventListener('click',e=>{
  if(e.target.id==='next'){qi++;qi<5?ask():fim();return}
  if(e.target.id==='again'){start();return}
  if(e.target.id==='goguia'){view('guia',true);return}
- const o=e.target.closest('.opt');if(!o||done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
- qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
- $('#fbk').innerHTML=`<div class="fb">${ok?'Certo! ':'Quase. '}Vai em ${BINS[i.b].n}. ${i.m}</div><p><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`});
-function fim(){const p=saveProg(sc);const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Dê uma olhada no guia para fixar os itens que errou.':'Vale rever o guia e tentar de novo.';
+ const o=e.target.closest('.opt');if(o)answer(o)});
+function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
+ qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
+ const h=qz.querySelector('.qhint');if(h)h.remove();
+ if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
+ $('#fbk').innerHTML=`<div class="fb">${ok?'Certo! ':'Quase. '}Vai em ${BINS[i.b].n}. ${i.m}</div><p><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`}
+/* arrastar a foto até a lixeira (também funciona com toque) */
+let dg=null;
+const optAt=(x,y)=>{const el=document.elementFromPoint(x,y);return el&&el.closest?el.closest('.opt'):null};
+qz.addEventListener('pointerdown',e=>{const ph=e.target.closest('.qrow .ph');if(!ph||done||(e.pointerType==='mouse'&&e.button!==0))return;
+ e.preventDefault();const r=ph.getBoundingClientRect(),g=ph.cloneNode(true);g.className='ghost';g.style.width=g.style.height=Math.min(r.width,110)+'px';g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';document.body.appendChild(g);dg=g});
+addEventListener('pointermove',e=>{if(!dg)return;dg.style.left=e.clientX+'px';dg.style.top=e.clientY+'px';const o=optAt(e.clientX,e.clientY);qz.querySelectorAll('.opt').forEach(x=>x.classList.toggle('over',x===o&&!x.disabled))});
+const endDrag=e=>{if(!dg)return;const o=e.type==='pointerup'?optAt(e.clientX,e.clientY):null;dg.remove();dg=null;qz.querySelectorAll('.opt').forEach(x=>x.classList.remove('over'));if(o&&!o.disabled)answer(o)};
+addEventListener('pointerup',endDrag);addEventListener('pointercancel',endDrag);
+/* feedback: confete e vibração (respeita "reduzir movimento") */
+const RM=matchMedia('(prefers-reduced-motion: reduce)');
+function buzz(p){try{if(!RM.matches&&navigator.vibrate)navigator.vibrate(p)}catch(e){}}
+function confetti(x,y,n){if(RM.matches)return;const c=document.createElement('canvas');c.className='cf';c.setAttribute('aria-hidden','true');c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);
+ const g=c.getContext('2d'),K=['#2F6E43','#7A992E','#FFE21F','#D42828','#004AAD','#FF691F'],P=Array.from({length:n},()=>({x,y,vx:(Math.random()-.5)*10,vy:-Math.random()*10-3,s:5+Math.random()*5,c:K[Math.random()*K.length|0],r:Math.random()*6,vr:(Math.random()-.5)*.4}));let f=0;
+ (function t(){g.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillStyle=p.c;g.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);g.restore()});if(++f<90)requestAnimationFrame(t);else c.remove()})()}
+function fim(){const p=saveProg(sc);if(sc>=4){buzz([40,30,40,30,80]);confetti(innerWidth/2,innerHeight*.35,sc===5?140:80)}const msg=sc===5?'Perfeito. Você já separa como um profissional.':sc>=3?'Muito bem. Dê uma olhada no guia para fixar os itens que errou.':'Vale rever o guia e tentar de novo.';
  let u='';try{u=location.href.split('#')[0]}catch(x){}
  const share='https://wa.me/?text='+encodeURIComponent(`Acertei ${sc} de 5 no teste do Guia de descarte! ${u}`);
  qz.innerHTML=`<div class="qtop"><span>Resultado</span></div><div class="badge"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="${sc>=3?'var(--olive)':'var(--line)'}"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 26c14 4 20 18 14 32-10 4-24 0-28-12 2-10 8-17 14-20z" fill="#fff"/><path d="M42 64c6-10 12-20 22-32" stroke="${sc>=3?'var(--olive)':'var(--mut)'}" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><div><h3>${sc} de 5</h3><p>${msg}</p><p class="prog">Seu melhor: ${p.best} de 5 · ${p.n} ${p.n===1?'teste':'testes'} neste aparelho.</p></div></div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="again">Jogar de novo</button><button class="btn alt" id="goguia">Ver o guia</button><a class="btn alt" href="${share}" target="_blank" rel="noopener">Compartilhar resultado</a></p>`}
@@ -255,6 +285,21 @@ window.addEventListener('hashchange',()=>view(location.hash.slice(1)));
 view(location.hash.slice(1));
 /* compartilhar */
 try{const u=location.href.split('#')[0];$('#sh').href='https://wa.me/?text='+encodeURIComponent('Guia de descarte: '+u)}catch(e){}
+
+/* buscas sem resultado: contador anônimo (GoatCounter). Deixe o código vazio para desligar. */
+const STATS={code:''};
+function stat(path,title){if(!STATS.code)return;const go=()=>{try{window.goatcounter.count({path,title,event:true})}catch(e){}};
+ if(window.goatcounter&&window.goatcounter.count)return go();
+ if(!stat.s){const s=document.createElement('script');s.async=true;s.dataset.goatcounter='https://'+STATS.code+'.goatcounter.com/count';s.dataset.goatcounterSettings='{"no_onload":true}';s.src='https://gc.zgo.at/count.js';s.onload=go;document.head.appendChild(s);stat.s=s}else stat.s.addEventListener('load',go)}
+const missSeen=new Set();let missT=null;
+const renderBase=render;
+render=function(){renderBase();clearTimeout(missT);if(!STATS.code||term.length<3||document.querySelector('#grid .item'))return;
+ missT=setTimeout(()=>{const k=term.slice(0,40);if(missSeen.has(k))return;missSeen.add(k);stat('sem-resultado/'+k,k)},1500)};
+/* instalação no celular e uso sem internet */
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+let dip=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;$('#inst').hidden=false});
+$('#inst').addEventListener('click',async()=>{if(!dip)return;dip.prompt();try{await dip.userChoice}catch(e){}dip=null;$('#inst').hidden=true});
+addEventListener('appinstalled',()=>{$('#inst').hidden=true});
 </script>
 </body>
 </html>

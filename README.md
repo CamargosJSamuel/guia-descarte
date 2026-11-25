@@ -25,5 +25,11 @@ Abra `docs/index.html` no navegador.
 - **Atualizar a data de revisão:** procure "novembro de 2026" em `src/template.html` (2 lugares).
 - Para publicar: `git add . && git commit -m "ajuste" && git push`. O site atualiza em 1 a 2 minutos.
 
+## Uso sem internet (instalar no celular)
+O site vira um aplicativo instalável (PWA). `src/sw.js` guarda a página no aparelho e `src/static/` tem o manifesto e os ícones. A versão do cache muda sozinha a cada build, então ajustes chegam na próxima abertura com internet.
+
+## Buscas sem resultado
+Em `src/template.html`, procure `const STATS={code:''}` e coloque o código do seu GoatCounter (ex.: `'guiadescarte'`, de guiadescarte.goatcounter.com). Vazio = desligado. Só registra o termo buscado, sem dados pessoais, uma vez por termo e por visita. Os termos aparecem em "Events" no painel do GoatCounter.
+
 ## Publicação (uma vez)
 Em Settings > Pages, em "Source", escolha **GitHub Actions**.
