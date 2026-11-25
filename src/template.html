@@ -159,30 +159,16 @@ footer p{margin:0;color:var(--mut);font-size:14px}
 .rt{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .ib{font:700 15px var(--fb);min-height:44px;display:inline-flex;align-items:center;gap:8px;color:#fff;background:var(--green);border:0;border-radius:999px;padding:0 16px;cursor:pointer}
 .ib[hidden]{display:none}
-.ibq{background:transparent;color:var(--green);border:2px solid var(--green)}
-.rt{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center}.rt .rev{flex:0 0 100%}.rt .ib{flex:0 0 auto}
+.ibq{background:transparent;color:var(--green);border:2px solid var(--green);width:44px;padding:0;justify-content:center}
+.ibq svg{width:22px;height:22px}
+.rt{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:6px 8px}.rt .rev{flex:0 0 100%}.rt .ib{flex:0 0 auto}
+header{padding:14px 0 6px}
 .qro{position:fixed;inset:0;z-index:40;background:#fff;color:#1b1b1b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;text-align:center}
 .qro[hidden]{display:none}
 .qro svg{width:min(86vw,62vh,520px);height:auto}
 .qro p{margin:0;font:600 18px var(--fb)}.qro small{font:500 15px var(--fb);color:#555;word-break:break-all}
 .ib svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 :root[data-theme="dark"] .ib{color:#10261a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ib{color:#10261a}}
-.seg{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
-.seg button{font:700 15px var(--fb);min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
-.seg .tvb{margin-left:auto;border-style:dashed}
-.selos{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-.selo{font:600 14px var(--fb);display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border-radius:999px;border:2px solid var(--line);color:var(--mut)}
-.selo.on{background:var(--olive);border-color:var(--olive);color:#fff}
-.gscore{font:700 48px/1 var(--fd);color:var(--green);margin:6px 0}
-.glist{margin:10px 0;padding-left:20px}.glist li{margin:0 0 6px}
-.tvx{position:fixed;top:12px;right:12px;z-index:30;font:700 16px var(--fb);min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--green);color:#fff;cursor:pointer}
-.tvx[hidden]{display:none}
-body.tv header,body.tv footer,body.tv .tabs,body.tv .totop,body.tv #duvida,body.tv .seg,body.tv .selos,body.tv #mt,body.tv #ms{display:none!important}
-body.tv .qhint{display:none}
-:root[data-theme="dark"] .seg button[aria-pressed="true"],:root[data-theme="dark"] .tvx{color:#10261a}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"],:root:not([data-theme="light"]) .tvx{color:#10261a}}
-.lead2{margin:0 0 14px}
 .cores{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px}
 .cores li{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:14px;padding:10px 12px;box-shadow:var(--shadow)}
 .cores i{flex:0 0 38px;height:38px;border-radius:10px;border:2px solid var(--line)}
@@ -205,17 +191,25 @@ body.tv .qhint{display:none}
 .erc b{display:block;font-size:17px;margin-bottom:4px}.erc span{display:block;font-size:15px;color:var(--mut)}.erc em{display:block;font-style:normal;font-weight:700;color:var(--green);margin-top:8px;font-size:15px}
 .ib.ibq{background:transparent;color:var(--green)}
 :root[data-theme="dark"] .ib.ibq{color:var(--green);background:transparent}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ib.ibq{color:var(--green);background:transparent}}
+.atl{display:flex;flex-wrap:wrap;gap:8px;padding-top:22px}
+.atl a{font:600 15px var(--fb);min-height:42px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;border:2px solid var(--line);color:var(--ink);text-decoration:none;background:var(--card)}
+#v-aprender section{scroll-margin-top:calc(var(--tabh,64px) + 10px)}
+.fbtn{font:600 15px var(--fb);min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;margin:6px 0 0}
+.fbtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+.fbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.chips[hidden]{display:none}
+.hero.searching .fbtn{display:none}
 </style>
 </head>
 <body>
 <header><div class="wrap top">
  <div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div>
- <div class="rt"><div class="rev">Última revisão<br>%%REV%%</div><button class="ib" id="ib" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Instalar app</button><button class="ib ibq" id="qrb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM20 14v6h-3"/></svg>QR Code</button></div>
+ <div class="rt"><div class="rev">Última revisão<br>%%REV%%</div><button class="ib" id="ib" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Instalar app</button><button class="ib ibq" id="qrb" aria-label="Mostrar QR Code do guia" title="QR Code"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM20 14v6h-3"/></svg></button></div>
 </div></header>
 <nav class="tabs" aria-label="Seções"><div class="wrap tabin" role="tablist">
  <button class="tab" role="tab" id="t-guia" aria-selected="true" data-v="guia">Guia</button>
- <button class="tab" role="tab" id="t-teste" aria-selected="false" data-v="teste">Teste</button>
  <button class="tab" role="tab" id="t-aprender" aria-selected="false" data-v="aprender">Aprender</button>
+ <button class="tab" role="tab" id="t-teste" aria-selected="false" data-v="teste">Teste</button>
  <button class="zb" id="zb" aria-label="Aumentar o tamanho do texto" title="Tamanho do texto">Aa</button></div></nav>
 <main class="wrap">
  <div id="v-guia" role="tabpanel" aria-labelledby="t-guia">
@@ -226,7 +220,8 @@ body.tv .qhint{display:none}
   <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
    <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label>
   <div class="pop" id="pop"><small>Mais buscados:</small></div>
-  <div class="chips" id="chips" role="group" aria-label="Filtrar por lixeira"></div>
+  <button class="fbtn" id="fbtn" aria-expanded="false" aria-controls="chips"><span id="fbl">Filtrar por lixeira</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  <div class="chips" id="chips" hidden role="group" aria-label="Filtrar por lixeira"></div>
  </div>
  <div class="rbar"><span id="count" aria-live="polite"></span><button class="clr" id="clr" hidden>Limpar</button></div>
  <div class="grid" id="grid"></div>
@@ -236,14 +231,14 @@ body.tv .qhint{display:none}
 
  </div>
  <div id="v-teste" role="tabpanel" aria-labelledby="t-teste" hidden>
-  <section style="padding-top:28px"><div class="seg" role="group" aria-label="Modo"><button id="md-t" aria-pressed="true">Teste (5)</button><button id="md-j" aria-pressed="false">Jogo 60 s</button><button id="tv" class="tvb">Modo telão</button></div>
+  <section style="padding-top:28px">
   <h2 id="mt">Teste o que você aprendeu</h2>
   <p class="sub" id="ms">Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.</p>
-  <div class="selos" id="selos"></div>
   <div class="quiz" id="qz"></div></section>
  </div>
 
  <div id="v-aprender" role="tabpanel" aria-labelledby="t-aprender" hidden>
+  <nav class="atl" aria-label="Atalhos da página"><a href="#cores">Cores</a><a href="#destino">Destino</a><a href="#erros">Erros comuns</a><a href="#escorrer">Esvaziar e escorrer</a><a href="#sabia">Você sabia?</a><a href="#instalar">Instalar</a></nav>
  <section id="cores" style="padding-top:28px"><h2>Por que cada lixeira tem uma cor?</h2>
   <p class="lead2">A cor não tem ligação com o material. Ela é um <b>código combinado em todo o Brasil</b>, para que a mesma cor signifique o mesmo resíduo em qualquer lugar: na empresa, na escola, na rua. Esse código vem da Resolução Conama nº 275/2001.</p>
   <ul class="cores"><li><i style="background:#004AAD;color:#fff"></i><div><b>Azul: Papel e papelão</b></div></li><li><i style="background:#D42828;color:#fff"></i><div><b>Vermelho: Plástico</b></div></li><li><i style="background:#006500;color:#fff"></i><div><b>Verde: Vidro</b></div></li><li><i style="background:#FFE21F;color:#1b1b1b"></i><div><b>Amarelo: Metal</b></div></li><li><i style="background:#000000;color:#fff"></i><div><b>Preto: Madeira</b></div></li><li><i style="background:#FF691F;color:#1b1b1b"></i><div><b>Laranja: Resíduos perigosos</b></div></li><li><i style="background:#FFFFFF;color:#1b1b1b"></i><div><b>Branco: Resíduos ambulatoriais e de serviços de saúde</b></div></li><li><i style="background:#7A3E9D;color:#fff"></i><div><b>Roxo: Resíduos radioativos</b></div></li><li><i style="background:#7A4A21;color:#fff"></i><div><b>Marrom: Resíduos orgânicos</b></div></li><li><i style="background:#6B6B6B;color:#fff"></i><div><b>Cinza: Resíduo geral não reciclável, misturado ou contaminado sem como separar</b></div></li></ul>
@@ -282,7 +277,7 @@ body.tv .qhint{display:none}
 </main>
 <footer><div class="wrap in"><div class="plate kdp"><img src="%%KDP%%" alt="Keurig Dr Pepper | Coffee Operating Unit"></div><p>Saúde, Meio Ambiente e Segurança · Última revisão: %%REV%%</p></div></footer>
 <div class="qro" id="qro" hidden role="dialog" aria-modal="true" aria-label="QR Code do guia">%%QR%%<p>Aponte a câmera do celular para abrir o guia</p><small>camargosjsamuel.github.io/guia-descarte</small><button class="btn" id="qrx">Fechar</button></div>
-<button class="tvx" id="tvx" hidden>Sair do telão</button>
+
 <button class="totop" id="totop" aria-label="Voltar ao topo" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg></button>
 <div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"><div class="sheet" id="sheet"></div></div>
 <script>
@@ -295,7 +290,9 @@ const slug=s=>norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function toResults(){if($('#grid').getBoundingClientRect().top<innerHeight*.6)return;const y=$('#grid').getBoundingClientRect().top+scrollY-($('.tabs').offsetHeight+$('.rbar').offsetHeight+8);window.scrollTo({top:Math.max(0,y),behavior:'smooth'})}
 function chipsRender(){const c={};ITEMS.forEach(i=>c[i.b]=(c[i.b]||0)+1);
  chips.innerHTML=`<button class="chip" aria-pressed="${bin==='all'}" data-b="all">Todas <b>${ITEMS.length}</b></button>`+Object.keys(BINS).filter(k=>c[k]).map(k=>`<button class="chip" style="--c:${BINS[k].c};--t:${BINS[k].t}" aria-pressed="${bin===k}" data-b="${k}"><i></i>${BINS[k].n} <b>${c[k]||0}</b></button>`).join('')}
-chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;bin=b.dataset.b;chipsRender();render();toResults()});
+function fOpen(o){chips.hidden=!o;$('#fbtn').setAttribute('aria-expanded',String(o))}
+$('#fbtn').addEventListener('click',()=>fOpen(chips.hidden));
+chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;bin=b.dataset.b;chipsRender();render();fOpen(false);toResults()});
 $('#clr').addEventListener('click',()=>{$('#q').value='';term='';bin='all';chipsRender();render();window.scrollTo({top:0,behavior:'smooth'})});
 $('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());if(term&&bin!=='all'){bin='all';chipsRender()}render()});
 const ORD=Object.keys(BINS),SORTED=ITEMS.slice().sort((a,b)=>ORD.indexOf(a.b)-ORD.indexOf(b.b)||(!!IMGS[b.i])-(!!IMGS[a.i]));
@@ -306,7 +303,7 @@ function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
  $('#hero').classList.toggle('searching',!!term);
  const lb=bin!=='all'?BINS[bin].n:'';
  $('#count').textContent=r.length+(r.length===1?' resíduo':' resíduos')+(lb?' em '+lb:'')+(term?' para “'+$('#q').value.trim()+'”':'');
- $('#clr').hidden=!(term||bin!=='all');
+ $('#clr').hidden=!(term||bin!=='all');$('#fbl').textContent=bin==='all'?'Filtrar por lixeira':'Lixeira: '+BINS[bin].n;
  $('#grid').innerHTML=r.length?r.map(card).join(''):`<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 14px">Nenhum resíduo encontrado. Descreva o resíduo ou mande uma foto no WhatsApp e a gente responde.</p><a class="btn" href="https://wa.me/qr/SA2UZZCNP2L4F1" target="_blank" rel="noopener">Abrir WhatsApp</a></div>`}
 chipsRender();render();
 const DEST=/*DEST*/,ERC=/*ERC*/;
@@ -322,8 +319,7 @@ function opts(i){const used=new Set(ITEMS.map(x=>x.b)),esp=Object.keys(ERRI).fil
  const c=CONF[i.b]||[],pool=[...shuffle(esp).slice(0,2),c[0],...shuffle(c.slice(1)),...shuffle([...used])];
  const d=[];for(const k of pool)if(k&&k!==i.b&&used.has(k)&&!d.includes(k))d.push(k);
  return shuffle([i.b,...d.slice(0,3)])}
-let mode='teste';
-function start(){stopG();qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask();renderSelos()}
+function start(){qs=shuffle(ITEMS).slice(0,5);qi=0;sc=0;ask()}
 function ask(){done=false;const i=qs[qi];
  qz.innerHTML=(qi===0&&progTxt()?`<p class="prog">${progTxt()}</p>`:'')+`<div class="qtop"><span>Pergunta ${qi+1} de 5</span><span>${sc} certas</span></div><div class="bar"><i style="width:${qi/5*100}%"></i></div>
  <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>Onde vai: ${i.n}?</h3></div>
@@ -332,10 +328,9 @@ function ask(){done=false;const i=qs[qi];
 qz.addEventListener('click',e=>{
  if(e.target.id==='next'){qi++;qi<5?ask():fim();return}
  if(e.target.id==='again'){start();return}
- if(e.target.id==='gagain'){gStart();return}
  if(e.target.id==='goguia'){view('guia',true);return}
  const o=e.target.closest('.opt');if(o)answer(o)});
-function answer(o){if(mode==='jogo')return gAnswer(o);if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
+function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;if(ok)sc++;
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
@@ -390,45 +385,9 @@ function prog(){try{return Object.assign({best:0,n:0,gbest:0,gseq:0,gn:0},JSON.p
 function put(p){try{localStorage.setItem('gd_p',JSON.stringify(p))}catch(e){}}
 function saveProg(s){const p=prog();p.n++;if(s>p.best)p.best=s;put(p);return p}
 function progTxt(){const p=prog();return p.n?`Seu melhor resultado: ${p.best} de 5 · ${p.n} ${p.n===1?'teste feito':'testes feitos'} neste aparelho.`:''}
-const SELOS=[['Primeiro teste',p=>p.n>=1],['Nota máxima',p=>p.best>=5],['5 testes feitos',p=>p.n>=5],['Jogo: 100 pontos',p=>p.gbest>=100],['Jogo: sequência de 8',p=>p.gseq>=8]];
-function renderSelos(){const p=prog();$('#selos').innerHTML=SELOS.map(s=>`<span class="selo${s[1](p)?' on':''}">${s[1](p)?'✓':'○'} ${s[0]}</span>`).join('')+(p.gn?`<span class="selo">Recorde no jogo: ${p.gbest} pontos</span>`:'')}
-/* jogo de 60 segundos */
-let gs=null,gt=null,gto=null;
-function stopG(){clearInterval(gt);clearTimeout(gto);gt=gto=null;gs=null}
-function gStart(){stopG();gs={end:Date.now()+60000,score:0,hit:0,streak:0,max:0,err:[],list:shuffle(ITEMS),k:0};gAsk();gt=setInterval(gTick,100)}
-function gTick(){if(!gs)return;const left=Math.max(0,gs.end-Date.now()),b=$('#gbar'),l=$('#gtime');if(b)b.style.width=(left/600)+'%';if(l)l.textContent=Math.ceil(left/1000)+' s';if(left<=0)gFim()}
-function gAsk(){done=false;const i=gs.list[gs.k++%gs.list.length];gs.cur=i;
- qz.innerHTML=`<div class="qtop"><span id="gtime">${Math.ceil(Math.max(0,gs.end-Date.now())/1000)} s</span><span>${gs.score} pontos${gs.streak>=3?' · sequência '+gs.streak:''}</span></div><div class="bar"><i id="gbar" style="width:${Math.max(0,gs.end-Date.now())/600}%"></i></div>
- <div class="qrow"><div class="ph"><img src="${IMGS[i.i]}" alt=""></div><h3>${i.n}</h3></div><p class="qhint">Arraste a foto ou toque na lixeira certa. Quanto mais acertos seguidos, mais pontos.</p>
- <div class="opts">${opts(i).map(k=>`<button class="opt" style="--c:${BINS[k].c};--t:${BINS[k].t}" data-b="${k}">${BINS[k].n}</button>`).join('')}</div>`}
-function gAnswer(o){if(!gs||done)return;done=true;const i=gs.cur,ok=o.dataset.b===i.b;
- qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
- if(ok){gs.hit++;gs.score+=10+Math.min(gs.streak,5)*2;gs.streak++;gs.max=Math.max(gs.max,gs.streak);buzz(25);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,18)}
- else{gs.streak=0;if(!gs.err.some(e=>e.i===i))gs.err.push({i,k:o.dataset.b});buzz([50,30,50])}
- gto=setTimeout(()=>{if(gs)gAsk()},ok?450:1200)}
-function gFim(){if(!gs)return;const g=gs;stopG();const p=prog();p.gn++;const novo=g.score>p.gbest;if(novo)p.gbest=g.score;if(g.max>p.gseq)p.gseq=g.max;put(p);renderSelos();
- if(g.score>=100||novo)confetti(innerWidth/2,innerHeight*.35,90);
- qz.innerHTML=`<div class="qtop"><span>Tempo esgotado</span></div><div class="gscore">${g.score} pontos</div><p>${g.hit} ${g.hit===1?'acerto':'acertos'} · melhor sequência: ${g.max}${novo?' · novo recorde!':''}</p>`+
- (g.err.length?`<p><b>Para fixar:</b></p><ul class="glist">${g.err.slice(0,5).map(e=>`<li>${e.i.n}: vai em <b>${BINS[e.i.b].n}</b>.</li>`).join('')}</ul>`:'<p>Nenhum erro. Ótimo!</p>')+
- `<p><button class="btn" id="gagain">Jogar de novo</button> <button class="btn" id="goguia">Ver o guia</button></p>`}
-function setMode(m){mode=m;stopG();$('#md-t').setAttribute('aria-pressed',String(m==='teste'));$('#md-j').setAttribute('aria-pressed',String(m==='jogo'));
- $('#mt').textContent=m==='jogo'?'Jogo: lixeira certa':'Teste o que você aprendeu';
- $('#ms').textContent=m==='jogo'?'Você tem 60 segundos. Acerte a lixeira de quantos resíduos conseguir.':'Cinco resíduos sorteados. Escolha a lixeira certa e veja o motivo.';
- if(m==='jogo'){qz.innerHTML='<p>Pronto para jogar? O tempo começa ao tocar no botão.</p><p><button class="btn" id="gagain">Começar</button></p>'}else start();renderSelos()}
-$('#md-t').addEventListener('click',()=>setMode('teste'));$('#md-j').addEventListener('click',()=>setMode('jogo'));
-/* modo telão: letras grandes, tela cheia e teclas 1 a 4 / Enter para quem conduz */
-let tvz='';
-function tvOn(){setMode(mode);view('teste');document.body.classList.add('tv');tvz=document.querySelector('main').style.zoom||'';document.querySelectorAll('main').forEach(x=>x.style.zoom=1.7);$('#tvx').hidden=false;try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}catch(e){}}
-function tvOff(){document.body.classList.remove('tv');document.querySelectorAll('main').forEach(x=>x.style.zoom=tvz);$('#tvx').hidden=true;try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}}
-$('#tv').addEventListener('click',tvOn);$('#tvx').addEventListener('click',tvOff);
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&document.body.classList.contains('tv'))tvOff()});
-document.addEventListener('keydown',e=>{if(!document.body.classList.contains('tv'))return;
- if(/^[1-4]$/.test(e.key)){const o=qz.querySelectorAll('.opt')[+e.key-1];if(o&&!o.disabled)answer(o)}
- else if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){const b=$('#next')||$('#again')||$('#gagain');if(b){e.preventDefault();b.click()}}
- else if(e.key==='Escape')tvOff()});
-start();renderSelos();
+start();
 /* abas */
-function view(v,push){v=v==='teste'||v==='aprender'?v:'guia';if(v!=='teste')stopG();$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
+function view(v,push){v=v==='teste'||v==='aprender'?v:'guia';$('#v-guia').hidden=v!=='guia';$('#v-teste').hidden=v!=='teste';$('#v-aprender').hidden=v!=='aprender';
  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));if(push){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo({top:0})}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.v,true)));
 window.addEventListener('hashchange',()=>view(location.hash.slice(1)));
@@ -436,6 +395,7 @@ view(location.hash.slice(1));
 /* compartilhar */
 try{const u=location.origin+location.pathname;$('#sh').href='https://wa.me/?text='+encodeURIComponent('Guia de descarte: '+u)}catch(e){}
 
+document.querySelector('.atl').addEventListener('click',e=>{const l=e.target.closest('a');if(!l)return;e.preventDefault();const s=document.querySelector(l.getAttribute('href'));if(s)s.scrollIntoView({behavior:'smooth',block:'start'})});
 /* voltar ao topo, altura das abas e link direto para um resíduo */
 const tt=$('#totop');addEventListener('scroll',()=>{tt.hidden=scrollY<700},{passive:true});tt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function tabh(){document.documentElement.style.setProperty('--tabh',$('.tabs').offsetHeight+'px')}tabh();addEventListener('resize',tabh);addEventListener('load',tabh);
