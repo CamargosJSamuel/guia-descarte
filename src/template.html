@@ -208,9 +208,11 @@ header{padding:14px 0 6px}
 .acc summary h2{margin:0;font-size:22px}.acc summary span{font-size:14.5px;color:var(--mut)}
 .accb{padding:0 14px 14px}.accb .dst,.accb .erc,.accb .fact{box-shadow:none;background:var(--bg)}.accb .cores li{box-shadow:none;background:var(--bg)}
 #v-aprender section{padding:0}#v-aprender>section:first-child{padding-top:18px}
-#fbk:not(:empty){position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);box-shadow:0 -10px 32px rgba(0,0,0,.2);border-radius:22px 22px 0 0;padding:16px 20px calc(14px + env(safe-area-inset-bottom));max-height:46vh;overflow:auto;border-top:3px solid var(--olive)}
-#fbk .fb{background:none;padding:0;margin:0 0 12px;max-width:720px;margin-inline:auto}#fbk p{max-width:720px;margin:0 auto}
-body:has(#v-teste:not([hidden]) #fbk:not(:empty)){padding-bottom:230px}
+#fbk:not(:empty){position:fixed;inset:0;z-index:30;background:rgba(10,20,14,.55);display:flex;align-items:center;justify-content:center;padding:20px;animation:fbin .2s ease-out}
+#fbk .fbc{background:var(--card);border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.3);padding:20px 22px;width:100%;max-width:560px;max-height:85vh;overflow:auto;border-top:4px solid var(--olive);animation:fbup .22s ease-out}
+#fbk .fb{background:none;padding:0;margin:0 0 14px}#fbk p{margin:0}
+@keyframes fbin{from{opacity:0}}@keyframes fbup{from{opacity:0;transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){#fbk:not(:empty),#fbk .fbc{animation:none}}
 .wafab{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:20;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px;border-radius:999px;background:var(--card);color:var(--green);border:2px solid var(--green);font:700 15px var(--fb);text-decoration:none;box-shadow:var(--shadow)}
 .wafab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .chat{position:fixed;left:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:40;width:min(360px,calc(100vw - 28px));background:var(--card);border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.3);border:1px solid var(--line);overflow:hidden;animation:chin .18s ease-out}
@@ -360,7 +362,7 @@ function answer(o){if(done)return;done=true;const i=qs[qi],ok=o.dataset.b===i.b;
  qz.querySelectorAll('.opt').forEach(x=>{x.disabled=true;x.classList.remove('over');if(x.dataset.b===i.b)x.classList.add('ok');else if(x===o)x.classList.add('no')});
  const h=qz.querySelector('.qhint');if(h)h.remove();
  if(ok){buzz(30);const r=o.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,45)}else buzz([60,40,60]);
- $('#fbk').innerHTML=`<div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p>`}
+ $('#fbk').innerHTML=`<div class="fbc" role="dialog" aria-modal="true" aria-label="Resposta"><div class="fb">${ok?`<b>Certo!</b> Vai em ${BINS[i.b].n}. ${i.m}`:`<b>Quase.</b> Vai em <b>${BINS[i.b].n}</b>, não em ${BINS[o.dataset.b].n}.<br>${errText(i,o.dataset.b)}`}</div><p style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="next">${qi<4?'Próxima':'Ver resultado'}</button></p></div>`;$('#next').focus({preventScroll:true})}
 /* explicação do erro: texto próprio do item (ERRI) ou motivo do item + texto da lixeira escolhida (ERRB) */
 function errText(i,k){return ERRI[i.n+'|'+k]||(i.m+' '+(ERRB[k]||''))}
 /* arrastar a foto até a lixeira (também funciona com toque) */
