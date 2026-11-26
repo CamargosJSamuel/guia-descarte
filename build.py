@@ -41,10 +41,5 @@ open('docs/index.html','w',encoding='utf-8').write(html); print(len(html)/1e6,'M
 
 # arquivos estáticos (ícones, manifesto) e service worker com versão do conteúdo
 for f in glob.glob('src/static/*'): shutil.copy(f,'docs/')
-# identificador por foto (modelo treinado em ia_treino/ + TensorFlow.js)
-os.makedirs('docs/ia',exist_ok=True); IA=sorted(glob.glob('src/ia/*'))
-h=hashlib.sha1(html.encode('utf-8'))
-for f in IA: shutil.copy(f,'docs/ia/'); h.update(open(f,'rb').read())
-v=h.hexdigest()[:10]
-ia_list=json.dumps(['ia/'+os.path.basename(f) for f in IA])
-open('docs/sw.js','w',encoding='utf-8').write(open('src/sw.js',encoding='utf-8').read().replace('%%V%%',v).replace('%%IA%%',ia_list)); print('sw',v)
+v=hashlib.sha1(html.encode('utf-8')).hexdigest()[:10]
+open('docs/sw.js','w',encoding='utf-8').write(open('src/sw.js',encoding='utf-8').read().replace('%%V%%',v)); print('sw',v)

@@ -226,28 +226,6 @@ header{padding:14px 0 6px}
 .qr{display:flex;gap:8px;flex-wrap:wrap}.qr button{font:600 14px var(--fb);min-height:40px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .chat .btn.alt{color:var(--green);border-color:var(--green)}.chl{font-size:14.5px;color:var(--green);font-weight:600;text-align:center}
 footer{padding-bottom:90px}
-/* identificar por foto: busca mais estreita + botão de câmera ao lado */
-.srow{display:flex;gap:10px;align-items:stretch;max-width:640px}
-.srow .search{flex:1;min-width:0}
-.camb{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:56px;padding:0 18px;border:0;border-radius:18px;background:var(--green);color:#fff;font:700 16px var(--fb);cursor:pointer;box-shadow:var(--shadow);transition:transform .12s}
-.camb:hover{transform:translateY(-1px)}.camb:active{transform:scale(.97)}
-.camb:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
-.camb svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:root[data-theme="dark"] .camb{color:#10261a}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .camb{color:#10261a}}
-@media (max-width:600px){.camb{padding:0;width:56px}.camb span{display:none}}
-.idf{display:flex;gap:14px;align-items:center;margin:0 0 14px}
-.idf img{width:84px;height:84px;object-fit:cover;border-radius:14px;flex:none;border:2px solid #ffffff55}
-.idf p{margin:0!important;font-size:16px!important}
-.idl{display:grid;gap:10px;margin:0 0 16px}
-.idc{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;color:#1b1b1b;border:0;border-radius:16px;padding:8px 12px 8px 8px;cursor:pointer;font:inherit;min-height:64px}
-.idc:focus-visible{outline:3px solid #fff;outline-offset:2px}
-.idc .ph{flex:none;width:64px;height:64px!important;margin:0!important;border-radius:12px;aspect-ratio:1!important}
-.idc b{display:block;font-size:17px;line-height:1.2}
-.idc .pill{margin-top:6px;display:inline-block}
-.idc em{margin-left:auto;font-style:normal;font:700 14px var(--fb);color:#5C6B52;white-space:nowrap}
-.spin{width:44px;height:44px;border-radius:50%;border:4px solid #ffffff55;border-top-color:#fff;animation:spn .8s linear infinite;margin:10px 0 16px}
-@keyframes spn{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
 </style>
 </head>
 <body>
@@ -265,11 +243,10 @@ footer{padding-bottom:90px}
  <div class="hero" id="hero">
   <div class="eyebrow">Meio Ambiente</div>
   <h1>Guia de descarte</h1>
-  <p class="lead">Digite o nome do resíduo ou tire uma foto e veja em qual lixeira ele deve ser descartado.</p>
+  <p class="lead">Digite o nome do resíduo e veja em qual lixeira ele deve ser descartado.</p>
  </div>
- <div class="tools" id="tools"><div class="srow"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label><button class="camb" id="camb" aria-label="Identificar resíduo por foto" title="Identificar por foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/></svg><span>Foto</span></button></div>
-   <input id="camf" type="file" accept="image/*" capture="environment" hidden></div>
+ <div class="tools" id="tools"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+   <input id="q" type="search" placeholder="Ex.: copinho, mouse, borra de café" autocomplete="off" aria-label="Buscar resíduo"></label></div>
  <div class="frow"><button class="fbtn" id="fbtn" aria-expanded="false" aria-controls="chips"><span id="fbl">Filtrar por lixeira</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><button class="clr" id="clr" hidden>Limpar</button></div>
  <div class="chips" id="chips" hidden role="group" aria-label="Filtrar por lixeira"></div>
  <p class="cnt" id="count" aria-live="polite"></p>
@@ -484,34 +461,6 @@ async function instalar(){if(dip){dip.prompt();try{await dip.userChoice}catch(e)
  const ov=$('#ov');if(arw){ov.classList.add(arw.cls==='up'?'itop':'ibot');ov.insertAdjacentHTML('beforeend',`<div class="arw ${arw.cls}" id="arw" style="${arw.css}"><svg viewBox="0 0 56 84" aria-hidden="true"><path d="${arw.d}"/></svg></div>`)}
  ov.hidden=false;$('#ovx').addEventListener('click',closeI);$('#ovx').focus()}
 $('#qrb').addEventListener('click',()=>{$('#qro').hidden=false;$('#qrx').focus()});$('#qrx').addEventListener('click',()=>{$('#qro').hidden=true;$('#qrb').focus()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#qro').hidden)$('#qrx').click()});
-
-/* identificar por foto: modelo treinado com as fotos do guia, roda no próprio aparelho (nenhuma foto é enviada) */
-const IA={tf:null,m:null};
-function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
-async function iaModel(){if(IA.m)return IA.m;if(!window.tf)await loadScript('ia/tf.min.js');IA.tf=window.tf;
- try{await tf.setBackend('webgl')}catch(e){await tf.setBackend('cpu')}IA.m=await tf.loadLayersModel('ia/model.json');return IA.m}
-function idSheet(html){const s=$('#sheet');s.style.setProperty('--c','#2F6E43');s.style.setProperty('--t','#fff');s.innerHTML=html;$('#ov').hidden=false}
-function photoCanvas(img){const c=document.createElement('canvas'),k=Math.min(img.naturalWidth,img.naturalHeight),z=k*.9;c.width=c.height=224;
- c.getContext('2d').drawImage(img,(img.naturalWidth-z)/2,(img.naturalHeight-z)/2,z,z,0,0,224,224);return c}
-async function identificar(file){lastF=$('#camb');const url=URL.createObjectURL(file);
- idSheet(`<div class="sm">Identificar por foto</div><h2 id="ovt" style="font-size:clamp(32px,8vw,44px)">Analisando…</h2><div class="idf"><img src="${url}" alt="Sua foto"><div class="spin" role="status" aria-label="Analisando"></div></div>`);
- try{const img=new Image();img.src=url;await img.decode();const m=await iaModel(),c=photoCanvas(img);
-  const p=tf.tidy(()=>{const x=tf.browser.fromPixels(c).toFloat().expandDims(0);return m.predict(tf.concat([x,x.reverse(2)])).mean(0)});
-  const pr=Array.from(await p.data());p.dispose();
-  const nada=pr[ITEMS.length]||0,top=ITEMS.map(i=>({i,p:pr[i.i]})).sort((a,b)=>b.p-a.p).slice(0,3),seguro=top[0].p>=.35&&nada<.5;
-  idSheet(`<div class="sm">Identificar por foto</div><h2 id="ovt" style="font-size:clamp(32px,8vw,44px)">${seguro?'É um destes?':'Não tenho certeza'}</h2>
-  <div class="idf"><img src="${url}" alt="Sua foto"><p>${seguro?'Toque no resíduo certo para ver a lixeira.':'Não reconheci bem. Veja os mais parecidos ou busque pelo nome.'}</p></div>
-  <div class="idl">${top.map(t=>`<button class="idc" data-i="${t.i.i}"><div class="ph"><img src="${IMGS[t.i.i]}" alt=""></div><div><b>${t.i.n}</b><span class="pill" style="--c:${BINS[t.i.b].c};--t:${BINS[t.i.b].t}">${BINS[t.i.b].n}</span></div>${t.p>=.01?`<em>${Math.round(t.p*100)}%</em>`:''}</button>`).join('')}</div>
-  <div class="acts"><button class="btn" id="idn">Tirar outra foto</button><button class="btn" id="idb">Buscar pelo nome</button><button class="btn" id="ovx">Fechar</button></div>
-  <p class="ovm">A foto fica só no seu aparelho. Resultado automático: confira o nome antes de descartar.</p>`);
-  $('.idl').addEventListener('click',e=>{const b=e.target.closest('.idc');if(b)openI(+b.dataset.i)});
-  $('#idn').addEventListener('click',()=>$('#camf').click());
-  $('#idb').addEventListener('click',()=>{closeI();$('#q').focus()});
-  $('.idc').focus()}
- catch(e){idSheet(`<div class="sm">Identificar por foto</div><h2 id="ovt" style="font-size:clamp(32px,8vw,44px)">Não deu certo</h2><p>Não foi possível analisar a foto neste aparelho. Abra o guia com internet uma vez para baixar o identificador, ou busque pelo nome.</p><div class="acts"><button class="btn" id="idb">Buscar pelo nome</button><button class="btn" id="ovx">Fechar</button></div>`);
-  $('#idb').addEventListener('click',()=>{closeI();$('#q').focus()})}}
-$('#camb').addEventListener('click',()=>{$('#camf').value='';$('#camf').click();iaModel().catch(()=>{})});
-$('#camf').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(f)identificar(f)});
 $('#ib').addEventListener('click',instalar);showIb();
 addEventListener('appinstalled',()=>{$('#ib').hidden=true});
 </script>
