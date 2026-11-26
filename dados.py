@@ -15,12 +15,13 @@ I=[('Folha de papel','papel','Papel limpo e seco é reciclável.','folha.png','s
 ('Teflon','comum','Plástico especial (fluorado), difícil de reaproveitar na coleta seletiva.','teflon.png','fita ptfe'),
 ('Etiqueta adesiva','comum','Papel com cola e filme, juntos. Atrapalham a reciclagem do papel.','etiqueta.png','adesivo rótulo'),
 ('Fita adesiva transparente','comum','Plástico com cola, que atrapalha a reciclagem.','fita.png','durex fita crepe'),
-('Isopor (poliestireno)','comum','Poliestireno expandido: muito leve e volumoso, e poucas cooperativas aceitam. Por isso vai no lixo comum.','isopor.png','copo copinho marmita pote poliestireno'),
+('Isopor (poliestireno)','comum','Poliestireno expandido: muito leve e volumoso, e poucas cooperativas aceitam. Por isso vai no lixo comum.','isopor.png','copo copinho marmita bandeja poliestireno'),
 ('Copo de poliestireno','comum','Poliestireno (PS, nº 6): leve, de baixo valor e quase sempre sujo de bebida. Junto do plástico limpo, pode prejudicar o lote. Por isso vai no lixo comum.','copo_ps.png','copinho copo descartável água café poliestireno PS'),
 ('Talher de plástico','comum','Em geral é poliestireno (PS, nº 6), o mesmo do copo descartável e do isopor: de baixo valor e pouco aceito pela reciclagem. Por isso vai no lixo comum.','talher.png','garfo colher faca descartável'),
 ('Ribbon','comum','Filme com tinta, difícil de reaproveitar.','ribbon.png','fita impressora'),
 ('Folha de papel plastificada','comum','Papel e plástico unidos, difíceis de separar.','plastif.png','laminado'),
 ('Papel toalha','comum','Já usado, fica sujo e não segue para reciclagem.','toalha.png','guardanapo'),
+('Cordão de crachá','comum','Fita de tecido sintético (poliéster) com presilha de plástico e gancho de metal, tudo junto. Não dá para reciclar na coleta seletiva.','cordao.png','cordao crachá fita porta crachá identificação colar'),
 ('Touca','comum','Descartável, de uso único.','touca.png','cabelo'),
 ('EPI usado','comum','Sem contaminação química: lixo comum.','mascara.png','máscara luva protetor'),
 ('Pano Perfex contaminado','perigoso','Contaminado com produto químico.','pano.png','pano trapo perfex'),
@@ -40,16 +41,19 @@ I += (
  +N('plastico','Polipropileno (PP, nº 5) é reciclável se estiver limpo e seco, diferente do poliestireno (copo e isopor). Vale para potes de vários formatos.',['Pote e tampa de plástico'],'pote marmita tampa bandeja embalagem polipropileno PP')
  +N('plastico','PET (nº 1) é reciclável se estiver vazia e escorrida. Vale para garrafas de vários formatos e cores.',['Garrafa PET'],'garrafa água refrigerante')
  +N('plastico','Polietileno de alta densidade (PEAD, nº 2) é reciclável se estiver limpo e vazio. Vale para garrafinhas de leite e suco.',['Garrafa de polietileno (leite e suco)'],'garrafinha leite suco pead embalagem')
- +N('vidro','Vidro reciclável. Embrulhe os cacos para ninguém se cortar.',['Pote de vidro','Garrafa de vidro','Cacos de vidro'],'café solúvel frasco')
+ +N('vidro','Vidro reciclável. Embrulhe os cacos para ninguém se cortar.',['Pote de vidro'],'frasco conserva pote')
+ +N('vidro','Vidro reciclável. Embrulhe os cacos para ninguém se cortar.',['Garrafa de vidro'],'garrafa cerveja vinho')
+ +N('vidro','Vidro reciclável. Embrulhe os cacos para ninguém se cortar.',['Cacos de vidro'],'caco quebrado')
  +N('vidro','Vidro reciclável, se não tiver resíduo químico. Com resíduo, vai no perigoso.',['Frasco de laboratório limpo'],'laboratório')
- +N('metal','Metal reciclável. Esvazie e enxágue antes.',['Lata de bebida'],'lata alimento conserva')
+ +N('metal','Metal reciclável. Esvazie e enxágue antes.',['Lata de bebida'],'lata alimento conserva cerveja refrigerante latinha')
  +N('metal','Sucata metálica: reciclável.',['Peça metálica de manutenção','Parafuso, porca e arruela','Ferramenta quebrada','Arame'],'sucata ferro aço')
  +N('comum','O papel tem uma camada fina de plástico (polietileno) para não vazar. Separar fibra e plástico exige um processo específico, que poucas recicladoras fazem. Por isso vai no lixo comum.',['Copo de papel'],'copinho descartável')
  +N('comum','Tecido não tecido (TNT) é descartável, de uso único, e fica sujo com o uso. Hoje há pouca opção de reciclagem. Por isso vai no lixo comum.',['Avental descartável (TNT)','Macacão descartável'],'tnt')
  +N('comum','Papel usado fica sujo de comida e gordura, o que prejudica a reciclagem. Por isso vai no lixo comum.',['Guardanapo'],'papel toalha')
  +N('comum','Alumínio ou plástico misturado ao pó de café. Separar esses materiais exige um processo próprio. Por isso vai no lixo comum.',['Cápsula de café usada'],'cápsula nespresso')
  +N('madeira','Madeira segue em lixeira própria.',['Palete quebrado','Caixote'],'pallet')
- +N('perigoso','Contaminado com óleo, graxa ou produto químico.',['Filtro de óleo','Lata de tinta','Pincel com tinta'],'')
+ +N('perigoso','Contaminado com óleo, graxa ou produto químico.',['Filtro de óleo'],'óleo graxa automotivo')
+ +N('perigoso','Contaminado com óleo, graxa ou produto químico.',['Lata de tinta','Pincel com tinta'],'')
  +N('organico','Resíduo do grão: orgânico.',[],'café')
  +N('comum','O filtro de papel vai no lixo comum. Só a borra pode ir no orgânico.',['Filtro de papel com borra'],'café coador')
  +N('comum','O saquinho pode ser de papel, de plástico (polipropileno) ou dos dois, conforme a marca. Como nem sempre dá para saber, vai no lixo comum. Só o chá, sem o saquinho, pode ir no orgânico.',['Saquinho de chá'],'chá')
@@ -65,9 +69,10 @@ I += (
  +N('lampadas','Tem componentes eletrônicos: lixeira própria de lâmpadas.',['Lâmpada de LED','Lâmpada de emergência'],'')
  +N('aerossol','Embalagem pressurizada: lixeira própria. Vale para tinta spray, desengripante, lubrificante, inseticida e ar comprimido. Mesmo vazia, pode guardar resíduo.',['Lata de aerossol (spray em geral)'],'spray tinta desengripante lubrificante inseticida ar comprimido')
 )
-PHOTOS={'Envelope':'envelope','Saco de papel limpo':'saco','Divisória de papelão':'divisoria','Sacola plástica':'sacola','Pote e tampa de plástico':'pote_pp','Pote de vidro':'pote_vidro','Garrafa de vidro':'vgarrafa','Cacos de vidro':'vcacos','Frasco de laboratório limpo':'vfrasco','Lata de bebida':'lata','Peça metálica de manutenção':'peca','Parafuso, porca e arruela':'parafuso','Ferramenta quebrada':'ferramenta','Arame':'arame','Copo de papel':'copo_papel','Avental descartável (TNT)':'avental','Garrafa PET':'pet','Garrafa de polietileno (leite e suco)':'pe','Macacão descartável':'macacao','Guardanapo':'guardanapo','Cápsula de café usada':'capsula','Filtro de papel com borra':'filtro_cafe','Saquinho de chá':'cha','Big bag':'bigbag','Marmita de alumínio':'marmita_al','Marmita de isopor':'marmita_iso','Palete quebrado':'palete','Caixote':'caixote','Filtro de óleo':'filtro_oleo','Lata de tinta':'lata_tinta','Pincel com tinta':'pincel','Cascas de fruta':'fruta','Podas e folhas':'poda','Poeira de café':'poeira','EPI contaminado com produto químico':'epi_cont_site','Curativo usado':'gaze_usada','Luva de procedimento':'luva','Papel higiênico':'papel_hig','Pilha':'pilha2','Bateria de lítio (celular e ferramenta)':'bateria_litio','Monitor':'monitor','Cabo e carregador':'cabo_carregador','Calculadora':'calculadora','Extensão elétrica':'extensao','Placa eletrônica':'placa','Lâmpada fluorescente tubular':'fl_tubular','Lâmpada fluorescente compacta':'fl_compacta','Lâmpada de LED':'led','Lâmpada de emergência':'emergencia','Lata de aerossol (spray em geral)':'aerossol'}
+PHOTOS={'Cordão de crachá':'cordao','Envelope':'envelope','Saco de papel limpo':'saco','Divisória de papelão':'divisoria','Sacola plástica':'sacola','Pote e tampa de plástico':'pote_pp','Pote de vidro':'pote_vidro','Garrafa de vidro':'vgarrafa','Cacos de vidro':'vcacos','Frasco de laboratório limpo':'vfrasco','Lata de bebida':'lata','Peça metálica de manutenção':'peca','Parafuso, porca e arruela':'parafuso','Ferramenta quebrada':'ferramenta','Arame':'arame','Copo de papel':'copo_papel','Avental descartável (TNT)':'avental','Garrafa PET':'pet','Garrafa de polietileno (leite e suco)':'pe','Macacão descartável':'macacao','Guardanapo':'guardanapo','Cápsula de café usada':'capsula','Filtro de papel com borra':'filtro_cafe','Saquinho de chá':'cha','Big bag':'bigbag','Marmita de alumínio':'marmita_al','Marmita de isopor':'marmita_iso','Palete quebrado':'palete','Caixote':'caixote','Filtro de óleo':'filtro_oleo','Lata de tinta':'lata_tinta','Pincel com tinta':'pincel','Cascas de fruta':'fruta','Podas e folhas':'poda','Poeira de café':'poeira','EPI contaminado com produto químico':'epi_cont_site','Curativo usado':'gaze_usada','Luva de procedimento':'luva','Papel higiênico':'papel_hig','Pilha':'pilha2','Bateria de lítio (celular e ferramenta)':'bateria_litio','Monitor':'monitor','Cabo e carregador':'cabo_carregador','Calculadora':'calculadora','Extensão elétrica':'extensao','Placa eletrônica':'placa','Lâmpada fluorescente tubular':'fl_tubular','Lâmpada fluorescente compacta':'fl_compacta','Lâmpada de LED':'led','Lâmpada de emergência':'emergencia','Lata de aerossol (spray em geral)':'aerossol'}
 # Motivo exibido ao abrir o resíduo e ao acertar no teste (texto didático: o que é, por que vai nessa lixeira).
 MOT={
+'Cordão de crachá':'O cordão é de tecido sintético (poliéster) e tem presilha de plástico e gancho de metal presos à fita. Como são materiais diferentes e unidos, a coleta seletiva não consegue separá-los. Por isso vai no lixo comum. Se ainda estiver bom, vale reaproveitar.',
 'Folha de papel':'Papel limpo e seco é uma das matérias-primas mais aproveitadas na reciclagem: as fibras são separadas e viram papel novo. Por isso vai na lixeira de papel e papelão. Molhado ou engordurado, ele perde esse aproveitamento.',
 'Papelão':'O papelão é feito de fibras de papel que podem ser recicladas várias vezes. Limpo e seco, vai na lixeira de papel e papelão. Úmido ou sujo de óleo e comida, as fibras estragam.',
 'Tubete de papelão':'É papel enrolado, feito de fibras que podem ser recicladas. Por isso vai na lixeira de papel e papelão, desde que esteja limpo e seco.',
@@ -255,9 +260,9 @@ ERROS_COMUNS=[
 ]
 
 # Sinônimos da busca: palavra digitada -> palavras equivalentes (sem acento, minúsculas).
-SINONIMOS={'latinha':['lata'],'refrigerante':['lata','garrafa'],'cerveja':['lata','garrafa','vidro'],'garrafinha':['garrafa'],'pet':['garrafa'],
- 'sacolinha':['sacola'],'saco':['sacola'],'caixa':['papelao','caixote'],'celular':['bateria','carregador'],'fone':['headset'],'teclado':['kit'],'mouse':['kit'],
- 'computador':['monitor','placa'],'tela':['monitor'],'oleo':['filtro'],'toalha':['papel'],'spray':['aerossol'],'desodorante':['aerossol'],'madeira':['palete','caixote'],
- 'jaleco':['avental'],'uniforme':['macacao','avental'],'bobina':['stretch','ribbon'],'filme':['stretch'],'durex':['fita'],'pote':['pote'],'marmita':['isopor'],
- 'copinho':['copo'],'descartavel':['copo','talher','avental','macacao'],'cafe':['cafe','borra','capsula'],'lixa':['pano'],'papelao':['papelao'],'cartucho':['tinta'],
- 'tinta':['tinta','pincel'],'luvas':['luva'],'vidros':['vidro'],'cabo':['cabo','extensao','carregador'],'eletronico':['monitor','placa','calculadora','kit','headset']}
+SINONIMOS={'latinha':['lata'],'garrafinha':['garrafa'],'pet':['garrafa'],
+ 'sacolinha':['sacola'],'saco':['sacola'],'caixa':['papelao','caixote'],'celular':['bateria','carregador'],'fone':['headset'],
+ 'computador':['monitor','placa'],'tela':['monitor'],'toalha':['toalha','guardanapo'],'spray':['aerossol'],'desodorante':['aerossol'],'madeira':['palete','caixote'],
+ 'jaleco':['avental'],'uniforme':['macacao','avental'],'bobina':['stretch','ribbon'],'filme':['stretch'],'durex':['fita'],'pote':['pote'],'marmita':['marmita'],
+ 'copinho':['copo'],'descartavel':['copo','talher','avental','macacao'],'cafe':['cafe','borra','capsula'],'papelao':['papelao'],'cartucho':['tinta'],
+ 'tinta':['tinta','pincel'],'luvas':['luva'],'vidros':['vidro'],'cabo':['cabo','extensao','carregador'],'eletronico':['monitor','placa','calculadora','periferico','headset']}

@@ -318,10 +318,12 @@ function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;const d=[];for(let i
 const words=i=>i._w||(i._w=hay(i).split(/[^a-z0-9]+/).filter(Boolean));
 /* busca tolerante: plural, sinônimos e pequenos erros de digitação (só quando a busca exata não acha nada) */
 function smartMatch(i,w){const vs=[w];if(w.length>3&&w.endsWith('s'))vs.push(w.slice(0,-1));(SIN[w]||[]).forEach(s=>vs.push(s));
- const h=hay(i);return vs.some(v=>h.includes(v)||(v.length>=4&&words(i).some(x=>lev(v,x)<=(v.length>=8?2:1))))}
+ return vs.some(v=>has(i,v)||(v.length>=4&&words(i).some(x=>lev(v,x)<=(v.length>=8?2:1))))}
+/* casa só no início de uma palavra (evita 'ps' achar 'cápsula'); cobre plural simples */
+function has(i,w){return words(i).some(x=>x.startsWith(w))}
 let smart=false;
 function render(){const tk=term.split(/\s+/).filter(w=>w&&!STOP.includes(w));
- let r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>hay(i).includes(w))));smart=false;
+ let r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&(!term||tk.every(w=>has(i,w))));smart=false;
  if(!r.length&&term){r=SORTED.filter(i=>(bin==='all'||i.b===bin)&&tk.every(w=>smartMatch(i,w)));smart=r.length>0}
  $('#v-guia').classList.toggle('searching',!!term);
  const lb=bin!=='all'?BINS[bin].n:'';
