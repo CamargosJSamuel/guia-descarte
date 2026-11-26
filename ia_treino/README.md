@@ -17,5 +17,10 @@ O modelo aprende com as fotos do próprio guia (`fotos/`). Retreine sempre que i
    ```
 5. `python3 build.py` e publicar.
 
-Fotos reais (opcional, melhora a precisão): coloque em `ia_treino/fotos_reais/<número do resíduo>/` e inclua no treino.
-A ordem das classes é a ordem de `I` em `dados.py`, mais "nenhum resíduo" no fim.
+## Fotos reais (o que mais melhora a precisão)
+- Pastas `ia_treino/fotos_reais/NN - Nome/` (NN = 01 a 76 na ordem de `I` em `dados.py`; `77 - Nenhum resíduo` = fotos sem resíduo). O nome depois do número é livre.
+- O que fotografar em cada pasta: `variacoes.py` (gera o kit "Guia Descarte - fotos para treino").
+- ~20% das fotos de cada pasta ficam fora do treino, só para teste: o "TESTE COM FOTOS REAIS" é o número que decide se publica.
+- Opções: `ALPHA=1_0` (MobileNet maior), `NT=400` (mais sintéticas), `REP=25` (variações por foto real), `FT=1` (ajuste fino, mais lento).
+- As fotos reais não vão para o repositório (pasta ignorada pelo git).
+- Ao incluir resíduo novo no fim de `I`, crie a pasta com o próximo número e renumere "Nenhum resíduo" para o último.
