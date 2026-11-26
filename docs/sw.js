@@ -1,7 +1,8 @@
 /* Service worker: guarda o guia no aparelho para abrir sem internet. */
-const V='guia-f9a0576e8c';
+const V='guia-819171a361';
 const CORE=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','apple-touch-icon.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
+const IA=["ia/group1-shard1of1.bin", "ia/model.json", "ia/tf.min.js"]; /* identificador por foto: guardado junto, mas sem travar a instalação se falhar */
+self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE).then(()=>c.addAll(IA).catch(()=>{}))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
   const r=e.request;if(r.method!=='GET')return;
