@@ -432,10 +432,9 @@ try{const u=location.origin+location.pathname;$('#sh').href='https://wa.me/?text
 const tt=$('#totop');addEventListener('scroll',()=>{tt.hidden=scrollY<700},{passive:true});tt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function tabh(){document.documentElement.style.setProperty('--tabh',$('.tabs').offsetHeight+'px')}tabh();addEventListener('resize',tabh);addEventListener('load',tabh);
 try{const r0=new URLSearchParams(location.search).get('r');if(r0){const it=ITEMS.find(x=>slug(x.n)===r0);if(it)openI(it.i)}}catch(e){}
-/* link direto para uma lixeira (?l=papel) ou busca (?q=copo), usado nos QR Codes das etiquetas */
-try{const p0=new URLSearchParams(location.search),l0=p0.get('l'),q0=p0.get('q');
- if(l0&&BINS[l0]){bin=l0;chipsRender();render();setTimeout(toResults,350)}
- else if(q0){$('#q').value=q0;$('#q').dispatchEvent(new Event('input'))}}catch(e){}
+/* link direto para uma lixeira (?l=papel), usado nos QR Codes das etiquetas */
+try{const l0=new URLSearchParams(location.search).get('l');
+ if(l0&&BINS[l0]){bin=l0;chipsRender();render();setTimeout(toResults,350)}}catch(e){}
 /* buscas sem resultado: contador anônimo (GoatCounter). Deixe o código vazio para desligar. */
 const STATS={code:''};
 function stat(path,title){if(!STATS.code)return;const go=()=>{try{window.goatcounter.count({path,title,event:true})}catch(e){}};
